@@ -18,17 +18,39 @@ module.exports = (sequelize) => {
     },
 
     altura: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
 
     peso: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
 
     añosDeVida: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+
+      get() {
+        return this.getDataValue("añosDeVida") ? `${this.getDataValue("añosDeVida")} años` : null;
+      }
+    },
+
+    imagen: {
+      type: DataTypes.TEXT,
+    },
+
+    cardDetails: {
+      type: DataTypes.VIRTUAL,
+
+      get() {
+        return { 
+          id: this.id,
+          nombre: this.nombre,
+          peso: this.peso,
+          imagen: this.imagen,
+          custom: true
+        };
+      }
     }
   },
   {

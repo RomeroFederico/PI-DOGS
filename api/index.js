@@ -20,10 +20,10 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
-const { preloadTemperamentos } = require('./src/util/util');
+const { preloadTemperamentos } = require('./src/util/preload');
 
 // Syncing all the models at once.
-conn.sync({ force: false })
+conn.sync({ force: true })
 .then(() => {
   server.listen(3001, async () => {
     console.log('API listening at 3001'); // eslint-disable-line no-console

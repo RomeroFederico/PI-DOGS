@@ -1,51 +1,68 @@
-const { Temperamento } = require('../db');
-const { ENDPOINT_ALL_BREEDS } = require('./global-constants');
+const { Op } = require("sequelize");
+const { Raza, Temperamento } = require('../db');
+const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS } = require('./global-constants');
 
 const axios = require('axios');
 
-let preloadTemperamentos = async function() {
+let listBreeds = async function() {
+	let api = axios(ENDPOINT_ALL_BREEDS);
+	let db = Raza.findAll({
+		include: [{
+    	model: Temperamento,
+    	as: 'temperamentos'
+  	}]
+  });
+
 	try {
-		let result = await existTemperamentsInDB();		// Verifico si ya estan cargados en la base.
-		if (!result) getTemperamentosFromAPI();				// Llamo a la API solo si no estan cargados.
+		let [ apiResult, dbResult ] = await Promise.all([api, db]);
+		return apiResult.data.map(convertAPIBreeds).concat(dbResult.map(convertDBBreeds));
 	}
 	catch(err) {
-		throw err;																		// Si surge cualquier error cierro el servidor.
+		throw err;
 	}
 }
 
-let existTemperamentsInDB = async function() {
+let addBreed = async function(data) {
+
+	if (!data || !data.breedData) throw new Error("insuficient data to make a new breed");
+
+	let { oldTemperaments, newTemperaments, breedData } = data;
+
 	try {
-		let cont = await Temperamento.count();
-		return cont > 0 ? true : false;
+
+		let newBreedRef = await Raza.create(breedData);
+
+		let newTempPromise = newTemperaments ? Temperamento.bulkCreate(newTemperaments) : [];
+		let oldTempPromise = oldTemperaments ? Temperamento.findAll({ where: { [Op.or]: oldTemperaments }}) : [];
+		let [ newTempReference, oldTempReference ] = await Promise.all([newTempPromise, oldTempPromise]);
+
+		await newBreedRef.addTemperamentos(newTempReference.concat(oldTempReference));
+
+		return newBreedRef;
 	}
-	catch(err){
-		throw new Error("DATABASE ERROR IN <existTemperamentsInDB>");
-	}
+	catch(err) {
+		throw err;
+	}	
 }
 
-let getTemperamentosFromAPI = function () {
-	axios.get(ENDPOINT_ALL_BREEDS)
-	.then(res => res.data)
-	.then(breeds => filterTemperamentos(breeds))
-	.then(temperamentos => Temperamento.bulkCreate(temperamentos))
-	.then(result => console.log("Temperamentos cargados con exito."))
-	.catch(err => {
-		throw new Error("ERROR IN <getTemperamentosFromAPI>");
-	});
+let convertAPIBreeds = function(breed) {
+	return {
+		id: breed.id,
+		nombre: breed.name,
+		temperamento: breed.temperament,
+		imagen: breed.image.url,
+		peso: breed.weight.imperial 
+	};
 }
 
-let filterTemperamentos = function (breeds) {
-	let temperamentos = {};
-
-	breeds.forEach(b => 
-		b.temperament?.replace(/\s/g, "").split(',').forEach(t => {
-			if (!temperamentos[t]) temperamentos[t] = true
-		})
-	);
-
-	return Object.keys(temperamentos).map(t => { return { nombre: t } });
+let convertDBBreeds = function(breed) {
+	return {
+		...breed.cardDetails,
+		temperamento: breed.temperamentos.map(t => t.nombre).join(", ")
+	}
 }
 
 module.exports = {
-	preloadTemperamentos
+	listBreeds,
+	addBreed
 }

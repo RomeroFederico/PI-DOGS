@@ -36,12 +36,12 @@ const { Raza, Temperamento } = sequelize.models;
 Raza.belongsToMany(Temperamento, { as: {
     singular: 'temperamento',
     plural: 'temperamentos'
-}, through: 'Raza-Temperamento'});
+}, through: 'razatemperamento'});
 
 Temperamento.belongsToMany(Raza, { as: {
     singular: 'raza',
     plural: 'razas'
-}, through: 'Raza-Temperamento'});
+}, through: 'razatemperamento'});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
