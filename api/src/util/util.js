@@ -6,7 +6,6 @@ const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS, IMAGE_URL_API,
 const axios = require('axios');
 
 let listBreeds = async function(name) {
-
 	// Comprueba que el nombre sea valido.
 	if (name && (/\d/.test(name) || name.length < 3)) throw new Error(INVALID_NAME);
 
