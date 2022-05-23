@@ -44,11 +44,10 @@ module.exports = (sequelize) => {
 
       get() {
         return { 
-          id: this.id,
+          id: this.id + 'C',
           nombre: this.nombre,
           peso: this.peso,
           imagen: this.imagen,
-          custom: true
         };
       }
     }

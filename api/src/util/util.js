@@ -1,28 +1,22 @@
 const { Op } = require("sequelize");
 const { Raza, Temperamento } = require('../db');
-const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS } = require('./global-constants');
+const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS, IMAGE_URL_API,
+			BREED_NOT_FOUND, INVALID_ID, INVALID_NAME, INSUFICIENT_DATA } = require('./global-constants');
 
 const axios = require('axios');
 
 let listBreeds = async function(name) {
-	let api = axios(ENDPOINT_ALL_BREEDS);
-	let db = Raza.findAll({
-		include: [{
-    	model: Temperamento,
-    	as: 'temperamentos'
-  	}]
-  });
+
+	// Comprueba que el nombre sea valido.
+	if (name && (/\d/.test(name) || name.length < 3)) throw new Error(INVALID_NAME);
 
 	try {
-		let [ apiResult, dbResult ] = await Promise.all([api, db]);
+		// Ejecuto las dos busquedas al mismo tiempo: de la API y la base de datos.
+		let [ apiResult, dbResult ] = await Promise.all([listBreedsAPIPromise(name), listBreedsDBPromise(name)]);
 		let allBreeds = apiResult.data.map(convertAPIBreeds).concat(dbResult.map(convertDBBreeds));
 
-		if (!name) return allBreeds;
-
-		name = name.toUpperCase();
-		let filtered = filterBreedsByName(allBreeds, name);
-		if (filtered.length === 0) throw new Error('Breed not found');
-		return filtered;
+		if (name && allBreeds.length === 0) throw new Error(BREED_NOT_FOUND);
+		return allBreeds;
 	}
 	catch(err) {
 		throw err;
@@ -30,42 +24,33 @@ let listBreeds = async function(name) {
 }
 
 let getBreedById = async function(id) {
-	if (!id || id === '') throw new Error('Invalid id');
+	// Comprueba que el id sea un numero o un numero + c (custom).
+	if (!(/^[0-9]+c?$/i.test(id))) throw new Error(INVALID_ID);
 
-	let breedsToSearch;
+	try {
+		let breedFound = isNaN(id) ? await findBreedByIdDB(id) : await findBreedByIdAPI(id);
 
-	if (isNaN(id)) {
-
-		id = Number(id.replace('C', ''));
-
-		if (isNaN(id)) throw new Error('Invalid id');
-
-		let breed = await Raza.findOne({
-			where: {
-				id: id
-			},
-			include: [{
-	    	model: Temperamento,
-	    	as: 'temperamentos'
-	  	}]
-	  });
-
-	  if (!breed) throw new Error('Breed not found');
-	  return breed;
+		if (!breedFound) throw new Error(BREED_NOT_FOUND);
+		if (isNaN(id)) return convertDBBreedsDetails(breedFound);
+		return ConverApiBreedsDetails(breedFound);
 	}
+	catch(err) {
+		throw err;
+	}
+}
 
-	id = Number(id);
-
-	let breeds = await axios.get(ENDPOINT_ALL_BREEDS);
-	let breed = breeds.data.find(b => b.id === id);
-
-	if (!breed) throw new Error('Breed not found');
-	return breed;
+let listTemperaments = async function() {
+	try {
+		return await Temperamento.findAll();
+	}
+	catch(err) {
+		throw err;
+	}
 }
 
 let addBreed = async function(data) {
 
-	if (!data || !data.breedData) throw new Error("insuficient data to make a new breed");
+	if (!data || !data.breedData) throw new Error(INSUFICIENT_DATA);
 
 	let { oldTemperaments, newTemperaments, breedData } = data;
 
@@ -86,14 +71,30 @@ let addBreed = async function(data) {
 	}	
 }
 
+let ConverApiBreedsDetails = function(breed) {
+	return {
+		...convertAPIBreeds(breed),
+		altura: breed.weight.imperial,
+		añosDeVida: breed.life_span?.replace('years', 'años')
+	}
+}
+
 let convertAPIBreeds = function(breed) {
 	return {
 		id: breed.id,
 		nombre: breed.name,
 		temperamento: breed.temperament,
-		imagen: breed.image.url,
+		imagen: breed.image ? breed.image.url : breed.reference_image_id ? IMAGE_URL_API + breed.reference_image_id : null,
 		peso: breed.weight.imperial 
 	};
+}
+
+convertDBBreedsDetails = function(breed) {
+	return {
+		...convertDBBreeds(breed),
+		altura: breed.altura,
+		añosDeVida: breed.añosDeVida
+	}
 }
 
 let convertDBBreeds = function(breed) {
@@ -103,17 +104,41 @@ let convertDBBreeds = function(breed) {
 	}
 }
 
-let filterBreedsByName = function(breeds, name) {
-	return breeds.filter(breed => breed.nombre.toUpperCase().includes(name));
+let listBreedsDBPromise = function(name) {
+	return Raza.findAll({
+		where: {
+			nombre: {
+				[Op.iLike]: name ? `%${name}%` : '%%'
+			}
+		},
+		include: [{
+    	model: Temperamento,
+    	as: 'temperamentos'
+  	}]
+  });
 }
 
-let listTemperaments = async function() {
-	try {
-		return await Temperamento.findAll();
-	}
-	catch(err) {
-		throw err;
-	}
+let listBreedsAPIPromise = function(name) {
+	return axios.get(name ? ENDPOINT_SEARCH_BREEDS + name : ENDPOINT_ALL_BREEDS);
+}
+
+let findBreedByIdDB = async function(id) {
+	id = Number(id.replace(/c/i, ''));
+	return await Raza.findOne({
+		where: {
+			id: id
+		},
+		include: [{
+    	model: Temperamento,
+    	as: 'temperamentos'
+  	}]
+  });
+}
+
+let findBreedByIdAPI = async function(id) {
+	id = Number(id);
+	let breeds = await axios.get(ENDPOINT_ALL_BREEDS);
+	return breeds.data.find(b => b.id === id);
 }
 
 module.exports = {
