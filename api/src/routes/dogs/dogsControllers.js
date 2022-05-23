@@ -1,12 +1,10 @@
-const { listBreeds, addBreed } = require('../../util/util');
+const { listBreeds, addBreed, getBreedById } = require('../../util/util');
 
 let getBreeds = async function (req, res, next) {
 	let { name } = req.query;
 
 	try {
-		//if (name) return filterBreeds(name, res, next);
-
-		let breeds = await listBreeds();
+		let breeds = await listBreeds(name);
 		return res.status(201).json(breeds);
 	}
 	catch(err) {
@@ -14,12 +12,16 @@ let getBreeds = async function (req, res, next) {
 	}
 }
 
-let filterBreeds = function (name, res, next) {
+let getBreedDetails = async function (req, res, next) {
+	let { idRaza } = req.params;
 
-}
-
-let getBreedDetails = function (req, res, next) {
-
+	try {
+		let breed = await getBreedById(idRaza);
+		return res.status(201).json(breed);
+	}
+	catch(err) {
+		next(err);
+	}
 }
 
 let createBreed = async function (req, res, next) {
