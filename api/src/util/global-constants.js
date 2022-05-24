@@ -9,8 +9,8 @@ const INVALID_ID = 'Invalid id';
 const INVALID_NAME = 'Invalid name';
 const INSUFICIENT_DATA = 'Insuficient data';
 
-const SORT_BY_NAME = 'nombre';
-const SORT_BY_WEIGTH = 'peso';
+const SORT_BY_NAME = 'NOMBRE';
+const SORT_BY_WEIGTH = 'PESO';
 
 const ASCENDING = 'ASCENDING';
 const DESCENDING = 'DESCENDING';
@@ -19,6 +19,10 @@ const CONVERT_WEIGHT = "CONVERT_WEIGTH";
 const CONVERT_HEIGHT = "CONVER_HEIGHT";
 const CONVERT_LB_TO_KG = 0.4536;
 const CONVERT_IN_TO_CM = 2.54; 
+
+const FILTER_ONLY_API = "API";
+const FILTER_ONLY_DB = "DB";
+const NO_FILTER = 'NONE';
 
 /* 
 	1 lb === 0.4536 kg
@@ -40,5 +44,8 @@ module.exports = {
 	CONVERT_WEIGHT,
 	CONVERT_HEIGHT,
 	CONVERT_LB_TO_KG,
-	CONVERT_IN_TO_CM
+	CONVERT_IN_TO_CM,
+	FILTER_ONLY_API,
+	FILTER_ONLY_DB,
+	NO_FILTER
 }

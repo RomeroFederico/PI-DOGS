@@ -1,4 +1,4 @@
-const { listBreeds, addBreed, getBreedById } = require('../../util/util');
+const { listBreeds, addBreed, getBreedById, paginateBreeds } = require('../../util/util');
 
 let getBreeds = async function (req, res, next) {
 	let { name } = req.query;
@@ -6,6 +6,20 @@ let getBreeds = async function (req, res, next) {
 	try {
 		let breeds = await listBreeds(name);
 		return res.status(201).json(breeds);
+	}
+	catch(err) {
+		next(err);
+	}
+}
+
+let getBreedsByPage = async function(req, res, next) {
+	let { page } = req.params;
+	let { sort, order, filter } = req.query;
+
+	try {
+		let breeds = await listBreeds();
+		let result = paginateBreeds(breeds, page, sort, order, filter);
+		return res.status(201).json(result);
 	}
 	catch(err) {
 		next(err);
@@ -55,6 +69,7 @@ let createBreed = async function (req, res, next) {
 
 module.exports = {
 	getBreeds,
+	getBreedsByPage,
 	getBreedDetails,
 	createBreed
 }

@@ -3,7 +3,8 @@ const { Raza, Temperamento } = require('../db');
 const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS, IMAGE_URL_API,
 			BREED_NOT_FOUND, INVALID_ID, INVALID_NAME, INSUFICIENT_DATA,
 			SORT_BY_NAME, SORT_BY_WEIGTH, ASCENDING, DESCENDING,
-			CONVERT_WEIGHT, CONVERT_HEIGHT, CONVERT_LB_TO_KG, CONVERT_IN_TO_CM } = require('./global-constants');
+			CONVERT_WEIGHT, CONVERT_HEIGHT, CONVERT_LB_TO_KG, CONVERT_IN_TO_CM,
+			FILTER_ONLY_API, FILTER_ONLY_DB, NO_FILTER } = require('./global-constants');
 
 const axios = require('axios');
 
@@ -18,13 +19,36 @@ let listBreeds = async function(name) {
 
 		if (name && allBreeds.length === 0) throw new Error(BREED_NOT_FOUND);
 
-		sortBreeds(allBreeds, SORT_BY_NAME, ASCENDING);
+		//sortBreeds(allBreeds, SORT_BY_NAME, ASCENDING);
 
 		return allBreeds;
 	}
 	catch(err) {
 		throw err;
 	}
+}
+
+let paginateBreeds = function(breeds, page, sortBy, order, filter) {
+	if (!page) page = 1;
+	if (!sortBy) sortBy = SORT_BY_NAME;
+	if (!order) order = ASCENDING;
+	if (!filter) filter = NO_FILTER;
+
+	sortBy = sortBy.toUpperCase();
+	order = order.toUpperCase();
+	filter = filter.toUpperCase();
+	
+	if (filter !== NO_FILTER) breeds = breeds.filter(filterBreeds(filter));
+
+	sortBreeds(breeds, sortBy, order);
+
+	pages = Math.ceil(breeds.length / 8);
+	breeds = breeds.slice((page - 1) * 8, page * 8);
+
+	return { 
+		breeds,
+		pages
+	}; 
 }
 
 let getBreedById = async function(id) {
@@ -148,9 +172,9 @@ let findBreedByIdAPI = async function(id) {
 let sortBreeds = function(breeds, property, asc = ASCENDING) {
 
 	breeds.sort((curr, next)=> {
-		if (property === SORT_BY_NAME) return asc === ASCENDING ? sortAsc(curr.nombre, next.nombre) : sortDesc(curr.nombre, next.nombre);
-		else if (asc === ASCENDING) return sortAsc(curr.peso[curr.peso.length - 1], next.peso[next.peso.length - 1]);
-		else return sortDesc(curr.peso[curr.peso.length - 1], next.peso[next.peso.length - 1]);
+		if (property === SORT_BY_NAME) return asc === DESCENDING ? sortDesc(curr.nombre, next.nombre) : sortAsc(curr.nombre, next.nombre);
+		else if (asc === DESCENDING) return sortDesc(curr.peso[curr.peso.length - 1], next.peso[next.peso.length - 1]);
+		else return sortAsc(curr.peso[curr.peso.length - 1], next.peso[next.peso.length - 1]);
 	})
 }
 
@@ -190,9 +214,15 @@ let convertInToCm = function(heightIn) {
 	return Math.round(heightIn * CONVERT_IN_TO_CM);
 }
 
+let filterBreeds = function(filter) {
+	if (filter === FILTER_ONLY_DB) return breed => isNaN(breed.id);
+	return breed => !isNaN(breed.id);
+}
+
 module.exports = {
 	listBreeds,
 	getBreedById,
 	listTemperaments,
-	addBreed
+	addBreed,
+	paginateBreeds
 }
