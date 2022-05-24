@@ -4,7 +4,8 @@ const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS, IMAGE_URL_API,
 			BREED_NOT_FOUND, INVALID_ID, INVALID_NAME, INSUFICIENT_DATA,
 			SORT_BY_NAME, SORT_BY_WEIGTH, ASCENDING, DESCENDING,
 			CONVERT_WEIGHT, CONVERT_HEIGHT, CONVERT_LB_TO_KG, CONVERT_IN_TO_CM,
-			FILTER_ONLY_API, FILTER_ONLY_DB, NO_FILTER } = require('./global-constants');
+			FILTER_ONLY_API, FILTER_ONLY_DB, NO_FILTER,
+			FILTER_ONLY_DB_TEMP, FILTER_ONLY_API_TEMP, FILTER_ONLY_TEMP } = require('./global-constants');
 
 const axios = require('axios');
 
@@ -18,9 +19,6 @@ let listBreeds = async function(name) {
 		let allBreeds = apiResult.data.map(convertAPIBreeds).concat(dbResult.map(convertDBBreeds));
 
 		if (name && allBreeds.length === 0) throw new Error(BREED_NOT_FOUND);
-
-		//sortBreeds(allBreeds, SORT_BY_NAME, ASCENDING);
-
 		return allBreeds;
 	}
 	catch(err) {
@@ -28,17 +26,19 @@ let listBreeds = async function(name) {
 	}
 }
 
-let paginateBreeds = function(breeds, page, sortBy, order, filter) {
+let paginateBreeds = function(breeds, page, sortBy, order, filter, temperaments) {
 	if (!page) page = 1;
 	if (!sortBy) sortBy = SORT_BY_NAME;
 	if (!order) order = ASCENDING;
-	if (!filter) filter = NO_FILTER;
+	if (!filter) filter = temperaments ? FILTER_ONLY_TEMP : NO_FILTER;
+
+	if (temperaments) temperaments = temperaments.toUpperCase().split("-");
 
 	sortBy = sortBy.toUpperCase();
 	order = order.toUpperCase();
 	filter = filter.toUpperCase();
 	
-	if (filter !== NO_FILTER) breeds = breeds.filter(filterBreeds(filter));
+	if (filter !== NO_FILTER) breeds = breeds.filter(filterBreeds(filter, temperaments));
 
 	sortBreeds(breeds, sortBy, order);
 
@@ -214,9 +214,39 @@ let convertInToCm = function(heightIn) {
 	return Math.round(heightIn * CONVERT_IN_TO_CM);
 }
 
-let filterBreeds = function(filter) {
-	if (filter === FILTER_ONLY_DB) return breed => isNaN(breed.id);
-	return breed => !isNaN(breed.id);
+let filterBreeds = function(filter, temperaments) {
+
+	if (temperaments && filter !== FILTER_ONLY_TEMP)
+		filter = filter === FILTER_ONLY_DB ? FILTER_ONLY_DB_TEMP : FILTER_ONLY_API_TEMP;
+
+	switch(filter) {
+
+		case FILTER_ONLY_API:
+			return breed => !isNaN(breed.id);
+		case FILTER_ONLY_DB:
+		 	return breed => isNaN(breed.id);
+		case FILTER_ONLY_API_TEMP:
+			return breed => !isNaN(breed.id) && filterByTemperaments(breed, temperaments);
+		case FILTER_ONLY_DB_TEMP:
+			return breed => isNaN(breed.id) && filterByTemperaments(breed, temperaments);
+		default:
+			return breed => filterByTemperaments(breed, temperaments)
+	}
+}
+
+let filterByTemperaments = function(breed, temperaments) {
+
+	let breedTemp = breed.temperamento ? breed.temperamento.toUpperCase().split(', ') : null;
+	if (!breedTemp) return false;
+
+	let cantTemp = temperaments.length;
+
+	for (var i = 0; i < cantTemp; i++) {
+		if (temperaments[i].length === 0) continue;
+		if (!breedTemp.some(t => t === temperaments[i])) return false;
+	}
+
+	return true;
 }
 
 module.exports = {

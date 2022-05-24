@@ -24,6 +24,10 @@ const FILTER_ONLY_API = "API";
 const FILTER_ONLY_DB = "DB";
 const NO_FILTER = 'NONE';
 
+const FILTER_ONLY_DB_TEMP = "DB+TEMP";
+const FILTER_ONLY_API_TEMP = "API+TEMP";
+const FILTER_ONLY_TEMP = "TEMP";
+
 /* 
 	1 lb === 0.4536 kg
 	1 in === 2.54 cm
@@ -47,5 +51,8 @@ module.exports = {
 	CONVERT_IN_TO_CM,
 	FILTER_ONLY_API,
 	FILTER_ONLY_DB,
-	NO_FILTER
+	NO_FILTER,
+	FILTER_ONLY_DB_TEMP,
+	FILTER_ONLY_API_TEMP,
+	FILTER_ONLY_TEMP
 }

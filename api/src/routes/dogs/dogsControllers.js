@@ -14,11 +14,11 @@ let getBreeds = async function (req, res, next) {
 
 let getBreedsByPage = async function(req, res, next) {
 	let { page } = req.params;
-	let { sort, order, filter } = req.query;
+	let { sort, order, filter, temperaments } = req.query;
 
 	try {
 		let breeds = await listBreeds();
-		let result = paginateBreeds(breeds, page, sort, order, filter);
+		let result = paginateBreeds(breeds, page, sort, order, filter, temperaments);
 		return res.status(201).json(result);
 	}
 	catch(err) {
