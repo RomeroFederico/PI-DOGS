@@ -1,15 +1,16 @@
-import { TEST } from '../actions/actions';
+import { GET_ALL_BREEDS, GET_BREED_DETAILS } from '../actions/actions';
 
 const initialState = {
-  test: false
+  breeds: [],
+  breedDetails: {}
 }
 
 const rootReducer = (state = initialState, action) => {
   switch(action.type) {
-    case TEST:
+    case GET_ALL_BREEDS:
       return {
         ...state,
-        test: true
+        breeds: action.payload
       }
     default:
       return state;

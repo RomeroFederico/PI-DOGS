@@ -13,18 +13,37 @@ module.exports = (sequelize) => {
 
     nombre: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
       /*AGREGAR VALIDACIONES*/
+      set(value) {
+        this.setDataValue('nombre', value.split(' ').map(s => s[0].toUpperCase() + s.slice(1).toLowerCase()).join(' '));
+      }
     },
 
     altura: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+
+      set(value) {
+        this.setDataValue('altura', value.join(' - '));
+      },
+
+      get() {
+        return this.getDataValue('altura').split(' - ').map(n => Number(n));
+      }
     },
 
     peso: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+
+      set(value) {
+        this.setDataValue('peso', value.join(' - '));
+      },
+
+      get() {
+        return this.getDataValue('peso').split(' - ').map(n => Number(n));
+      }
     },
 
     añosDeVida: {

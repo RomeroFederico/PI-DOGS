@@ -1,18 +1,19 @@
-import { TEST } from './actions';
+import { 
+  GET_ALL_BREEDS,
+  GET_BREED_DETAILS
+} from './actions';
 
-export function testReducer() {
-  return {
-    type: TEST
-  }
-}
+const PATH_GET_DOGS = 'http://localhost:3001/dogs';
 
-export function testWithDelay () {
+export function getAllBreeds () {
   return function(dispatch) {
-    return new Promise(resolve => setTimeout(resolve, 3000))
-      .then(value => {
-        dispatch({
-          type: TEST
-        })
-      })
+    return fetch(PATH_GET_DOGS)
+           .then(result => result.json())
+           .then(breeds => {
+             dispatch({
+              type: GET_ALL_BREEDS,
+              payload: breeds 
+             })
+           })
   }
 }

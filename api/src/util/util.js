@@ -1,7 +1,9 @@
 const { Op } = require("sequelize");
 const { Raza, Temperamento } = require('../db');
 const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS, IMAGE_URL_API,
-			BREED_NOT_FOUND, INVALID_ID, INVALID_NAME, INSUFICIENT_DATA } = require('./global-constants');
+			BREED_NOT_FOUND, INVALID_ID, INVALID_NAME, INSUFICIENT_DATA,
+			SORT_BY_NAME, SORT_BY_WEIGTH, ASCENDING, DESCENDING,
+			CONVERT_WEIGHT, CONVERT_HEIGHT, CONVERT_LB_TO_KG, CONVERT_IN_TO_CM } = require('./global-constants');
 
 const axios = require('axios');
 
@@ -15,6 +17,9 @@ let listBreeds = async function(name) {
 		let allBreeds = apiResult.data.map(convertAPIBreeds).concat(dbResult.map(convertDBBreeds));
 
 		if (name && allBreeds.length === 0) throw new Error(BREED_NOT_FOUND);
+
+		sortBreeds(allBreeds, SORT_BY_NAME, ASCENDING);
+
 		return allBreeds;
 	}
 	catch(err) {
@@ -73,7 +78,7 @@ let addBreed = async function(data) {
 let ConverApiBreedsDetails = function(breed) {
 	return {
 		...convertAPIBreeds(breed),
-		altura: breed.weight.imperial,
+		altura: fixMetrictAPI(breed.height.metric, breed.height.imperial, convertInToCm),
 		añosDeVida: breed.life_span?.replace('years', 'años')
 	}
 }
@@ -84,7 +89,7 @@ let convertAPIBreeds = function(breed) {
 		nombre: breed.name,
 		temperamento: breed.temperament,
 		imagen: breed.image ? breed.image.url : breed.reference_image_id ? IMAGE_URL_API + breed.reference_image_id : null,
-		peso: breed.weight.imperial 
+		peso: fixMetrictAPI(breed.weight.metric, breed.weight.imperial, convertLbToKg)
 	};
 }
 
@@ -138,6 +143,51 @@ let findBreedByIdAPI = async function(id) {
 	id = Number(id);
 	let breeds = await axios.get(ENDPOINT_ALL_BREEDS);
 	return breeds.data.find(b => b.id === id);
+}
+
+let sortBreeds = function(breeds, property, asc = ASCENDING) {
+
+	breeds.sort((curr, next)=> {
+		if (property === SORT_BY_NAME) return asc === ASCENDING ? sortAsc(curr.nombre, next.nombre) : sortDesc(curr.nombre, next.nombre);
+		else if (asc === ASCENDING) return sortAsc(curr.peso[curr.peso.length - 1], next.peso[next.peso.length - 1]);
+		else return sortDesc(curr.peso[curr.peso.length - 1], next.peso[next.peso.length - 1]);
+	})
+}
+
+let sortAsc = function(current, next) {
+	if (current > next) return 1;
+	if (current < next) return -1;
+	return 0;
+}
+
+let sortDesc = function(current, next) {
+	if (current > next) return -1;
+	if (current < next) return 1;
+	return 0;
+}
+
+let fixMetrictAPI = function(metric, metricImperial, convertCB) {
+
+	if (!metric && !metricImperial) return [0];
+
+	let fixed = [0, 0]; // min y max
+
+	if (!(/[-–]/.test(metric))) fixed[1] = isNaN(metric) ? 0 : Number(metric);
+	else fixed = metric.replace(/\s/g, '').split(/[-–]/).map(w => isNaN(w) ? 0 : Number(w));
+
+	if (fixed[0] === 0 && fixed[1] === 0 && metricImperial) 
+		return fixMetrictAPI(metricImperial, null, true).map(convertCB);
+	if (fixed[0] === 0) return [fixed[1]];
+	if (fixed[1] === 0) return [fixed[0]];
+	return fixed;
+}
+
+let convertLbToKg = function(weigthLb) {
+	return Math.round(weigthLb * CONVERT_LB_TO_KG);
+}
+
+let convertInToCm = function(heightIn) {
+	return Math.round(heightIn * CONVERT_IN_TO_CM);
 }
 
 module.exports = {

@@ -1,1 +1,2 @@
-export const TEST = 'TEST';
+export const GET_ALL_BREEDS = "GET_ALL_BREEDS";
+export const GET_BREED_DETAILS = "GET_BREED_DETAILS";
