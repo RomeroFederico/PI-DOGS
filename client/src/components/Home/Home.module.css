@@ -1,0 +1,32 @@
+.divContenedor {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.olTemperaments {
+  width: 700px;
+}
+
+.liTemperaments,
+.liTempDisabled {
+  color: blue;
+  display: block;
+  width: 33%;
+  float: left;
+
+  cursor: pointer;
+}
+
+.liTemperaments:hover {
+  color: crimson;
+}
+
+.liTempDisabled {
+  color: crimson;
+  cursor: default;
+}
+
+.liBreeds {
+  color: orange;
+}
