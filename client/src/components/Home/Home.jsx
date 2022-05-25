@@ -7,8 +7,10 @@ import s from './Home.module.css';
 export default function Home() {
   const home = useSelector(state => state.home);
   const dispatch = useDispatch();
-  const [page, setPage] = React.useState(1);
-  const [temperament, setTemperament] = React.useState("Playful");
+  const [ temperaments, setTemperament ] = React.useState("");
+  const [ order, setOrder ] = React.useState('ascending');
+  const [ sort, setSort ] = React.useState('nombre');
+  const [ filter, setFilter ] = React.useState('');
 
   let btnPages;
 
@@ -36,7 +38,7 @@ export default function Home() {
           onClick = {handleClick}
           name = {i}
           key = {`btn-page-${i}`}
-          disabled = { page === i ? true : false }
+          disabled = { home.currentPage === i ? true : false }
         >
         {i}
         </button>
@@ -48,24 +50,36 @@ export default function Home() {
 
   let handleClick = function(e) {
     let { name } = e.target;
-    setPage(Number(name))
     dispatch(getBreedsWithPaginate(Number(name), {
-      sort: 'peso',
-      order: 'descending',
-      filter: null,
-      temperaments: temperament
+      sort: sort,
+      order: order,
+      filter: filter,
+      temperaments: temperaments
     }));
   }
 
-  let handleClickTemp = function(nombre) {
-    if (temperament === nombre) return;
-    setPage(1);
-    setTemperament(nombre);
+  let handleClickTemp = function(searhTemperaments) {
+    if (temperaments === searhTemperaments) return;
+    setTemperament(searhTemperaments);
     dispatch(getBreedsWithPaginate(1, {
-      sort: 'nombre',
-      order: 'ascending',
-      filter: null,
-      temperaments: nombre
+      sort: sort,
+      order: order,
+      filter: filter,
+      temperaments: searhTemperaments
+    }));
+  }
+
+  let handleSelect = function(e) {
+    let { name, value } = e.target;
+    if (name === 'order') setOrder(value);
+    if (name === 'sort') setSort(value);
+    if (name === 'filter') setFilter(value);
+    dispatch(getBreedsWithPaginate(1, {
+      sort: sort,
+      order: order,
+      filter: filter,
+      [name]: value,
+      temperaments: temperaments
     }));
   }
 
@@ -78,7 +92,7 @@ export default function Home() {
       {
         home.temperaments.map(t => { return (
           <li 
-            className = { temperament !== t.nombre ? s.liTemperaments : s.liTempDisabled }
+            className = { temperaments !== t.nombre ? s.liTemperaments : s.liTempDisabled }
             key = {`li-temp-${t.id}`}
             onClick = {() => handleClickTemp(t.nombre)}
           >
@@ -88,6 +102,9 @@ export default function Home() {
       }
       </ol>
       <ol>
+      {
+        home.breeds.length === 0 && <span>No se encontraron razas</span>
+      }
       {
         home.breeds.length > 0 && home.breeds.map(b => { return (
           <li className = {s.liBreeds} key = {`li-breeds-${b.id}`}>
@@ -104,7 +121,34 @@ export default function Home() {
       </ol>
     </div>
     {btnPages}
-    <h5>Page: {page}</h5>
+    <h5>Page: {home.currentPage}</h5>
+    <select
+      name = 'order'
+      value = {order}
+      onChange = {handleSelect}
+    >
+      <option value = "ascending">Ascendente</option>
+      <option value = "descending">Descendente</option>
+    </select>
+
+    <select
+      name = 'sort'
+      value = {sort}
+      onChange = {handleSelect}
+    >
+      <option value = "nombre">Por Nombre</option>
+      <option value = "peso">Por Peso</option>
+    </select>
+
+    <select
+      name = 'filter'
+      value = {filter}
+      onChange = {handleSelect}
+    >
+      <option value = "">Ambos</option>
+      <option value = "api">Solo originales</option>
+      <option value = "db">Solo creados</option>
+    </select>
     </>
   )
 };

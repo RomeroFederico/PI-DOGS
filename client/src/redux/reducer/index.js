@@ -16,7 +16,8 @@ const initialState = {
     show: false,
     temperaments: [],
     breeds: [],
-    pages: 0
+    pages: 0,
+    currentPage: 1
   }
 }
 

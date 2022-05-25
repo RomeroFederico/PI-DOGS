@@ -39,10 +39,10 @@ export const getTemperaments = function() {
 }
 
 export const getBreedsWithPaginate = function(page = 1, filterOptions = {
-    sort: 'peso',
-    order: 'descending',
+    sort: null,
+    order: null,
     filter: null,
-    temperaments: 'playful'
+    temperaments: null
   }) {
 
   let query = Object.keys(filterOptions)
@@ -57,7 +57,8 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
               type: GET_BREEDS_WITH_PAGINATE,
               payload: {
                 breeds: data.breeds,
-                pages: data.pages
+                pages: data.pages,
+                currentPage: page
               }
              })
            })
