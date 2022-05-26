@@ -27,8 +27,21 @@ export const METRICS_FOR_BREEDS = {
 }
 
 export const FONT_SIZE = {
+  SMALLEST: 'SMALLEST',
   SMALL: 'SMALL',
   MEDIUM: 'MEDIUM',
   SUBTITLE: 'SUBTITLE',
   TITLE: 'TITLE',
+}
+
+export const TYPES = {
+  CUSTOM: {
+    name: 'Original',
+    regexp: /^[0-9]+$/
+  },
+
+  ORIGINAL:{
+    name: 'Custom',
+    regexp: /^[0-9]+c?$/i
+  } 
 }

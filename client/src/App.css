@@ -1,10 +1,11 @@
 .global-variables {
-  --cardHeight: 23rem;
+  --cardHeight: 25rem;
   --cardWidth: 14rem;
 
   --cardImageHeight: 10rem;
   --cardImageWidth: 14rem;
 
+  --fontSmallest: 0.7rem;
   --fontSmall: 0.8rem;
   --fontMedium: 0.9rem;
   --fontSubTitle: 1.1rem;
@@ -55,6 +56,10 @@
 
 .BGExtra-Large {
   background-color: var(--colorExtraLargeRace);
+}
+
+.FONTSMALLEST {
+  font-size: var(--fontSmallest);
 }
 
 .FONTSMALL {

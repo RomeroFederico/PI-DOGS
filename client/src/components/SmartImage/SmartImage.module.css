@@ -1,5 +1,6 @@
-.loadingImage,
-.image {
+.loadingImageContainer,
+.image,
+.imageContainer {
   width: var(--cardImageWidth);
   height: var(--cardImageHeight);
 }
@@ -7,6 +8,17 @@
 .image {
   object-fit: cover;
   object-position: top;
+}
+
+.imageNotFound {
+  fill: var(--fontColor);
+  width: calc(var(--cardImageWidth) * 0.7);
+  height: calc(var(--cardImageHeight) * 0.7);
+}
+
+.loadingImage {
+  height: 70%;
+  width: 70%;
 }
 
 .dontShowImage {
