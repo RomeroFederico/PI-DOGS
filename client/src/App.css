@@ -18,6 +18,26 @@
   --colorExtraLargeRace: #6a4c93;
 }
 
+.FILLExtra-Small {
+  fill: var(--colorExtraSmallRace);
+}
+
+.FILLSmall {
+  fill: var(--colorSmallRace);
+}
+
+.FILLMedium {
+  fill: var(--colorMediumRace);
+}
+
+.FILLLarge {
+  fill: var(--colorLargeRace);
+}
+
+.FILLExtra-Large {
+  fill: var(--colorExtraLargeRace);
+}
+
 .COLORExtra-Small {
   color: var(--colorExtraSmallRace);
 }

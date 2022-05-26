@@ -17,13 +17,12 @@ export default function Card({ id, nombre, temperamento, imagen, peso }) {
       <div className = {`${s.typeZone}`}>
         <div className = {`center ${s.header} ${s.typeTitle} BG${size}`}>{type}</div>
         <div className = {`center ${s.header} BG${size}`}>
-          {/*<img src = {dogFace} alt = 'peso' className = {s.dogIco}/>*/}
           <DogFace style = {s.dogIco}/>
         </div>
         <div className = {`center ${s.header} ${s.typeTitle} BG${size}`}>Nro: {id}</div>
       </div>
       <div className = {s.imageZone}>
-        <SmartImage image = {imagen} alt = {nombre} key = {`smart-image-${id}`}/>
+        <SmartImage image = {imagen} alt = {nombre} key = {`smart-image-${id}`} style = {`FILL${size}`}/>
       </div>
 
       <div className = {s.mainZone}>
@@ -41,7 +40,6 @@ export default function Card({ id, nombre, temperamento, imagen, peso }) {
         </div>
 
         <div className = {`center ${s.weigth} BG${size}`}>
-          {/*<img src = {weight} alt = 'peso' className = {s.weigthIco}/>*/}
           <Weight style = {s.weigthIco} />
         </div>
 
