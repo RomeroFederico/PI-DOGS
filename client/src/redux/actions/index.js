@@ -5,7 +5,8 @@ import {
   GET_TEMPERAMENTS,
   SHOW_HOME,
   RESET_HOME,
-  SHOW_LOADING
+  SHOW_LOADING,
+  CHANGE_THEME
 } from './actions';
 
 const PATH_GET_DOGS = 'http://localhost:3001/dogs';
@@ -80,5 +81,11 @@ export const resetHome = function() {
 export const showLoading = function() {
   return {
     type: SHOW_LOADING
+  }
+}
+
+export const changeTheme = function() {
+  return {
+    type: CHANGE_THEME
   }
 }

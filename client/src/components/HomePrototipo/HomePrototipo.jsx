@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBreedsWithPaginate, getTemperaments, showHome, resetHome} from '../../redux/actions/index.js';
+import { getBreedsWithPaginate, getTemperaments, showHome, resetHome, changeTheme} from '../../redux/actions/index.js';
 
 import Card from '../Card/Card';
 
@@ -85,6 +85,10 @@ export default function HomePrototipo() {
     }));
   }
 
+  let handleChangeTheme = function() {
+    dispatch(changeTheme());
+  }
+
   btnPages = buildBtnPages(home.pages);
 
   return (
@@ -159,6 +163,7 @@ export default function HomePrototipo() {
       <option value = "api">Solo originales</option>
       <option value = "db">Solo creados</option>
     </select>
+    <button onClick = {handleChangeTheme}>Cambiar Tema</button> 
     </>
   )
 };

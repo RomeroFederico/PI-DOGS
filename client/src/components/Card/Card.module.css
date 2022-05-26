@@ -5,11 +5,23 @@
   display: grid;
   grid-template-rows: 10rem 10rem 3rem;
 
-  border: 1px solid rgba(0, 0, 0, 0.1);
   box-sizing: content-box;
-  box-shadow: 3px 3px 5px 0px rgba(126,126,126,0.5);
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
 
   margin: 10px;
+  background-color: var(--primaryColor);
+  color: var(--fontColor);
+  position: relative;
+
+  transition: background-color 0.5s;
+}
+
+.card:hover {
+  background-color: var(--reversePrimaryColor);
+  color: var(--reverseFontColor);
+
+  animation: moveCard 0.5s;
+  animation-fill-mode: forwards;
 }
 
 .imageZone {
@@ -31,6 +43,8 @@
   padding: 0 1rem 0 1rem;
 
   text-align: center;
+
+  transition: color 0.5s;
 }
 
 .sizeBreed {
@@ -38,6 +52,9 @@
   font-size: 0.8rem;
   color: orange;
   font-weight: 700;
+
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .titleBreed {
@@ -68,11 +85,12 @@
   justify-content: space-evenly;
   flex-direction: column;
 
-  color: white;
+  color: var(--primaryColor);
 }
 
 .textInfo {
   font-size: var(--fontSmall);
+  font-weight: 700;
 }
 
 .textTitle {
@@ -87,4 +105,13 @@
 .weigthIco {
   height: 60%;
   width: 60%;
+}
+
+@keyframes moveCard {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, -10px);
+  }
 }

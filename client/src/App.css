@@ -80,15 +80,26 @@
 }
 
 .darkTheme {
-  --primaryColor: #232323;
-  --primaryColorSub: #424242;
+  --primaryColor: #212529;
+  --primaryColorSub: #343a40;
+  --fontColor: #FFFFFF;
 
-  --fontColor: #000000;
+  --reversePrimaryColor: #f8f9fa;
+  --reversePrimaryColorSub: #e9ecef;
+  --reverseFontColor: #000000;
 }
 
 .ligthTheme {
-  --primaryColor: #f2f2f2;
-  --primaryColorSub: #808080;
-
+  --primaryColor: #f8f9fa;
+  --primaryColorSub: #e9ecef;
   --fontColor: #000000;
+
+  --reversePrimaryColor: #212529;
+  --reversePrimaryColorSub: #343a40;
+  --reverseFontColor: #FFFFFF;
+}
+
+.body {
+  background-color: var(--primaryColorSub);
+  transition: background-color 0.5s;
 }

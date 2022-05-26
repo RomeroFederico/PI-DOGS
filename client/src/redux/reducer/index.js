@@ -5,12 +5,14 @@ import {
   GET_TEMPERAMENTS,
   SHOW_HOME,
   RESET_HOME,
-  SHOW_LOADING
+  SHOW_LOADING,
+  CHANGE_THEME
 } from '../actions/actions';
 
 const initialState = {
 
   loading: false,
+  theme: 'ligthTheme',
 
   home: {
     show: false,
@@ -56,6 +58,11 @@ const rootReducer = (state = initialState, {type, payload}) => {
           breeds: [],
           pages: 0
         }
+      }
+    case CHANGE_THEME:
+      return {
+        ...state,
+        theme: state.theme === 'ligthTheme' ? 'darkTheme' : 'ligthTheme'
       }
     default:
       return state;
