@@ -1,0 +1,14 @@
+.loadingImage,
+.image {
+  width: var(--cardImageWidth);
+  height: var(--cardImageHeight);
+}
+
+.image {
+  object-fit: cover;
+  object-position: top;
+}
+
+.dontShowImage {
+  display: none;
+}

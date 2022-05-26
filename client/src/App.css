@@ -1,38 +1,94 @@
-.App {
-  text-align: center;
+.global-variables {
+  --cardHeight: 23rem;
+  --cardWidth: 14rem;
+
+  --cardImageHeight: 10rem;
+  --cardImageWidth: 14rem;
+
+  --fontSmall: 0.8rem;
+  --fontMedium: 0.9rem;
+  --fontSubTitle: 1.1rem;
+  --fontTitle: 1.3rem;
+
+  --colorExtraSmallRace: #ff595e;
+  --colorSmallRace: #ffca3a;
+  --colorMediumRace: #8ac926;
+  --colorLargeRace: #1982c4;
+  --colorExtraLargeRace: #6a4c93;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.COLORExtra-Small {
+  color: var(--colorExtraSmallRace);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.COLORSmall {
+  color: var(--colorSmallRace);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.COLORMedium {
+  color: var(--colorMediumRace);
+}
+
+.COLORLarge {
+  color: var(--colorLargeRace);
+}
+
+.COLORExtra-Large {
+  color: var(--colorExtraLargeRace);
+}
+
+.BGExtra-Small {
+  background-color: var(--colorExtraSmallRace);
+}
+
+.BGSmall {
+  background-color: var(--colorSmallRace);
+}
+
+.BGMedium {
+  background-color: var(--colorMediumRace);
+}
+
+.BGLarge {
+  background-color: var(--colorLargeRace);
+}
+
+.BGExtra-Large {
+  background-color: var(--colorExtraLargeRace);
+}
+
+.FONTSMALL {
+  font-size: var(--fontSmall);
+}
+
+.FONTMEDIUM {
+  font-size: var(--fontMedium);
+}
+
+.FONTSUBTITLE {
+  font-size: var(--fontSubTitle);
+}
+
+.FONTTITLE {
+  font-size: var(--fontTitle);
+}
+
+.center {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.darkTheme {
+  --primaryColor: #232323;
+  --primaryColorSub: #424242;
+
+  --fontColor: #000000;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ligthTheme {
+  --primaryColor: #f2f2f2;
+  --primaryColorSub: #808080;
+
+  --fontColor: #000000;
 }

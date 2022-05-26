@@ -2,9 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBreedsWithPaginate, getTemperaments, showHome, resetHome} from '../../redux/actions/index.js';
 
-import s from './Home.module.css';
+import Card from '../Card/Card';
 
-export default function Home() {
+import s from './HomePrototipo.module.css';
+
+export default function HomePrototipo() {
   const home = useSelector(state => state.home);
   const dispatch = useDispatch();
   const [ temperaments, setTemperament ] = React.useState("");
@@ -101,24 +103,32 @@ export default function Home() {
         )})
       }
       </ol>
-      <ol>
+      <div className = {s.cards}>
       {
         home.breeds.length === 0 && <span>No se encontraron razas</span>
       }
       {
         home.breeds.length > 0 && home.breeds.map(b => { return (
-          <li className = {s.liBreeds} key = {`li-breeds-${b.id}`}>
-            <ul>
-            {
-              Object.keys(b).map(prop => { return (
-                <li key = {`li-${prop}-${b.id}`}>{`${prop}: ${b[prop]}`}</li>
-              )})
-            }
-            </ul>
-          </li>
+          // <li className = {s.liBreeds} key = {`li-breeds-${b.id}`}>
+          //   <ul>
+          //   {
+          //     Object.keys(b).map(prop => { return (
+          //       <li key = {`li-${prop}-${b.id}`}>{`${prop}: ${b[prop]}`}</li>
+          //     )})
+          //   }
+          //   </ul>
+          // </li>
+          <Card 
+            key = {`card-breeds-${b.id}`}
+            nombre = {b.nombre}
+            temperamento = {b.temperamento}
+            peso = {b.peso}
+            id = {b.id}
+            imagen = {b.imagen}
+          />
         )})
       }
-      </ol>
+      </div>
     </div>
     {btnPages}
     <h5>Page: {home.currentPage}</h5>

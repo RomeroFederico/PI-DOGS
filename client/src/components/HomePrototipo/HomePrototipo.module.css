@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-direction: column;
 }
 
 .olTemperaments {
@@ -29,4 +30,12 @@
 
 .liBreeds {
   color: orange;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  flex-wrap: wrap;
 }
