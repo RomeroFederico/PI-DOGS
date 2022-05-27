@@ -1,0 +1,14 @@
+.container {
+  min-height: var(--minCardsHeight);
+  width: var(--cardsWidth);
+}
+
+.gridCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: calc(var(--cardHeight) + 20px);
+}
+
+.notFoundTitle {
+  color: var(--fontColor);
+}

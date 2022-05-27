@@ -16,6 +16,9 @@
   --colorMediumRace: #8ac926;
   --colorLargeRace: #1982c4;
   --colorExtraLargeRace: #6a4c93;
+
+  --minCardsHeight: calc(calc(25rem + 20px) * 2);
+  --cardsWidth: calc(calc(14rem + 20px) * 4);
 }
 
 .FILLExtra-Small {

@@ -155,6 +155,7 @@
 
 .card:hover::after {
   animation: slide 2s infinite; /* For the card shine animation*/
+  animation-delay: 0.5s;
 }
 
 /* animation */
