@@ -4,6 +4,7 @@ import { getBreedsWithPaginate, getTemperaments, showHome, resetHome, changeThem
 
 //import Card from '../Card/Card';
 import Cards from '../Cards/Cards';
+import SideBar from '../SideBar/SideBar';
 
 import s from './HomePrototipo.module.css';
 
@@ -168,7 +169,8 @@ export default function HomePrototipo() {
       <option value = "api">Solo originales</option>
       <option value = "db">Solo creados</option>
     </select>
-    <button onClick = {handleChangeTheme}>Cambiar Tema</button> 
+    <button onClick = {handleChangeTheme}>Cambiar Tema</button>
+    <SideBar />
     </>
   )
 };

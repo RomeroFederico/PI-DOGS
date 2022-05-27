@@ -1,0 +1,24 @@
+.optionContainer {
+  width: 15rem;
+  height: 3rem;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 7fr;
+  grid-template-rows: 1fr;
+}
+
+.optionImage {
+  width: 70%;
+  height: 70%;
+}
+
+.optionText {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.radioOption {
+  margin: 0;
+  padding: 0;
+}

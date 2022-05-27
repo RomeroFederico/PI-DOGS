@@ -21,10 +21,10 @@ export default function Cards({ cards }) {
   }
 
   return (
-    <div className = {`center ${s.container}`}>
+    <div className = {s.container}>
     {
       cards.length === 0 && (
-        <div>
+        <div className = {`${s.breedNotFoundContainer} center`}>
           <WhereIsTheDog />
           <h1 className = {s.notFoundTitle}>No Se Encontraron Razas</h1>
         </div>

@@ -9,6 +9,12 @@
   grid-auto-rows: calc(var(--cardHeight) + 20px);
 }
 
+.breedNotFoundContainer {
+  min-height: inherit;
+  width: 100%;
+  flex-direction: column;
+}
+
 .notFoundTitle {
   color: var(--fontColor);
 }

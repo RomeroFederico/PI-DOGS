@@ -1,4 +1,4 @@
-import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES } from './constants';
+import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS } from './constants';
 
 export function getBreedSize (weight) {
   let sizes = Object.keys(METRICS_FOR_BREEDS);
@@ -23,4 +23,21 @@ export function getType (id) {
 
   if (findType) return TYPES[findType].name;
   return "";
+}
+
+export function getFilters () {
+  return FILTER_PARAMS;
+}
+
+export function mapComponents (filterParams, currentComponent) {
+  let params = Object.keys(filterParams);
+  let imageComponentParams = params.reduce((acum, param) => {
+    let subParam = Object.keys(filterParams[param]);
+    subParam = subParam.filter(p => p !== 'name');
+    acum = acum.concat(subParam.map(s => filterParams[param][s].imageComponent));
+    return acum;
+  }, []);
+  let findComponent = imageComponentParams.find(i => i.name === currentComponent.name);
+  if (findComponent) findComponent.component = currentComponent.component;
+  return filterParams;
 }
