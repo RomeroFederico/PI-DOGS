@@ -56,9 +56,9 @@ const DESCENDING = Option.create('DESCENDING', 'Descendente', 'descending', 'Des
 const ORIGINAL = Option.create('ORIGINAL', 'Originales', 'API', 'Original');
 const CUSTOM = Option.create('CUSTOM', 'Creadas', 'DB', 'New');
 
-const SORT_BY = new Param('Ordenar por', [WEIGHT, NAME]);
-const ORDER = new Param('Orden', [ASCENDING, DESCENDING]);
-const FILTER_ONLY = new Param('Filtrar por Razas', [ORIGINAL, CUSTOM]);
+const SORT_BY = new Param('Ordenar por', 'sort', [WEIGHT, NAME]);
+const ORDER = new Param('Orden', 'order', [ASCENDING, DESCENDING]);
+const FILTER_ONLY = new Param('Filtrar por Razas', 'filter', [ORIGINAL, CUSTOM]);
 
 export const FILTER_PARAMS = [
   SORT_BY,

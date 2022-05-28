@@ -41,5 +41,5 @@
 }
 
 .cards {
-  margin-left: 20vw;
+  margin-left: var(--sideBarWidth);
 }

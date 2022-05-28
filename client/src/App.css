@@ -1,4 +1,7 @@
 .global-variables {
+
+  --sideBarWidth: 20vw;
+
   --cardHeight: 25rem;
   --cardWidth: 14rem;
 
@@ -17,7 +20,7 @@
   --colorLargeRace: #1982c4;
   --colorExtraLargeRace: #6a4c93;
 
-  --minCardsHeight: calc(calc(25rem + 20px) * 2);
+  --minCardsHeight: calc(25rem * 2);
   --cardsWidth: calc(calc(14rem + 20px) * 4);
 }
 
@@ -138,5 +141,4 @@
 
 .imageParam {
   fill: var(--fontColor);
-  transition: fill 0.5s;
 }

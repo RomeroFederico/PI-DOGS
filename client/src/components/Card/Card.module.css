@@ -7,8 +7,7 @@
 
   box-sizing: content-box;
   box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
-
-  margin: 10px;
+  
   background-color: var(--primaryColor);
   color: var(--fontColor);
   position: relative;

@@ -59,7 +59,8 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
               payload: {
                 breeds: data.breeds,
                 pages: data.pages,
-                currentPage: page
+                currentPage: page,
+                filter: { ...filterOptions }
               }
              })
            })

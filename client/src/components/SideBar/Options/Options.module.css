@@ -6,7 +6,6 @@
   font-size: var(--fontMedium);
   color: var(--fontColor);
   font-weight: 700;
-  font-style: italic;
 
   background-color: var(--primaryColorSub);
 
@@ -14,6 +13,8 @@
   margin: 0.5rem 0 0.5rem 0;
 
   text-align: center;
+
+  opacity: 0.7;
 }
 
 .options {

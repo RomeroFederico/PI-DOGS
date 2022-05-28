@@ -19,7 +19,13 @@ const initialState = {
     temperaments: [],
     breeds: [],
     pages: 0,
-    currentPage: 1
+    currentPage: 1,
+    filter: {
+      sort: 'nombre',
+      order: 'asc',
+      filter: '',
+      temperaments: []
+    }
   }
 }
 

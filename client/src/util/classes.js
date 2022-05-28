@@ -1,6 +1,7 @@
 export class Param {
-  constructor(name, options) {
-    this.name = name;
+  constructor(clientName, serverName, options) {
+    this.clientName = clientName;
+    this.serverName = serverName;
     this.options = options;
   }
 

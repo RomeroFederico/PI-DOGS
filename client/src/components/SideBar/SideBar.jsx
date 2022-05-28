@@ -13,7 +13,8 @@ export default function SideBar() {
   let options = filters.map((param, index)=> { return (
 
     <Options
-      filterName = { param.name }
+      filterServerName = { param.serverName }
+      filterClientName = { param.clientName }
       options = { param.options }
       key = {`Options-${param.name}-${index}`}
     />
