@@ -1,10 +1,34 @@
 .optionContainer {
-  width: 15rem;
-  height: 3rem;
+  width: 6rem;
+  height: 6rem;
 
   display: grid;
-  grid-template-columns: 1fr 2fr 7fr;
-  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5fr 2fr;
+}
+
+.optionImageContainer {
+  grid-row: 1 / 2;
+
+  width: 70%;
+  justify-self: center;
+
+  border: 2px dashed var(--fontColor);
+  transition: border 0.5s;
+
+  cursor: pointer;
+}
+
+.optionContainer:hover > .optionText {
+  color: var(--secondaryColor);
+}
+
+.optionContainer:hover > .optionImageContainer {
+  border-color: var(--secondaryColor);
+}
+
+.optionContainer:hover > .optionImageContainer > .optionImage > svg {
+  fill: var(--secondaryColor);
 }
 
 .optionImage {
@@ -13,12 +37,16 @@
 }
 
 .optionText {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
 
-.radioOption {
-  margin: 0;
-  padding: 0;
+  grid-row: 2 / 3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  color: var(--fontColor);
+  font-size: var(--fontMedium);
+  font-weight: 700;
 }

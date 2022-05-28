@@ -1,0 +1,21 @@
+.containerOptions {
+  width: 100%;
+}
+
+.optionName {
+  font-size: var(--fontMedium);
+  color: var(--fontColor);
+  font-weight: 700;
+  font-style: italic;
+
+  background-color: var(--primaryColorSub);
+
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  margin: 0.5rem 0 0.5rem 0;
+
+  text-align: center;
+}
+
+.options {
+
+}

@@ -109,35 +109,9 @@ export default function HomePrototipo() {
         )})
       }
       </ol>
-      <div className = {s.cards}>
-
-        {/*{
-          home.breeds.length === 0 && <span>No se encontraron razas</span>
-        }
-        {
-          home.breeds.length > 0 && home.breeds.map(b => { return (
-            // <li className = {s.liBreeds} key = {`li-breeds-${b.id}`}>
-            //   <ul>
-            //   {
-            //     Object.keys(b).map(prop => { return (
-            //       <li key = {`li-${prop}-${b.id}`}>{`${prop}: ${b[prop]}`}</li>
-            //     )})
-            //   }
-            //   </ul>
-            // </li>
-            <Card 
-              key = {`card-breeds-${b.id}`}
-              nombre = {b.nombre}
-              temperamento = {b.temperamento}
-              peso = {b.peso}
-              id = {b.id}
-              imagen = {b.imagen}
-            />
-          )})
-        }*/}
-
-        <Cards cards = {home.breeds} />
-
+      <div className = {s.mainZone}>
+        <SideBar />
+        <Cards cards = {home.breeds} style = {s.cards}/>
       </div>
     </div>
     {btnPages}
@@ -170,7 +144,6 @@ export default function HomePrototipo() {
       <option value = "db">Solo creados</option>
     </select>
     <button onClick = {handleChangeTheme}>Cambiar Tema</button>
-    <SideBar />
     </>
   )
 };

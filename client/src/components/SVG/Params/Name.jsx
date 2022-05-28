@@ -3,7 +3,9 @@ import React from 'react';
 export default function Name({ style }) {
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.753 511.753" style={{enableBackground: "new 0 0 511.753 511.753"}} >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.753 511.753" style={{enableBackground: "new 0 0 511.753 511.753"}}
+         className = {'imageParam'}
+    >
       <g>
         <g>
           <g>

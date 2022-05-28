@@ -29,15 +29,8 @@ export function getFilters () {
   return FILTER_PARAMS;
 }
 
-export function mapComponents (filterParams, currentComponent) {
-  let params = Object.keys(filterParams);
-  let imageComponentParams = params.reduce((acum, param) => {
-    let subParam = Object.keys(filterParams[param]);
-    subParam = subParam.filter(p => p !== 'name');
-    acum = acum.concat(subParam.map(s => filterParams[param][s].imageComponent));
-    return acum;
-  }, []);
-  let findComponent = imageComponentParams.find(i => i.name === currentComponent.name);
-  if (findComponent) findComponent.component = currentComponent.component;
-  return filterParams;
+export function getImageComponent(option, imageComponents) {
+  let findComponent = imageComponents.find(i => i.name === option.imageComponentName);
+  if (findComponent) return findComponent.component;
+  return false;
 }

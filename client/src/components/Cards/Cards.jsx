@@ -5,7 +5,7 @@ import WhereIsTheDog from '../SVG/WhereIsTheDog/WhereIsTheDog';
 
 import s from './Cards.module.css';
 
-export default function Cards({ cards }) {
+export default function Cards({ cards, style }) {
 
   let showCards = function(cards) {
     return cards.map(c => { return (
@@ -21,7 +21,7 @@ export default function Cards({ cards }) {
   }
 
   return (
-    <div className = {s.container}>
+    <div className = {`${s.container} ${style}`}>
     {
       cards.length === 0 && (
         <div className = {`${s.breedNotFoundContainer} center`}>

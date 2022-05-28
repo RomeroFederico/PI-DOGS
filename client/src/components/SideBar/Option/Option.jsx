@@ -1,29 +1,28 @@
 import React from 'react';
+import { getImageComponent } from '../../../util';
+import { paramsComponents } from '../../SVG/Params';
 
 import s from './Option.module.css';
 
-export default function Option({ optionName, data }) {
+export default function Option({ optionData }) {
+
+  let imageComponent = getImageComponent(optionData, paramsComponents);
 
   return (
     <div className = {s.optionContainer}>
-      <div className = {'center'}>
-        <input 
-          type = "radio"
-          name = {optionName}
-          value = {data.serverName}
-          className = {s.radioOption}
-        />
-      </div>
-      <div className = {'center'}>
+      <div className = {`center ${s.optionImageContainer}`}>
         <div className = {`${s.optionImage}`}>
         {
-          data.imageComponent.component
+          imageComponent && imageComponent
+        }
+        {
+          !imageComponent && <span>⚙</span>
         }
         </div>
       </div>
 
       <div className = {s.optionText}>
-        {data.clientName}
+        {optionData.clientName}
       </div>
     </div>
   );

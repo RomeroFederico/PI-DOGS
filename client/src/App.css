@@ -112,6 +112,8 @@
   --primaryColorSub: #343a40;
   --fontColor: #FFFFFF;
 
+  --secondaryColor: #ffb703;
+
   --reversePrimaryColor: #f8f9fa;
   --reversePrimaryColorSub: #e9ecef;
   --reverseFontColor: #000000;
@@ -122,6 +124,8 @@
   --primaryColorSub: #e9ecef;
   --fontColor: #000000;
 
+  --secondaryColor: #ffb703;
+
   --reversePrimaryColor: #212529;
   --reversePrimaryColorSub: #343a40;
   --reverseFontColor: #FFFFFF;
@@ -130,4 +134,9 @@
 .body {
   background-color: var(--primaryColorSub);
   transition: background-color 0.5s;
+}
+
+.imageParam {
+  fill: var(--fontColor);
+  transition: fill 0.5s;
 }

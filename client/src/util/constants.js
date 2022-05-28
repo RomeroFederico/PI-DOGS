@@ -1,3 +1,5 @@
+import { Param, Option } from './classes'; 
+
 export const METRICS_FOR_BREEDS = {
 
   X_SMALL_RACE: {
@@ -46,82 +48,20 @@ export const TYPES = {
   } 
 }
 
-export const FILTER_PARAMS = {
-  SORT_BY: {
+// FILTER PARAMS FOR THE HOME
+const WEIGHT = Option.create('WEIGHT', 'Peso', 'peso', 'Weight');
+const NAME = Option.create('NAME', 'Nombre', 'nombre', 'Name');
+const ASCENDING = Option.create('ASCENDING', 'Ascendente', 'ascending', 'Asc');
+const DESCENDING = Option.create('DESCENDING', 'Descendente', 'descending', 'Desc');
+const ORIGINAL = Option.create('ORIGINAL', 'Originales', 'API', 'Original');
+const CUSTOM = Option.create('CUSTOM', 'Creadas', 'DB', 'New');
 
-    name: 'Ordenar Por',
+const SORT_BY = new Param('Ordenar por', [WEIGHT, NAME]);
+const ORDER = new Param('Orden', [ASCENDING, DESCENDING]);
+const FILTER_ONLY = new Param('Filtrar por Razas', [ORIGINAL, CUSTOM]);
 
-    WEIGHT: {
-      clientName: 'Peso',
-      serverName: 'peso',
-      imageComponent: {
-        name: 'Weight',
-        component: null
-      }
-    },
-
-    NAME: {
-      clientName: 'Nombre',
-      serverName: 'nombre',
-      imageComponent: {
-        name: 'Name',
-        component: null
-      }
-    }
-  },
-
-  ORDER: { 
-
-    name: 'Orden',
-
-    ASCENDING: {
-      clientName: 'Ascendente',
-      serverName: 'ascending',
-      imageComponent: {
-        name: 'Asc',
-        component: null
-      }
-    },
-
-    DESCENDING: {
-      clientName: 'Descendente',
-      serverName: 'Descending',
-      imageComponent: {
-        name: 'Desc',
-        component: null
-      }
-    }
-  },
-
-  FILTER_ONLY: {
-
-    name: 'Filtrar por',
-
-    ORIGINAL: {
-      clientName: 'Razas Originales',
-      serverName: 'API',
-      imageComponent: {
-        name: 'Original',
-        component: null
-      }
-    },
-
-    CUSTOM: {
-      clientName: 'Razas Creadas',
-      serverName: 'DB',
-      imageComponent: {
-        name: 'New',
-        component: null
-      }
-    },
-
-    ALL: {
-      clientName: 'Descendente',
-      serverName: '',
-      imageComponent: {
-        name: 'All',
-        component: null
-      }
-    },
-  },
-}
+export const FILTER_PARAMS = [
+  SORT_BY,
+  ORDER,
+  FILTER_ONLY
+];

@@ -4,7 +4,6 @@ import Asc from './Asc';
 import Desc from './Desc';
 import Original from './Original';
 import New from './New';
-import All from './All';
 
 export const paramsComponents = [
   {
@@ -30,9 +29,5 @@ export const paramsComponents = [
   {
     component: <New />,
     name: 'New'
-  },
-  {
-    component: <All />,
-    name: 'All'
   }
 ]
