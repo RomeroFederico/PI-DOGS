@@ -19,4 +19,5 @@
   background-color: var(--dangerColor);
   color: white;
   opacity: 1;
+  font-size: var(--fontSmall);
 }

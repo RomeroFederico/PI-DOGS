@@ -5,7 +5,8 @@ const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS, IMAGE_URL_API,
 			SORT_BY_NAME, SORT_BY_WEIGTH, ASCENDING, DESCENDING,
 			CONVERT_WEIGHT, CONVERT_HEIGHT, CONVERT_LB_TO_KG, CONVERT_IN_TO_CM,
 			FILTER_ONLY_API, FILTER_ONLY_DB, NO_FILTER,
-			FILTER_ONLY_DB_TEMP, FILTER_ONLY_API_TEMP, FILTER_ONLY_TEMP } = require('./global-constants');
+			FILTER_ONLY_DB_TEMP, FILTER_ONLY_API_TEMP, FILTER_ONLY_TEMP,
+			TEMPERAMENTS_SEPARATOR } = require('./global-constants');
 
 const axios = require('axios');
 
@@ -32,7 +33,7 @@ let paginateBreeds = function(breeds, page, sortBy, order, filter, temperaments)
 	if (!order) order = ASCENDING;
 	if (!filter) filter = temperaments ? FILTER_ONLY_TEMP : NO_FILTER;
 
-	if (temperaments) temperaments = temperaments.toUpperCase().split("-");
+	if (temperaments) temperaments = temperaments.toUpperCase().split(TEMPERAMENTS_SEPARATOR);
 
 	sortBy = sortBy.toUpperCase();
 	order = order.toUpperCase();

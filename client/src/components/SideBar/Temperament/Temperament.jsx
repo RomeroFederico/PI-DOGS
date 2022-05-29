@@ -12,7 +12,7 @@ export default function Temperament({ name }) {
 
   return (
     <button 
-      className = {s.btnRemoveTemperament}
+      className = {`${s.btnRemoveTemperament} ${name.length > 10 ? 'FONTSMALLEST' : ''}`}
       onMouseEnter = {handleHover}
       onMouseLeave = {handleHover}>
       { showRemove ? 'Quitar' : name }

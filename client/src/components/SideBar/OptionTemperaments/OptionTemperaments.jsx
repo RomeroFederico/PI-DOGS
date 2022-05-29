@@ -1,17 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Temperament from '../Temperament/Temperament';
-import ModalTemperaments from '../ModalTemperaments/ModalTemperaments';
+import { showModalTemperaments } from '../../../redux/actions';
 
 import s from './OptionTemperaments.module.css';
 
 export default function OptionTemperaments(props) {
 
+  let dispatch = useDispatch();
   let { temperaments } = useSelector(state => state.home.filter);
-  let [ showModal, setShowModal ] = React.useState(false);
 
   let handleClick = function() {
-    setShowModal(true);
+    dispatch(showModalTemperaments());
   }
 
   return (
@@ -20,9 +20,6 @@ export default function OptionTemperaments(props) {
         {`:: Temperamentos ::`}
       </div>
       <div className = {s.options}>
-      {
-        showModal && <ModalTemperaments />
-      }
       {
         temperaments && temperaments[0] !== '' && temperaments.map((t, index) => { return (
 

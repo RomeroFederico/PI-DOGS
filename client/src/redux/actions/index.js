@@ -4,6 +4,11 @@ import {
   GET_BREEDS_WITH_PAGINATE,
   GET_TEMPERAMENTS,
   RESET_BREEDS,
+  SHOW_MODAL_TEMPERAMENTS,
+  CLOSE_MODAL_TEMPERAMENTS,
+  SEARCH_TEMPERAMENTS_MODAL,
+  ADD_TEMPERAMENT_TO_FILTERS,
+  REMOVE_TEMPERAMENT_FROM_FILTERS,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -71,6 +76,39 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
 export const resetBreeds = function() {
   return {
     type: RESET_BREEDS
+  }
+}
+
+export const closeModalTemperaments = function() {
+  return {
+    type: CLOSE_MODAL_TEMPERAMENTS
+  }
+}
+
+export const showModalTemperaments = function() {
+  return {
+    type: SHOW_MODAL_TEMPERAMENTS
+  }
+}
+
+export const searchTemperamentsModal = function(value) {
+  return {
+    type: SEARCH_TEMPERAMENTS_MODAL,
+    payload: value
+  }
+}
+
+export const addTemperamentToFilters = function(value) {
+  return {
+    type: ADD_TEMPERAMENT_TO_FILTERS,
+    payload: value
+  }
+}
+
+export const removeTemperamentFromFilters = function(value) {
+  return {
+    type: REMOVE_TEMPERAMENT_FROM_FILTERS,
+    payload: value
   }
 }
 

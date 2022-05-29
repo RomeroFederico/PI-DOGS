@@ -1,0 +1,25 @@
+.containerSearch {
+  width: 100%;
+}
+
+.searchTemperament {
+  width: 100%;
+  height: 2rem;
+  margin: 0;
+  padding: 0 1rem 0 1rem;
+  border: none;
+  background-color: var(--primaryColorSub);
+  font-size: var(--fontMedium);
+  color: var(--fontColor);
+  font-weight: 700;
+  font-style: italic;
+  box-sizing: border-box;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5) inset;
+}
+
+.searchTemperament:focus {
+  outline: none !important;
+  border:1px solid var(--secondaryColor);
+}

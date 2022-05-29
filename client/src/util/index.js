@@ -1,4 +1,5 @@
 import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS } from './constants';
+import { Temperament } from './validaciones';
 
 export function getBreedSize (weight) {
   let sizes = Object.keys(METRICS_FOR_BREEDS);
@@ -33,4 +34,13 @@ export function getImageComponent(option, imageComponents) {
   let findComponent = imageComponents.find(i => i.name === option.imageComponentName);
   if (findComponent) return findComponent.component;
   return false;
+}
+
+export function validateTemperament(value) {
+  return Temperament.validate(value);
+}
+
+export function filterTemperaments(temperaments, search) {
+  if (search === '') return temperaments;
+  return temperaments.filter(t => t.nombre.toUpperCase().includes(search));
 }

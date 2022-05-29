@@ -15,38 +15,44 @@
   width: 50%;
   border-radius: 10px;
   box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
-}
-
-.temperaments {
-  background-color: var(--primaryColorSub);
-  height: 90%;
-  width: 90%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: auto;
-  grid-gap: 15px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 15px;
-  border-radius: 10px;
-  box-sizing: border-box;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto 300px;
+  grid-gap: 1rem;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem;
 }
 
-.temperamento {
-  color: var(--fontColor);
-  font-size: var(--fontSmall);
-  font-style: italic;
-  border: 1px solid var(--fontColor);
-  padding: 5px 2px 5px 2px;
-  text-align: center;
-  opacity: 0.7;
+.modalTitle {
+  background-color: transparent;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
   font-weight: 700;
+  font-size: var(--fontSubTitle);
+  color: var(--fontColor);
 }
 
-.temperamento:hover {
+.title {
+  padding-left: 0.5rem;
+}
+
+.closeModal {
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+
+  font-weight: 900;
+  font-size: var(--fontTitle);
+  color: var(--fontColor);
+}
+
+.closeModal:hover {
   cursor: pointer;
-  background-color: var(--secondaryColor);
-  border-color: var(--secondaryColor);
-  opacity: 1;
-  color: white;
+  color: var(--secondaryColor);
 }
