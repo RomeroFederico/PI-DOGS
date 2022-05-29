@@ -3,6 +3,7 @@ import {
   GET_BREED_DETAILS,
   GET_BREEDS_WITH_PAGINATE,
   GET_TEMPERAMENTS,
+  RESET_BREEDS,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -40,10 +41,10 @@ export const getTemperaments = function() {
 }
 
 export const getBreedsWithPaginate = function(page = 1, filterOptions = {
-    sort: null,
-    order: null,
-    filter: null,
-    temperaments: null
+    sort: 'nombre',
+    order: 'ascending',
+    filter: '',
+    temperaments: '',
   }) {
 
   let query = Object.keys(filterOptions)
@@ -64,6 +65,12 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
               }
              })
            })
+  }
+}
+
+export const resetBreeds = function() {
+  return {
+    type: RESET_BREEDS
   }
 }
 

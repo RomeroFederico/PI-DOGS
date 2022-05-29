@@ -1,0 +1,52 @@
+.background {
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(0, 0,0 , 0.7);
+}
+
+.modal {
+  background-color: var(--primaryColor);
+  height: 70%;
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+}
+
+.temperaments {
+  background-color: var(--primaryColorSub);
+  height: 90%;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: auto;
+  grid-gap: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.temperamento {
+  color: var(--fontColor);
+  font-size: var(--fontSmall);
+  font-style: italic;
+  border: 1px solid var(--fontColor);
+  padding: 5px 2px 5px 2px;
+  text-align: center;
+  opacity: 0.7;
+  font-weight: 700;
+}
+
+.temperamento:hover {
+  cursor: pointer;
+  background-color: var(--secondaryColor);
+  border-color: var(--secondaryColor);
+  opacity: 1;
+  color: white;
+}

@@ -16,12 +16,23 @@
   justify-items: center;
 }
 
-.breedNotFoundContainer {
+.breedNotFoundContainer,
+.loadingImageContainer {
   min-height: inherit;
   width: 100%;
   flex-direction: column;
+  justify-content: flex-start !important;
 }
 
 .notFoundTitle {
   color: var(--fontColor);
+}
+
+.loadingImage {
+  height: 50%;
+  width: 50%;
+}
+
+.fillLoadingImage {
+  fill: var(--secondaryColor);
 }

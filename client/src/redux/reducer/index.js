@@ -3,6 +3,7 @@ import {
   GET_BREED_DETAILS,
   GET_BREEDS_WITH_PAGINATE,
   GET_TEMPERAMENTS,
+  RESET_BREEDS,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -34,9 +35,16 @@ const rootReducer = (state = initialState, {type, payload}) => {
     case GET_BREEDS_WITH_PAGINATE:
       return {
         ...state,
+        loading: false,
         home: {
           ...state.home,
-          ...payload
+          ...payload,
+          filter: {
+            ...payload.filter,
+            temperaments: 
+              Array.isArray(payload.filter.temperaments) ? 
+              payload.filter.temperaments : payload.filter.temperaments.split('-')
+          }
         }
       }
     case GET_TEMPERAMENTS:
@@ -45,6 +53,17 @@ const rootReducer = (state = initialState, {type, payload}) => {
         home: {
           ...state.home,
           temperaments: payload
+        }
+      }
+    case RESET_BREEDS:
+      return {
+        ...state,
+        currentPage: 1,
+        pages: 0,
+        loading: true,
+        home: {
+          ...state.home,
+          breeds: []
         }
       }
     case SHOW_HOME:

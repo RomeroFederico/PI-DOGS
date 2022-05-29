@@ -1,6 +1,6 @@
 .global-variables {
 
-  --sideBarWidth: 20vw;
+  --sideBarHeight: 10rem;
 
   --cardHeight: 25rem;
   --cardWidth: 14rem;
@@ -116,6 +116,7 @@
   --fontColor: #FFFFFF;
 
   --secondaryColor: #ffb703;
+  --dangerColor: crimson;
 
   --reversePrimaryColor: #f8f9fa;
   --reversePrimaryColorSub: #e9ecef;
@@ -128,6 +129,7 @@
   --fontColor: #000000;
 
   --secondaryColor: #ffb703;
+  --dangerColor: crimson;
 
   --reversePrimaryColor: #212529;
   --reversePrimaryColorSub: #343a40;

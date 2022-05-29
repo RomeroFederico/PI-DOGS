@@ -7,13 +7,19 @@ import s from './Card.module.css';
 import Weight from '../SVG/Weight/Weight';
 import DogFace from '../SVG/DogFace/DogFace';
 
-export default function Card({ id, nombre, temperamento, imagen, peso }) {
+export default function Card({ id, nombre, temperamento, imagen, peso, delay }) {
+
+  let [ showCard, setShowCard ] = React.useState(false);
 
   let size = getBreedSize(peso[peso.length - 1]);
   let type = getType(id);
 
+  React.useEffect(() => {
+    setTimeout(() => setShowCard(true),  100 * (delay + 1));
+  }, []);
+
   return (
-    <div className = {s.card}>
+    <div className = {`${s.card} ${ showCard ? '' : s.hideCard } `}>
       <div className = {`${s.typeZone}`}>
         <div className = {`center ${s.header} ${s.typeTitle} BG${size}`}>{type}</div>
         <div className = {`center ${s.header} BG${size}`}>

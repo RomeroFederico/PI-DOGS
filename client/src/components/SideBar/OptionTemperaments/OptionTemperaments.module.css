@@ -1,0 +1,49 @@
+.containerOptions {
+}
+
+.optionName {
+  font-size: var(--fontMedium);
+  color: var(--fontColor);
+  font-weight: 700;
+
+  background-color: var(--primaryColorSub);
+
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  margin: 0.5rem 0 0.5rem 0;
+
+  text-align: center;
+
+  opacity: 0.7;
+}
+
+.options {
+  height: 6rem;
+  width: 18rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.btnAddTemperament {
+  margin: 0;
+  padding: 0;
+  margin: 5px;
+  font-size: var(--fontSmall);
+  color: var(--primaryColor);
+  border-radius: 5px;
+  background-color: var(--reversePrimaryColorSub);
+  border: 1px solid transparent;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.btnAddTemperament:hover {
+  cursor: pointer;
+  background-color: var(--secondaryColor);
+  opacity: 1;
+}
+
+.plus {
+  font-size: var(--fontMedium);
+}

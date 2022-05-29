@@ -2,7 +2,7 @@ import React from 'react';
 import { getImageComponent } from '../../../util';
 import { paramsComponents } from '../../SVG/Params';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBreedsWithPaginate } from '../../../redux/actions/index.js';
+import { getBreedsWithPaginate, resetBreeds } from '../../../redux/actions/index.js';
 
 import s from './Option.module.css';
 
@@ -13,14 +13,23 @@ export default function Option({ optionData, optionName, filterServerName }) {
   let imageComponent = getImageComponent(optionData, paramsComponents);
 
   let handleClick = function() {
+    dispatch(resetBreeds());
     dispatch(getBreedsWithPaginate(1, {
       ...filter,
       [filterServerName]: optionData.serverName
     }));
   }
 
+  let isSelected = function() {
+    return filter[filterServerName] === optionData.serverName;
+  }
+
+  let getClassName = function() {
+    return isSelected() ? s.selected : s.noSelected;
+  }
+
   return (
-    <div className = {s.optionContainer} onClick = {handleClick}>
+    <div className = {`${s.optionContainer} ${getClassName()}`} onClick = { !isSelected() ? handleClick : null }>
       <div className = {`center ${s.optionImageContainer}`}>
         <div className = {`${s.optionImage}`}>
         {

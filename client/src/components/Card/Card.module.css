@@ -172,3 +172,9 @@
     transform: translateX(100%);
   }
 }
+
+/* unfold card */
+
+.hideCard {
+  display: none;
+}

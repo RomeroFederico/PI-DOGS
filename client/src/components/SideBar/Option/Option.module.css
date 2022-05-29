@@ -6,8 +6,6 @@
   grid-template-columns: 1fr;
   grid-template-rows: 5fr 2fr;
 
-  cursor: pointer;
-
   opacity: 0.7;
 }
 
@@ -20,19 +18,36 @@
   border: 2px dashed var(--fontColor);
 }
 
-.optionContainer:hover {
+.selected {
   opacity: 1;
 }
 
-.optionContainer:hover > .optionText {
+.selected > .optionText {
   color: var(--secondaryColor);
 }
 
-.optionContainer:hover > .optionImageContainer {
+.selected > .optionImageContainer {
   border-color: var(--secondaryColor);
 }
 
-.optionContainer:hover > .optionImageContainer > .optionImage > svg {
+.selected > .optionImageContainer > .optionImage > svg {
+  fill: var(--secondaryColor);
+}
+
+.noSelected:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.noSelected:hover > .optionText {
+  color: var(--secondaryColor);
+}
+
+.noSelected:hover > .optionImageContainer {
+  border-color: var(--secondaryColor);
+}
+
+.noSelected:hover > .optionImageContainer > .optionImage > svg {
   fill: var(--secondaryColor);
 }
 

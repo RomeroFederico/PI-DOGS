@@ -55,10 +55,11 @@ const ASCENDING = Option.create('ASCENDING', 'Ascendente', 'ascending', 'Asc');
 const DESCENDING = Option.create('DESCENDING', 'Descendente', 'descending', 'Desc');
 const ORIGINAL = Option.create('ORIGINAL', 'Originales', 'API', 'Original');
 const CUSTOM = Option.create('CUSTOM', 'Creadas', 'DB', 'New');
+const ALL = Option.create('ALL', 'Todas', '', 'All');
 
 const SORT_BY = new Param('Ordenar por', 'sort', [WEIGHT, NAME]);
 const ORDER = new Param('Orden', 'order', [ASCENDING, DESCENDING]);
-const FILTER_ONLY = new Param('Filtrar por Razas', 'filter', [ORIGINAL, CUSTOM]);
+const FILTER_ONLY = new Param('Filtrar por Razas', 'filter', [ALL, ORIGINAL, CUSTOM]);
 
 export const FILTER_PARAMS = [
   SORT_BY,
