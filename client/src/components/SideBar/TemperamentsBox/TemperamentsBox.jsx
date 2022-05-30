@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTemperamentToFilters, resetBreeds, getBreedsWithPaginate } from '../../../redux/actions';
+import { addTemperamentToFilters, resetBreeds, getBreedsWithPaginate, getBreedsWithPaginateLocal } from '../../../redux/actions';
 
 import s from './TemperamentsBox.module.css';
 
 export default function TemperamentsBox({ temperaments }) {
 
   let dispatch = useDispatch();
-  let { filterData } = useSelector(state => state.home);
+  let { filterData, localBreeds } = useSelector(state => state.home);
 
   let handleClick = function(e) {
     let { name } = e.target;
@@ -19,7 +19,8 @@ export default function TemperamentsBox({ temperaments }) {
     };
     dispatch(addTemperamentToFilters(newTemperaments));
     dispatch(resetBreeds());
-    dispatch(getBreedsWithPaginate(1, filterDataToFetch));
+    if (localBreeds) dispatch(getBreedsWithPaginateLocal(1, filterDataToFetch));
+    else dispatch(getBreedsWithPaginate(1, filterDataToFetch));
   }
 
   return (

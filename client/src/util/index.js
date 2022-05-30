@@ -37,7 +37,6 @@ export function getImageComponent(option, imageComponents) {
 }
 
 export function getTemperamentsFromFilters(temperaments) {
-  console.log("Obtengo los temperamentos: ", temperaments);
   return temperaments.split(',');
 }
 

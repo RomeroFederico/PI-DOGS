@@ -6,7 +6,6 @@ const checkEmptyData = function(data) {
 }
 
 export const filterLocalBreeds = function(breeds, filterData, page) {
-  console.log(breeds, filterData);
   checkEmptyData(filterData);
   let { sort, order, filter, temperaments } = filterData;
 

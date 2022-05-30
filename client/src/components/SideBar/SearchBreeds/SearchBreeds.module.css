@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.search {
+.btnSearch {
   background-color: transparent;
   border: none;
   color: var(--fontColor);
@@ -14,8 +14,16 @@
   margin-left: 1rem;
 }
 
-.enabled {
+.enableSearch,
+.enableReset {
   cursor: pointer;
-  color: var(--secondaryColor);
   opacity: 1;
+}
+
+.enableSearch {
+  color: var(--secondaryColor);
+}
+
+.enableReset {
+  color: var(--dangerColor);
 }

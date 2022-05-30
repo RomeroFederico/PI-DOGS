@@ -4,6 +4,8 @@ import {
   GET_BREEDS_WITH_PAGINATE,
   GET_BREEDS_BY_NAME,
   GET_TEMPERAMENTS,
+  GET_BREEDS_WITH_PAGINATE_LOCAL,
+  BREEDS_NOT_FOUND,
   RESET_BREEDS,
   SET_FILTER_DATA,
   SHOW_MODAL_TEMPERAMENTS,
@@ -28,7 +30,7 @@ const initialState = {
     show: false,
     allTemperaments: [],
     breeds: [],
-    localBreeds: [],
+    localBreeds: null,
     pages: 0,
     currentPage: 1,
     filterData: {
@@ -53,6 +55,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
         home: {
           ...state.home,
           ...payload,
+          localBreeds: null,
           filterData: {
             ...payload.filterData,
           }
@@ -60,10 +63,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
       }
     case GET_BREEDS_BY_NAME:
 
-      let { breeds, pages } = filterLocalBreeds([ ...payload.localBreeds ], { ...payload.filterData });
-
-      console.log(breeds, pages);
-      console.log('payload:', payload);
+      var { breeds, pages } = filterLocalBreeds([ ...payload.localBreeds ], { ...payload.filterData });
 
       return {
         ...state,
@@ -84,6 +84,35 @@ const rootReducer = (state = initialState, {type, payload}) => {
         home: {
           ...state.home,
           allTemperaments: payload
+        }
+      }
+    case GET_BREEDS_WITH_PAGINATE_LOCAL: 
+
+      var { breeds, pages } = filterLocalBreeds([ ...state.home.localBreeds ], { ...payload.filterData });
+
+      return {
+        ...state,
+        loading: false,
+        home: {
+          ...state.home,
+          breeds: breeds,
+          pages: pages,
+          filterData: {
+            ...payload.filterData
+          }
+        }
+      }
+    case BREEDS_NOT_FOUND:
+      return {
+        ...state,
+        loading: false,
+        home: {
+          ...state.home,
+          pages: 1,
+          currentPage: 1,
+          breeds: [],
+          localBreeds: payload.localBreeds, // Si viene de getBreedsByName, vendra como un [], caso contrario => null/undefined
+          filterData: payload.filterData
         }
       }
     case SET_FILTER_DATA:

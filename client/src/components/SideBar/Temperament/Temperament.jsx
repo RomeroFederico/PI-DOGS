@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeTemperamentFromFilters, resetBreeds, getBreedsWithPaginate } from '../../../redux/actions';
+import { removeTemperamentFromFilters, resetBreeds, getBreedsWithPaginate, getBreedsWithPaginateLocal } from '../../../redux/actions';
 
 import s from './Temperament.module.css';
 
 export default function Temperament({ name }) {
 
   let dispatch = useDispatch();
-  let { filterData } = useSelector(state => state.home);
+  let { filterData, localBreeds } = useSelector(state => state.home);
 
   let handleClick = function() {
     let newTemperaments = filterData.temperaments.split(',').filter(t => t !== name).join(',');
@@ -18,7 +18,8 @@ export default function Temperament({ name }) {
     };
     dispatch(removeTemperamentFromFilters(newTemperaments));
     dispatch(resetBreeds());
-    dispatch(getBreedsWithPaginate(1, filterDataToFetch));
+    if (localBreeds) dispatch(getBreedsWithPaginateLocal(1, filterDataToFetch));
+    else dispatch(getBreedsWithPaginate(1, filterDataToFetch));
   }
 
   return (

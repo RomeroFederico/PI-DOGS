@@ -4,6 +4,8 @@ import {
   GET_BREEDS_WITH_PAGINATE,
   GET_BREEDS_BY_NAME,
   GET_TEMPERAMENTS,
+  GET_BREEDS_WITH_PAGINATE_LOCAL,
+  BREEDS_NOT_FOUND,
   RESET_BREEDS,
   SET_FILTER_DATA,
   SHOW_MODAL_TEMPERAMENTS,
@@ -21,6 +23,8 @@ const PATH_GET_DOGS = 'http://localhost:3001/dogs';
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
 const PATH_GET_TEMPERAMENTS = 'http://localhost:3001/temperament';
 const PATH_GET_DOGS_PAGE = 'http://localhost:3001/dogs/page';
+
+const ERROR_BREED_NOT_FOUND = "Breed not found";
 
 export const getAllBreeds = function() {
   return function(dispatch) {
@@ -63,16 +67,28 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
     return fetch(`${PATH_GET_DOGS_PAGE}/${page}?${query}`)
            .then(result => result.json())
            .then(data => {
-             dispatch({
-              type: GET_BREEDS_WITH_PAGINATE,
-              payload: {
-                breeds: data.breeds,
-                pages: data.pages,
-                currentPage: page,
-                localBreeds: [],
-                filterData: { ...filterOptions }
+              if (data.error) {
+                if (data.msg === ERROR_BREED_NOT_FOUND) 
+                  dispatch({
+                    type: BREEDS_NOT_FOUND,
+                    payload: {
+                      filterData: { ...filterOptions }
+                    }
+                  });
+                else
+                  throw new Error("SERVER ERROR");
               }
-             })
+              else 
+                dispatch({
+                  type: GET_BREEDS_WITH_PAGINATE,
+                  payload: {
+                    breeds: data.breeds,
+                    pages: data.pages,
+                    currentPage: page,
+                    localBreeds: [],
+                    filterData: { ...filterOptions }
+                }
+              })
            })
   }
 }
@@ -82,15 +98,43 @@ export const getBreedsByName = function(name, filterOptions) {
     return fetch(`${PATH_GET_DOGS_BY_NAME}${name}`)
            .then(result => result.json())
            .then(data => {
-             dispatch({
-              type: GET_BREEDS_BY_NAME,
-              payload: {
-                localBreeds: data,
-                currentPage: 1,
-                filterData: { ...filterOptions }
+              if (data.error) {
+                if (data.msg === ERROR_BREED_NOT_FOUND) 
+                  dispatch({
+                    type: BREEDS_NOT_FOUND,
+                    payload: {
+                      localBreeds: [],
+                      filterData: { ...filterOptions }
+                    }
+                  });
+                else
+                  throw new Error("SERVER ERROR");
               }
-             })
+              else
+              dispatch({
+                type: GET_BREEDS_BY_NAME,
+                payload: {
+                  localBreeds: data,
+                  currentPage: 1,
+                  filterData: { ...filterOptions }
+                }
+              })
            })
+  }
+}
+
+export const getBreedsWithPaginateLocal = function(page, filterOptions) {
+  return function (dispatch) {
+    return new Promise((resolve) => setTimeout(resolve, 500))
+               .then(() => {
+                  dispatch({
+                    type: GET_BREEDS_WITH_PAGINATE_LOCAL,
+                    payload: {
+                      page: page,
+                      filterData: { ...filterOptions }
+                    }
+                  })
+               })
   }
 }
 

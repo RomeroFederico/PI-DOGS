@@ -41,6 +41,8 @@ let paginateBreeds = function(breeds, page, sortBy, order, filter, temperaments)
 	
 	if (filter !== NO_FILTER) breeds = breeds.filter(filterBreeds(filter, temperaments));
 
+	if (breeds.length === 0) throw new Error(BREED_NOT_FOUND);
+
 	sortBreeds(breeds, sortBy, order);
 
 	let pages = Math.ceil(breeds.length / 8);

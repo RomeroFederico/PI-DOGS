@@ -2,14 +2,14 @@ import React from 'react';
 import { getImageComponent } from '../../../util';
 import { paramsComponents } from '../../SVG/Params';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilterData, resetBreeds, getBreedsWithPaginate } from '../../../redux/actions/index.js';
+import { setFilterData, resetBreeds, getBreedsWithPaginate, getBreedsWithPaginateLocal } from '../../../redux/actions/index.js';
 
 import s from './Option.module.css';
 
 export default function Option({ optionData, optionName, filterServerName }) {
 
   let dispatch = useDispatch();
-  let { filterData } = useSelector(state => state.home);
+  let { filterData, localBreeds } = useSelector(state => state.home);
   let imageComponent = getImageComponent(optionData, paramsComponents);
 
   let handleClick = function() {
@@ -19,7 +19,8 @@ export default function Option({ optionData, optionName, filterServerName }) {
     };
     dispatch(setFilterData(newFilterData));
     dispatch(resetBreeds());
-    dispatch(getBreedsWithPaginate(1, newFilterData));
+    if (localBreeds) dispatch(getBreedsWithPaginateLocal(1, newFilterData));
+    else dispatch(getBreedsWithPaginate(1, newFilterData));
   }
 
   let isSelected = function() {
