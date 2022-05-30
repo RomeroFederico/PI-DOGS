@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { searchTemperamentsModal } from '../../../redux/actions';
 import { validateTemperament } from '../../../util';
+import Input from '../../Input/Input';
 
 import s from './SearchTemperaments.module.css';
 
@@ -18,20 +19,11 @@ export default function SearchTemperaments() {
     dispatch(searchTemperamentsModal(result));
   }
 
-  let handlePaste = function(e) {
-    e.preventDefault();
-  }
-
   return (
-    <div className = {s.containerSearch}>
-      <input 
-        type = 'text'
-        className = {s.searchTemperament}
-        placeholder = {"Busque el temperamento aqui"}
-        onInput = {handleInput}
-        onPaste = {handlePaste}
-        value = {temperament}
-      />
-    </div>
+    <Input 
+      value = {temperament} 
+      placeholder = {"Busque el temperamento aqui"}
+      handleInput = {handleInput}
+    />
   );
 }

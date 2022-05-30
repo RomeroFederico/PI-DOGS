@@ -8,9 +8,10 @@
 .gridCards {
   display: grid;
   grid-template-columns: repeat(4, var(--cardWidth));
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-auto-rows: var(--cardHeight);
 
-  grid-gap: 2rem;
+  grid-gap: 5rem;
 
   align-items: center;
   justify-items: center;

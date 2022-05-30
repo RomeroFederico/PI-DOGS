@@ -1,34 +1,36 @@
 .containerOptions {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
 }
 
 .optionName {
   font-size: var(--fontMedium);
   color: var(--fontColor);
   font-weight: 700;
-
   background-color: var(--primaryColorSub);
-
   padding: 0.2rem 1rem 0.2rem 1rem;
-  margin: 0.5rem 0 0.5rem 0;
-
   text-align: center;
-
   opacity: 0.7;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .options {
-  height: 6rem;
-  width: 18rem;
-
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 10px;
+  height: calc(var(--fontMedium) + 10px);
 }
 
 .btnAddTemperament {
   margin: 0;
   padding: 0;
-  margin: 5px;
   font-size: var(--fontSmall);
   color: var(--primaryColor);
   border-radius: 5px;

@@ -2,6 +2,7 @@ import {
   GET_ALL_BREEDS,
   GET_BREED_DETAILS,
   GET_BREEDS_WITH_PAGINATE,
+  GET_BREEDS_BY_NAME,
   GET_TEMPERAMENTS,
   RESET_BREEDS,
   SET_FILTER_DATA,
@@ -17,6 +18,7 @@ import {
 } from './actions';
 
 const PATH_GET_DOGS = 'http://localhost:3001/dogs';
+const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
 const PATH_GET_TEMPERAMENTS = 'http://localhost:3001/temperament';
 const PATH_GET_DOGS_PAGE = 'http://localhost:3001/dogs/page';
 
@@ -67,6 +69,24 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
                 breeds: data.breeds,
                 pages: data.pages,
                 currentPage: page,
+                localBreeds: [],
+                filterData: { ...filterOptions }
+              }
+             })
+           })
+  }
+}
+
+export const getBreedsByName = function(name, filterOptions) {
+  return function(dispatch) {
+    return fetch(`${PATH_GET_DOGS_BY_NAME}${name}`)
+           .then(result => result.json())
+           .then(data => {
+             dispatch({
+              type: GET_BREEDS_BY_NAME,
+              payload: {
+                localBreeds: data,
+                currentPage: 1,
                 filterData: { ...filterOptions }
               }
              })

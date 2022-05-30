@@ -2,6 +2,7 @@ import {
   GET_ALL_BREEDS,
   GET_BREED_DETAILS,
   GET_BREEDS_WITH_PAGINATE,
+  GET_BREEDS_BY_NAME,
   GET_TEMPERAMENTS,
   RESET_BREEDS,
   SET_FILTER_DATA,
@@ -16,6 +17,8 @@ import {
   CHANGE_THEME
 } from '../actions/actions';
 
+import { filterLocalBreeds } from '../../util/filtrados';
+
 const initialState = {
 
   loading: false,
@@ -25,6 +28,7 @@ const initialState = {
     show: false,
     allTemperaments: [],
     breeds: [],
+    localBreeds: [],
     pages: 0,
     currentPage: 1,
     filterData: {
@@ -49,6 +53,26 @@ const rootReducer = (state = initialState, {type, payload}) => {
         home: {
           ...state.home,
           ...payload,
+          filterData: {
+            ...payload.filterData,
+          }
+        }
+      }
+    case GET_BREEDS_BY_NAME:
+
+      let { breeds, pages } = filterLocalBreeds([ ...payload.localBreeds ], { ...payload.filterData });
+
+      console.log(breeds, pages);
+      console.log('payload:', payload);
+
+      return {
+        ...state,
+        loading: false,
+        home: {
+          ...state.home,
+          ...payload,
+          breeds: breeds,
+          pages: pages,
           filterData: {
             ...payload.filterData,
           }

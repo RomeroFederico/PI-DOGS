@@ -33,7 +33,7 @@
 }
 
 .mainZone {
-  width: calc(100vw - 2rem);
+  width: 100%;
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: auto;

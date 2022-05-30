@@ -43,7 +43,7 @@ let paginateBreeds = function(breeds, page, sortBy, order, filter, temperaments)
 
 	sortBreeds(breeds, sortBy, order);
 
-	pages = Math.ceil(breeds.length / 8);
+	let pages = Math.ceil(breeds.length / 8);
 	breeds = breeds.slice((page - 1) * 8, page * 8);
 
 	return { 
@@ -113,7 +113,7 @@ let convertAPIBreeds = function(breed) {
 		id: breed.id,
 		nombre: breed.name,
 		temperamento: breed.temperament,
-		imagen: breed.image ? breed.image.url : breed.reference_image_id ? IMAGE_URL_API + breed.reference_image_id : null,
+		imagen: breed.image ? breed.image.url : breed.reference_image_id ? IMAGE_URL_API + breed.reference_image_id + '.jpg' : null,
 		peso: fixMetrictAPI(breed.weight.metric, breed.weight.imperial, convertLbToKg)
 	};
 }

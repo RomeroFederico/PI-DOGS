@@ -1,5 +1,5 @@
 import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS } from './constants';
-import { Temperament } from './validaciones';
+import { Temperament, Breed } from './validaciones';
 
 export function getBreedSize (weight) {
   let sizes = Object.keys(METRICS_FOR_BREEDS);
@@ -37,6 +37,7 @@ export function getImageComponent(option, imageComponents) {
 }
 
 export function getTemperamentsFromFilters(temperaments) {
+  console.log("Obtengo los temperamentos: ", temperaments);
   return temperaments.split(',');
 }
 
@@ -50,4 +51,8 @@ export function filterTemperaments(temperaments, search, alreadyOnFilter) {
     alreadyOnFilter.every(a => a !== t.nombre) &&
      (search === '' || t.nombre.toUpperCase().includes(search))
   );
+}
+
+export function validateBreed(value) {
+  return Breed.validate(value);
 }
