@@ -36,11 +36,18 @@ export function getImageComponent(option, imageComponents) {
   return false;
 }
 
+export function getTemperamentsFromFilters(temperaments) {
+  return temperaments.split(',');
+}
+
 export function validateTemperament(value) {
   return Temperament.validate(value);
 }
 
-export function filterTemperaments(temperaments, search) {
-  if (search === '') return temperaments;
-  return temperaments.filter(t => t.nombre.toUpperCase().includes(search));
+export function filterTemperaments(temperaments, search, alreadyOnFilter) {
+  alreadyOnFilter = alreadyOnFilter.split(',');
+  return temperaments.filter(t => 
+    alreadyOnFilter.every(a => a !== t.nombre) &&
+     (search === '' || t.nombre.toUpperCase().includes(search))
+  );
 }

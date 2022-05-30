@@ -10,10 +10,11 @@ import s from './ModalTemperaments.module.css';
 export default function ModalTemperaments() {
 
   let dispatch = useDispatch();
-  let { temperaments } = useSelector(state => state.home);
-  let { search } = useSelector(state => state.home.filter.modal);
+  let allTemperaments = useSelector(state => state.home.allTemperaments);
+  let temperamentsFiltered = useSelector(state => state.home.filterData.temperaments);
+  let { search } = useSelector(state => state.home.modalAddTemperaments);
 
-  let filteredTemperaments = filterTemperaments(temperaments, search);
+  let filteredTemperaments = filterTemperaments(allTemperaments, search, temperamentsFiltered);
 
   let handleClick = function() {
     dispatch(closeModalTemperaments());

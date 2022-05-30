@@ -1,16 +1,25 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { addTemperamentToFilters } from '../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTemperamentToFilters, resetBreeds, getBreedsWithPaginate } from '../../../redux/actions';
 
 import s from './TemperamentsBox.module.css';
 
 export default function TemperamentsBox({ temperaments }) {
 
   let dispatch = useDispatch();
+  let { filterData } = useSelector(state => state.home);
 
   let handleClick = function(e) {
     let { name } = e.target;
-    dispatch(addTemperamentToFilters(name));
+    let newTemperaments = filterData.temperaments !== '' ? `${filterData.temperaments},${name}` : name;
+    let filterDataToFetch = {
+      ...filterData,
+      modal: null,
+      temperaments: newTemperaments
+    };
+    dispatch(addTemperamentToFilters(newTemperaments));
+    dispatch(resetBreeds());
+    dispatch(getBreedsWithPaginate(1, filterDataToFetch));
   }
 
   return (

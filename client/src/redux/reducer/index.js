@@ -4,6 +4,7 @@ import {
   GET_BREEDS_WITH_PAGINATE,
   GET_TEMPERAMENTS,
   RESET_BREEDS,
+  SET_FILTER_DATA,
   SHOW_MODAL_TEMPERAMENTS,
   CLOSE_MODAL_TEMPERAMENTS,
   SEARCH_TEMPERAMENTS_MODAL,
@@ -22,19 +23,19 @@ const initialState = {
 
   home: {
     show: false,
-    temperaments: [],
+    allTemperaments: [],
     breeds: [],
     pages: 0,
     currentPage: 1,
-    filter: {
+    filterData: {
       sort: 'nombre',
       order: 'asc',
       filter: '',
-      temperaments: [],
-      modal: {
-        show: false,
-        search: '',
-      }
+      temperaments: '',
+    },
+    modalAddTemperaments: {
+      show: false,
+      search: '',
     }
   }
 }
@@ -48,12 +49,8 @@ const rootReducer = (state = initialState, {type, payload}) => {
         home: {
           ...state.home,
           ...payload,
-          filter: {
-            ...state.home.filter,
-            ...payload.filter,
-            temperaments: 
-              Array.isArray(payload.filter.temperaments) ? 
-              payload.filter.temperaments : payload.filter.temperaments.split(',')
+          filterData: {
+            ...payload.filterData,
           }
         }
       }
@@ -62,7 +59,15 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         home: {
           ...state.home,
-          temperaments: payload
+          allTemperaments: payload
+        }
+      }
+    case SET_FILTER_DATA:
+      return {
+        ...state,
+        home: {
+          ...state.home,
+          filterData: payload,
         }
       }
     case SHOW_MODAL_TEMPERAMENTS:
@@ -70,12 +75,9 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         home: {
           ...state.home,
-          filter: {
-            ...state.home.filter,
-            modal: {
-              show: true,
-              search: ''
-            }
+          modalAddTemperaments: {
+            show: true,
+            search: ''
           }
         }
       }
@@ -84,12 +86,9 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         home: {
           ...state.home,
-          filter: {
-            ...state.home.filter,
-            modal: {
-              show: false,
-              search: ''
-            }
+          modalAddTemperaments: {
+            show: false,
+            search: ''
           }
         }
       }
@@ -98,48 +97,38 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         home: {
           ...state.home,
-          filter: {
-            ...state.home.filter,
-            modal: {
-              ...state.home.filter.modal,
-              search: payload
-            }
+          modalAddTemperaments: {
+            show: true,
+            search: payload
           }
         }
       }
-    case ADD_TEMPERAMENT_TO_FILTERS: {
-
-      let newTemperaments = state.home.filter.temperaments[0] !== '' ? 
-        state.home.filter.temperaments.concat([payload]) :
-        [payload];
-
+    case ADD_TEMPERAMENT_TO_FILTERS:
       return {
         ...state,
         home: {
           ...state.home,
-          filter: {
-            ...state.home.filter,
-            temperaments: newTemperaments,
-            modal: {
-              show: false,
-              search: ''
-            }
+          filterData: {
+            ...state.home.filterData,
+            temperaments: payload,
+          },
+          modalAddTemperaments: {
+            show: false,
+            search: ''
           }
         }
       }
-    }
-    case REMOVE_TEMPERAMENT_FROM_FILTERS: {
+    case REMOVE_TEMPERAMENT_FROM_FILTERS:
       return {
         ...state,
         home: {
           ...state.home,
-          filter: {
-            ...state.home.filter,
-            temperaments: state.home.filter.temperaments.filter(t => t !== payload)
+          filterData: {
+            ...state.home.filterData,
+            temperaments: payload
           }
         }
       }
-    }
     case RESET_BREEDS:
       return {
         ...state,

@@ -4,6 +4,7 @@ import {
   GET_BREEDS_WITH_PAGINATE,
   GET_TEMPERAMENTS,
   RESET_BREEDS,
+  SET_FILTER_DATA,
   SHOW_MODAL_TEMPERAMENTS,
   CLOSE_MODAL_TEMPERAMENTS,
   SEARCH_TEMPERAMENTS_MODAL,
@@ -66,7 +67,7 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
                 breeds: data.breeds,
                 pages: data.pages,
                 currentPage: page,
-                filter: { ...filterOptions }
+                filterData: { ...filterOptions }
               }
              })
            })
@@ -76,6 +77,13 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
 export const resetBreeds = function() {
   return {
     type: RESET_BREEDS
+  }
+}
+
+export const setFilterData = function(filterData) {
+  return {
+    type: SET_FILTER_DATA,
+    payload: filterData
   }
 }
 
