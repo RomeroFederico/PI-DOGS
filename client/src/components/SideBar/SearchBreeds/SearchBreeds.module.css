@@ -27,3 +27,13 @@
 .enableReset {
   color: var(--dangerColor);
 }
+
+.active {
+  background-color: var(--secondaryColor);
+  color: white;
+}
+
+.active:focus {
+  outline: none !important;
+  border: none;
+}

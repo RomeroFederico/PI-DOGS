@@ -35,6 +35,7 @@ export default function SearchBreeds() {
         value = {breed} 
         placeholder = {"Busque una raza (min 3 car.)"}
         handleInput = {handleInput}
+        style = {localBreeds ? s.active : null}
       />
       <button 
         className = {`${s.btnSearch} ${breed.length >= 3 ? s.enableSearch : ''}`}

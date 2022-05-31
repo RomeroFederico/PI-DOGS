@@ -20,7 +20,7 @@
   --colorLargeRace: #1982c4;
   --colorExtraLargeRace: #6a4c93;
 
-  --minCardsHeight: calc(25rem * 2);
+  --minCardsHeight: calc(25rem * 2 + 5rem);
   --cardsWidth: calc(calc(14rem + 20px) * 4);
 }
 

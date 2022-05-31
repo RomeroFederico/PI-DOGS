@@ -2,7 +2,7 @@ import React from 'react';
 
 import s from './Input.module.css';
 
-export default function Input({ value, placeholder, handleInput, search }) {
+export default function Input({ value, placeholder, handleInput, search, style }) {
 
   let handlePaste = function(e) {
     e.preventDefault();
@@ -12,7 +12,7 @@ export default function Input({ value, placeholder, handleInput, search }) {
     <div className = {s.containerInput}>
       <input 
         type = 'text'
-        className = {s.input}
+        className = {`${s.input} ${style ? style : ''}`}
         placeholder = {placeholder}
         onInput = {handleInput}
         onPaste = {handlePaste}

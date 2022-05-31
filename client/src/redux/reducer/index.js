@@ -8,6 +8,7 @@ import {
   BREEDS_NOT_FOUND,
   RESET_BREEDS,
   SET_FILTER_DATA,
+  SET_PAGE,
   SHOW_MODAL_TEMPERAMENTS,
   CLOSE_MODAL_TEMPERAMENTS,
   SEARCH_TEMPERAMENTS_MODAL,
@@ -88,7 +89,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
       }
     case GET_BREEDS_WITH_PAGINATE_LOCAL: 
 
-      var { breeds, pages } = filterLocalBreeds([ ...state.home.localBreeds ], { ...payload.filterData });
+      var { breeds, pages } = filterLocalBreeds([ ...state.home.localBreeds ], { ...payload.filterData }, payload.currentPage);
 
       return {
         ...state,
@@ -97,6 +98,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
           ...state.home,
           breeds: breeds,
           pages: pages,
+          currentPage: payload.currentPage,
           filterData: {
             ...payload.filterData
           }
@@ -113,6 +115,14 @@ const rootReducer = (state = initialState, {type, payload}) => {
           breeds: [],
           localBreeds: payload.localBreeds, // Si viene de getBreedsByName, vendra como un [], caso contrario => null/undefined
           filterData: payload.filterData
+        }
+      }
+    case SET_PAGE:
+      return {
+        ...state,
+        home: {
+          ...state.home,
+          currentPage: payload
         }
       }
     case SET_FILTER_DATA:

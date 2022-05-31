@@ -55,3 +55,19 @@ export function filterTemperaments(temperaments, search, alreadyOnFilter) {
 export function validateBreed(value) {
   return Breed.validate(value);
 }
+
+export function getPages(currentPage, pages) {
+  let display = [];
+
+  if (pages >= 4 && currentPage >= 4) display.push({ index: 1 });
+  if (pages >= 5 && currentPage >= 5) display.push({ symbol: '...' });
+  if (currentPage - 2 > 0) display.push({ index: currentPage - 2 });
+  if (currentPage - 1 > 0) display.push({ index: currentPage - 1 });
+  display.push({ index: currentPage });
+  if (currentPage + 1 <= pages) display.push({ index: currentPage + 1 });
+  if (currentPage + 2 <= pages) display.push({ index: currentPage + 2 });
+  if (pages >= 5 && currentPage < pages - 3) display.push({ symbol: '...' });
+  if (pages >= 4 && currentPage < pages - 2) display.push({ index: pages });
+
+  return display;
+}

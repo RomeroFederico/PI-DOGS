@@ -8,6 +8,7 @@ import {
   BREEDS_NOT_FOUND,
   RESET_BREEDS,
   SET_FILTER_DATA,
+  SET_PAGE,
   SHOW_MODAL_TEMPERAMENTS,
   CLOSE_MODAL_TEMPERAMENTS,
   SEARCH_TEMPERAMENTS_MODAL,
@@ -130,7 +131,7 @@ export const getBreedsWithPaginateLocal = function(page, filterOptions) {
                   dispatch({
                     type: GET_BREEDS_WITH_PAGINATE_LOCAL,
                     payload: {
-                      page: page,
+                      currentPage: page,
                       filterData: { ...filterOptions }
                     }
                   })
@@ -148,6 +149,13 @@ export const setFilterData = function(filterData) {
   return {
     type: SET_FILTER_DATA,
     payload: filterData
+  }
+}
+
+export const setPage = function(page) {
+  return {
+    type: SET_PAGE,
+    payload: page
   }
 }
 
