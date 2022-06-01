@@ -13,6 +13,7 @@ const REGEXP_TEMPERAMENT = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+[-–\s]?[a-zA-ZÀ-ÿ\u00
 // - A partir de una letra.
 // - Palabras con un solo espacio o guion en el medio.
 const REGEXP_SEPARATORS = /[-–\s]/;
+const NO_MORE_THAN_ONE_SEPARATOR = /[-–\s]{2}/
 
 export class Temperament {
 
@@ -23,7 +24,7 @@ export class Temperament {
   }
 
   static checkMinLength(value) {
-    return value.length > MIN_TEMPERAMENT_LENGTH;
+    return value.length >= MIN_TEMPERAMENT_LENGTH;
   }
 
   static checkMaxLength(value) {
@@ -59,12 +60,24 @@ export class Breed {
     return false;
   }
 
-  static checMinkLength(value) {
-    return value.length > MIN_BREED_LENGTH;
+  static checkMinLength(value) {
+    return value.trim().length >= MIN_BREED_LENGTH;
   }
 
   static checkMaxLength(value) {
     return value.length <= MAX_BREED_LENGTH;
+  }
+
+  static checkWordsLength(value) {
+    return value.split(REGEXP_SEPARATORS).every(word => word.length >= 2 || word.length === 0);
+  }
+
+  static checkFirstCharacterIsALetter(value) {
+    return !REGEXP_SEPARATORS.test(value[0]);
+  }
+
+  static checkNoMoreThanOneSeparator(value) {
+    return !NO_MORE_THAN_ONE_SEPARATOR.test(value);
   }
 
   static checkeEmptyOrSingleCharacter(value) {
@@ -121,27 +134,34 @@ export class Dog {
       name: [
         "El nombre debe poseer entre 3 (tres) y 35 (treinta y cinco) caracteres MAXIMO.",
         "El nombre solo puede poseer letras (incluye acentos y otras dieresis).",
-        "A su vez, solo se puede incluir 3 (tres) palabras, separadas por espacio y/o guion del medio (-–)"
+        "A su vez, solo se puede incluir 3 (tres) palabras, separadas por un UNICO espacio y/o guion del medio (-–).",
+        "Cada palabra debe tener 2 (dos) o mas caracteres."
       ],
       temperaments: [
         "El temperamento debe poseer entre 3 (tres) y 15 (quince) caracteres MAXIMO.",
         "El temperamento solo puede poseer letras (incluye acentos y otras dieresis).",
         "A su vez, solo se puede incluir 2 (dos) palabras, separadas por espacio y/o guion del medio (-–)",
+        "Cada palabra debe tener 2 (dos) o mas caracteres.",
       ]
     }
   }
 
   static validateName(name) {
-    if (Breed.checkMinLength(name)) return 'El nombre es demasiado corto.';
-    if (Breed.checkMaxLength(name)) return 'El nombre es demasiado largo.';
-    if (Breed.checkCharacters(name)) return 'El nombre posee caracteres invalidos.';
+    if (name.length === 0) return '-';
+    if (!Breed.checkFirstCharacterIsALetter(name)) return 'El primer caracter de cada palabra debe ser una letra';
+    if (!Breed.checkNoMoreThanOneSeparator(name)) return 'Se han colocado mas de un espacio seguido.'
+    if (!Breed.checkMinLength(name)) return 'El nombre es demasiado corto.';
+    if (!Breed.checkMaxLength(name)) return 'El nombre es demasiado largo.';
+    if (!Breed.checkCharacters(name)) return 'El nombre posee caracteres invalidos.';
+    if (!Breed.checkWordsLength(name)) return 'Las palabras son demaciado cortas.'
     return true;
   }
 
   static validateTemperament(newTemperament) {
-    if (Temperament.checkMinLength(newTemperament)) return 'El temperamento es demasiado corto.';
-    if (Temperament.checkMaxLength(newTemperament)) return 'El temperamento es demasiado largo.';
-    if (Temperament.checkCharacters(newTemperament)) return 'El temperamento posee caracteres invalidos.';
+    if (newTemperament.length === 0) return '-';
+    if (!Temperament.checkMinLength(newTemperament)) return 'El temperamento es demasiado corto.';
+    if (!Temperament.checkMaxLength(newTemperament)) return 'El temperamento es demasiado largo.';
+    if (!Temperament.checkCharacters(newTemperament)) return 'El temperamento posee caracteres invalidos.';
     return true;
   }
 }

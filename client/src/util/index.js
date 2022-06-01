@@ -71,3 +71,7 @@ export function getPages(currentPage, pages) {
 
   return display;
 }
+
+export function checkIfExistBreedByName(breeds, name) {
+  return breeds.every(b => b.nombre.toLowerCase() !== name.toLowerCase());
+}

@@ -16,6 +16,8 @@ import {
   REMOVE_TEMPERAMENT_FROM_FILTERS,
   INITIALIZE_NEW_DOG,
   VALIDATE_PROPERTY_DOG,
+  VALIDATING,
+  CHECK_IF_NAME_IS_AVALAIBLE,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -141,6 +143,35 @@ export const getBreedsWithPaginateLocal = function(page, filterOptions) {
   }
 }
 
+export const checkIfNameIsAvalaible = function(name) {
+  return function(dispatch) {
+    return fetch(`${PATH_GET_DOGS_BY_NAME}${name}`)
+           .then(result => result.json())
+           .then(data => {
+            if (data.error) {
+              if (data.msg === ERROR_BREED_NOT_FOUND) 
+                dispatch({
+                  type: CHECK_IF_NAME_IS_AVALAIBLE,
+                  payload: {
+                    valid: true,
+                    name: name
+                  }
+                });
+              else
+                throw new Error("SERVER ERROR");
+            }
+            else
+              dispatch({
+                type: CHECK_IF_NAME_IS_AVALAIBLE,
+                payload: {
+                  breeds: data,
+                  name: name
+                }
+              })
+           });
+  }
+}
+
 export const resetBreeds = function() {
   return {
     type: RESET_BREEDS
@@ -197,6 +228,12 @@ export const removeTemperamentFromFilters = function(value) {
 export const initializeNewDog = function() {
   return {
     type: INITIALIZE_NEW_DOG,
+  }
+}
+
+export const startValidating = function() {
+  return {
+    type: VALIDATING
   }
 }
 

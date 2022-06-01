@@ -16,6 +16,8 @@ import {
   REMOVE_TEMPERAMENT_FROM_FILTERS,
   INITIALIZE_NEW_DOG,
   VALIDATE_PROPERTY_DOG,
+  VALIDATING,
+  CHECK_IF_NAME_IS_AVALAIBLE,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -24,6 +26,7 @@ import {
 
 import { filterLocalBreeds } from '../../util/filtrados';
 import { Dog } from '../../util/validaciones';
+import { checkIfExistBreedByName } from '../../util';
 
 const initialState = {
 
@@ -50,6 +53,7 @@ const initialState = {
   },
 
   create: {
+    validating: false,
     newDog: null,
   }
 }
@@ -239,6 +243,30 @@ const rootReducer = (state = initialState, {type, payload}) => {
           newDog: {
             ...state.create.newDog,
             [payload]: true
+          }
+        }
+      }
+    case VALIDATING:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          validating: true
+        }
+      }
+    case CHECK_IF_NAME_IS_AVALAIBLE:
+
+      let resultValidateName = payload.valid ? true : checkIfExistBreedByName(payload.breeds, payload.name)
+
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          validating: false,
+          newDog: {
+            ...state.create.newDog,
+            validName: resultValidateName,
+            name: payload.name
           }
         }
       }

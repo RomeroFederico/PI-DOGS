@@ -7,11 +7,42 @@
   height: var(--formCreateBreedHeight);
   background-color: var(--primaryColor);
   border-radius: 10px;
+  border: 1px solid var(--primaryColor);
   box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
 
   display: grid;
-  grid-template-columns: 3fr 8fr;
-  grid-template-rows: 1fr;
-
+  grid-template-columns: 3fr 9fr;
+  grid-template-rows: 1fr 8fr;
+  grid-gap: 2px;
   overflow: hidden;
+
+  background-color: var(--primaryColorSub);
+}
+
+.banner {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+
+  background-color: var(--secondaryColor);
+  border-bottom: 2px solid var(--primary);
+
+  color: white;
+  font-size: var(--fontTitle);
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding-right: 2rem;
+}
+
+.mainZone {
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--primaryColor);
+  padding: 1rem;
+  box-sizing: border-box;
 }

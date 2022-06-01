@@ -1,0 +1,18 @@
+.tail {
+  transform-origin: center;
+  animation: moveTail 1s infinite;
+}
+
+@keyframes moveTail {
+  0% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}

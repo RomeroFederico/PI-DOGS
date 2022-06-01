@@ -12,7 +12,7 @@ export default function PropertyTab({ name, isPropertyValid, imageComponent }) {
       {imageComponent}
       <span className = {s.tabTitle}>{name}</span>
       <span className = {s.tabIsValid}>
-      { isPropertyValid ? (newDog[isPropertyValid] ? '✔' : '❌' ) : '⚪' }
+      { isPropertyValid ? (newDog[isPropertyValid] ? '✔' : 'X' ) : '⚪' }
       </span>
     </div>
   );

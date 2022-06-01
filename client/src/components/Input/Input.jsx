@@ -2,7 +2,7 @@ import React from 'react';
 
 import s from './Input.module.css';
 
-export default function Input({ value, placeholder, handleInput, search, style }) {
+export default function Input({ value, placeholder, handleInput, style }) {
 
   let handlePaste = function(e) {
     e.preventDefault();
