@@ -1,0 +1,17 @@
+.globalContainer {
+  width: 100%;
+}
+
+.containerForm {
+  width: var(--formCreateBreedWidth);
+  height: var(--formCreateBreedHeight);
+  background-color: var(--primaryColor);
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+
+  display: grid;
+  grid-template-columns: 3fr 8fr;
+  grid-template-rows: 1fr;
+
+  overflow: hidden;
+}

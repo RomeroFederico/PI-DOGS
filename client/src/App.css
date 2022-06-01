@@ -22,6 +22,9 @@
 
   --minCardsHeight: calc(25rem * 2 + 5rem);
   --cardsWidth: calc(calc(14rem + 20px) * 4);
+
+  --formCreateBreedHeight: 30rem;
+  --formCreateBreedWidth: 50rem;
 }
 
 .FILLExtra-Small {
@@ -141,6 +144,8 @@
   transition: background-color 0.5s;
 }
 
-.imageParam {
+.imageParam,
+.tab {
   fill: var(--fontColor);
+  z-index: 5;
 }

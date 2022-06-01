@@ -14,6 +14,8 @@ import {
   SEARCH_TEMPERAMENTS_MODAL,
   ADD_TEMPERAMENT_TO_FILTERS,
   REMOVE_TEMPERAMENT_FROM_FILTERS,
+  INITIALIZE_NEW_DOG,
+  VALIDATE_PROPERTY_DOG,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -21,6 +23,7 @@ import {
 } from '../actions/actions';
 
 import { filterLocalBreeds } from '../../util/filtrados';
+import { Dog } from '../../util/validaciones';
 
 const initialState = {
 
@@ -44,6 +47,10 @@ const initialState = {
       show: false,
       search: '',
     }
+  },
+
+  create: {
+    newDog: null,
   }
 }
 
@@ -215,6 +222,25 @@ const rootReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         home: { ...initialState.home }
+      }
+    case INITIALIZE_NEW_DOG:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          newDog: new Dog('', [], [])
+        }
+      }
+    case VALIDATE_PROPERTY_DOG:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          newDog: {
+            ...state.create.newDog,
+            [payload]: true
+          }
+        }
       }
     case CHANGE_THEME:
       return {

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Card from './components/Card/Card';
 import HomePrototipo from './components/HomePrototipo/HomePrototipo';
+import FormCreateBreed from './components/FormCreateBreed/FormCreateBreed';
 
 import './App.css';
 
@@ -14,7 +15,8 @@ function App() {
 
   return (
     <div className = {`global-variables ${theme} body`}>
-      <HomePrototipo />
+      {/*<HomePrototipo />*/}
+      <FormCreateBreed />
     </div>
   );
 }

@@ -14,6 +14,8 @@ import {
   SEARCH_TEMPERAMENTS_MODAL,
   ADD_TEMPERAMENT_TO_FILTERS,
   REMOVE_TEMPERAMENT_FROM_FILTERS,
+  INITIALIZE_NEW_DOG,
+  VALIDATE_PROPERTY_DOG,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -191,6 +193,19 @@ export const removeTemperamentFromFilters = function(value) {
     payload: value
   }
 }
+
+export const initializeNewDog = function() {
+  return {
+    type: INITIALIZE_NEW_DOG,
+  }
+}
+
+export const validatePropertyDog = function(property) {
+  return {
+    type: VALIDATE_PROPERTY_DOG,
+    payload: property,
+  }
+} 
 
 export const showHome = function() {
   return {
