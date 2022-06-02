@@ -148,7 +148,7 @@ export class Dog {
 
   static validateName(name) {
     if (name.length === 0) return '-';
-    if (!Breed.checkFirstCharacterIsALetter(name)) return 'El primer caracter de cada palabra debe ser una letra';
+    if (!Breed.checkFirstCharacterIsALetter(name)) return 'El primer caracter de cada palabra debe ser una letra.';
     if (!Breed.checkNoMoreThanOneSeparator(name)) return 'Se han colocado mas de un espacio seguido.'
     if (!Breed.checkMinLength(name)) return 'El nombre es demasiado corto.';
     if (!Breed.checkMaxLength(name)) return 'El nombre es demasiado largo.';

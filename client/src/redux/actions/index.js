@@ -18,6 +18,7 @@ import {
   VALIDATE_PROPERTY_DOG,
   VALIDATING,
   CHECK_IF_NAME_IS_AVALAIBLE,
+  CHANGE_FORM_CREATE_SECTION,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -242,7 +243,14 @@ export const validatePropertyDog = function(property) {
     type: VALIDATE_PROPERTY_DOG,
     payload: property,
   }
-} 
+}
+
+export const changeFormCreateSection = function(section) {
+  return {
+    type: CHANGE_FORM_CREATE_SECTION,
+    payload: section
+  }
+}
 
 export const showHome = function() {
   return {

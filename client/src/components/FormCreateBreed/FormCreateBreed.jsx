@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropertiesTab from '../PropertiesTab/PropertiesTab';
-import AddName from '../AddName/AddName';
+import FormCreateSections from '../FormCreateSections/FormCreateSections';
+import Loading from '../Loading/Loading';
 import { initializeNewDog, validatePropertyDog } from '../../redux/actions';
 
 import s from './FormCreateBreed.module.css';
@@ -26,7 +27,8 @@ export default function FormCreateBreed() {
         </div>
         <PropertiesTab />
         <div className = {s.mainZone}>
-          <AddName />
+          <Loading style = {s.loading}/>
+          <FormCreateSections />
         </div>
       </div>
     </div>

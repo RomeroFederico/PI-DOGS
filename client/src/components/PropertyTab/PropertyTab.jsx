@@ -11,8 +11,8 @@ export default function PropertyTab({ name, isPropertyValid, imageComponent }) {
     <div className = {s.containerTab}>
       {imageComponent}
       <span className = {s.tabTitle}>{name}</span>
-      <span className = {s.tabIsValid}>
-      { isPropertyValid ? (newDog[isPropertyValid] ? '✔' : 'X' ) : '⚪' }
+      <span className = {`${s.tabIsValid} `}>
+      { isPropertyValid ? (newDog[isPropertyValid] ? <i className = {s.valid}>✔</i> : <i className = {s.invalid}>X</i> ) : '⚪' }
       </span>
     </div>
   );

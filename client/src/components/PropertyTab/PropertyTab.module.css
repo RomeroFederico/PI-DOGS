@@ -54,6 +54,14 @@
   animation-fill-mode: forwards;
 }
 
+.valid {
+  color: var(--successColor);
+}
+
+.invalid {
+  color: var(--dangerColor);
+}
+
 /* animation */
 
 @keyframes slide {

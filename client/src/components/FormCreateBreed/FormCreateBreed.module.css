@@ -45,4 +45,16 @@
   background-color: var(--primaryColor);
   padding: 1rem;
   box-sizing: border-box;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.loading {
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  top: 5px;
+  right: 10px;
 }

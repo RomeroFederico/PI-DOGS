@@ -23,7 +23,9 @@
   width: 70%;
 }
 
-.validationMsg {
+.validationMsg,
+.checkingBackendMsg,
+.valid {
   width: 100%;
   height: 1rem;
   text-align: center;
@@ -31,6 +33,14 @@
   font-weight: 700;
   color: var(--dangerColor);
   margin: 0.5rem 0 0.5rem 0;
+}
+
+.checkingBackendMsg {
+  color: var(--secondaryColor);
+}
+
+.valid {
+  color: var(--successColor);
 }
 
 .rules {
@@ -46,7 +56,7 @@
 
 .fadeInRight {
   animation-name: fadeInRight;
-  animation-duration: 1s;
+  animation-duration: 0.51s;
   animation-fill-mode: both;
 }
 
@@ -60,4 +70,39 @@
     opacity: 1;
     transform: none;
   }
+}
+
+.fadeOutRight {
+  animation-name: fadeOutRight;
+  animation-duration: 0.51s;
+  animation-fill-mode: forwards;
+}
+
+.applyDelay {
+  animation-delay: 1s;
+}
+
+@keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.blockButtons {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: none;
+  top: 0;
+  bottom: 0;
+}
+
+.enabled {
+  display: block;
 }

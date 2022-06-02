@@ -18,6 +18,7 @@ import {
   VALIDATE_PROPERTY_DOG,
   VALIDATING,
   CHECK_IF_NAME_IS_AVALAIBLE,
+  CHANGE_FORM_CREATE_SECTION,
   SHOW_HOME,
   RESET_HOME,
   SHOW_LOADING,
@@ -54,6 +55,7 @@ const initialState = {
 
   create: {
     validating: false,
+    section: 1,
     newDog: null,
   }
 }
@@ -268,6 +270,14 @@ const rootReducer = (state = initialState, {type, payload}) => {
             validName: resultValidateName,
             name: payload.name
           }
+        }
+      }
+    case CHANGE_FORM_CREATE_SECTION:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          section: payload
         }
       }
     case CHANGE_THEME:
