@@ -14,14 +14,17 @@ import {
   SEARCH_TEMPERAMENTS_MODAL,
   ADD_TEMPERAMENT_TO_FILTERS,
   REMOVE_TEMPERAMENT_FROM_FILTERS,
+
   INITIALIZE_NEW_DOG,
   VALIDATE_PROPERTY_DOG,
   VALIDATING,
   CHECK_IF_NAME_IS_AVALAIBLE,
   CHANGE_FORM_CREATE_SECTION,
+  SET_BACK_PAGE_ANIMATION,
+  SET_NEXT_PAGE_ANIMATION,
+
   SHOW_HOME,
   RESET_HOME,
-  SHOW_LOADING,
   CHANGE_THEME
 } from '../actions/actions';
 
@@ -32,7 +35,7 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'darkTheme',
+  theme: 'ligthTheme',
 
   home: {
     show: false,
@@ -56,6 +59,8 @@ const initialState = {
   create: {
     validating: false,
     section: 1,
+    animateBackPage: false,
+    animateNextPage: false,
     newDog: null,
   }
 }
@@ -277,7 +282,25 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         create: {
           ...state.create,
+          animateBackPage: false,
+          animateNextPage: false,
           section: payload
+        }
+      }
+    case SET_BACK_PAGE_ANIMATION:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          animateBackPage: true,
+        }
+      }
+    case SET_NEXT_PAGE_ANIMATION:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          animateNextPage: true,
         }
       }
     case CHANGE_THEME:

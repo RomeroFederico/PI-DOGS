@@ -1,22 +1,20 @@
-.fadeIn {
-  animation-name: fadeInRight;
-  animation-duration: 0.51s;
-  animation-fill-mode: both;
-
+.container { 
   width: 100%;
   height: 100%;
 
-  background-color: green;
+  flex-direction: column;
+  justify-content: space-between !important;
 }
 
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translate3d(50%, 0, 0);
-  }
+.imgContainer {
+  height: 12rem;
+  width: 20rem;
+}
 
-  100% {
-    opacity: 1;
-    transform: none;
-  }
+.title {
+  color: var(--fontColor);
+  font-size: var(--fontTitle);
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 5px;
 }

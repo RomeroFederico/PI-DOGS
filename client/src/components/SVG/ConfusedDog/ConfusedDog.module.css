@@ -1,0 +1,100 @@
+.question {
+  animation: confused 15s infinite;
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+}
+
+.question > path {
+  fill: var(--secondaryColor);
+}
+
+.option{
+  animation: showOption 15s infinite;
+  animation-fill-mode: both;
+  transform-box: fill-box;
+}
+
+.one {
+  transform-origin: left;
+}
+
+.two {
+  animation-delay: 2500ms;
+  transform-origin: right;
+}
+
+.three {
+  animation-delay: 5s;
+  transform-origin: left;
+}
+
+.four {
+  animation-delay: 7500ms;
+  transform-origin: right;
+}
+
+@keyframes confused {
+
+
+  0% {
+    opacity: 0;
+    transform: rotate(0);
+  }
+
+
+
+  66% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  70% {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+  
+  80% {
+    transform: rotate(15deg);
+  }
+
+  90% {
+    transform: rotate(-15deg);
+  }
+
+  96% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    transform: rotate(0) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes showOption {
+  0% {
+    opacity: 0;
+    transform: translateY(30%) scale(0.5);
+  }
+
+  3% {
+    opacity: 1;
+    transform: translateY(0%) scale(1.0);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translateY(0%) scale(1.0);
+  }
+
+  15% {
+    opacity: 0;
+    transform: translateY(30%) scale(0.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(30%) scale(0.5);
+  }
+}

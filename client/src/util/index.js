@@ -1,4 +1,4 @@
-import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS } from './constants';
+import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS, DELAY_PAGINATE_SECTION } from './constants';
 import { Temperament, Breed } from './validaciones';
 
 export function getBreedSize (weight) {
@@ -74,4 +74,8 @@ export function getPages(currentPage, pages) {
 
 export function checkIfExistBreedByName(breeds, name) {
   return breeds.every(b => b.nombre.toLowerCase() !== name.toLowerCase());
+}
+
+export function getDelayForPaginateAnimation() {
+  return DELAY_PAGINATE_SECTION;
 }

@@ -25,6 +25,8 @@
 
   --formCreateBreedHeight: 30rem;
   --formCreateBreedWidth: 50rem;
+
+  --durationPaginateSection: 500ms;
 }
 
 .FILLExtra-Small {
@@ -146,8 +148,40 @@
   transition: background-color 0.5s;
 }
 
-.imageParam,
-.tab {
-  fill: var(--fontColor);
-  z-index: 5;
+/* Animaciones de paginado. */
+
+.fadeInRight {
+  animation-name: fadeInRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+.fadeOutRight {
+  animation-name: fadeOutRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, 0, 0);
+  }
 }
