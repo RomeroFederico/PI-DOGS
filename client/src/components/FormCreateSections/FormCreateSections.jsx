@@ -20,7 +20,7 @@ export default function FormCreateSections() {
 
   return (
     <div className = {`center ${s.container} ${animateNextPage ? 'fadeOutRight' : ''} ${animateBackPage ? 'fadeInRight' : ''} `}>
-      <div className = {`${s.blockButtons}`}>
+      <div className = {`${s.blockButtons} ${animateNextPage || animateBackPage ? s.enabled : ''}`}>
       </div>
       { sectionToShow }
     </div>

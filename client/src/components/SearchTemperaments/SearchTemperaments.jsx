@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { searchTemperamentsModal } from '../../../redux/actions';
-import { validateTemperament } from '../../../util';
-import Input from '../../Input/Input';
+import { searchTemperamentsModal } from '../../redux/actions';
+import { validateTemperament } from '../../util';
+import Input from '../Input/Input';
 
 import s from './SearchTemperaments.module.css';
 

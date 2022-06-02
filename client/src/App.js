@@ -15,8 +15,8 @@ function App() {
 
   return (
     <div className = {`global-variables ${theme} body`}>
-      {/*<HomePrototipo />*/}
-      <FormCreateBreed />
+      <HomePrototipo />
+      {/*<FormCreateBreed />*/}
     </div>
   );
 }

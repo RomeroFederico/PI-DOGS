@@ -49,11 +49,12 @@ const initialState = {
       order: 'asc',
       filter: '',
       temperaments: '',
-    },
-    modalAddTemperaments: {
-      show: false,
-      search: '',
     }
+  },
+
+  modalAddTemperaments: {
+    show: false,
+    search: '',
   },
 
   create: {
@@ -61,6 +62,8 @@ const initialState = {
     section: 1,
     animateBackPage: false,
     animateNextPage: false,
+    newTemperaments: [],
+    oldTemperaments: [], 
     newDog: null,
   }
 }
@@ -154,34 +157,25 @@ const rootReducer = (state = initialState, {type, payload}) => {
     case SHOW_MODAL_TEMPERAMENTS:
       return {
         ...state,
-        home: {
-          ...state.home,
-          modalAddTemperaments: {
-            show: true,
-            search: ''
-          }
+        modalAddTemperaments: {
+          show: true,
+          search: ''
         }
       }
     case CLOSE_MODAL_TEMPERAMENTS:
       return {
         ...state,
-        home: {
-          ...state.home,
-          modalAddTemperaments: {
-            show: false,
-            search: ''
-          }
+        modalAddTemperaments: {
+          show: false,
+          search: ''
         }
       }
     case SEARCH_TEMPERAMENTS_MODAL:
       return {
         ...state,
-        home: {
-          ...state.home,
-          modalAddTemperaments: {
-            show: true,
-            search: payload
-          }
+        modalAddTemperaments: {
+          show: true,
+          search: payload
         }
       }
     case ADD_TEMPERAMENT_TO_FILTERS:
@@ -192,11 +186,11 @@ const rootReducer = (state = initialState, {type, payload}) => {
           filterData: {
             ...state.home.filterData,
             temperaments: payload,
-          },
-          modalAddTemperaments: {
-            show: false,
-            search: ''
           }
+        },
+        modalAddTemperaments: {
+          show: false,
+          search: ''
         }
       }
     case REMOVE_TEMPERAMENT_FROM_FILTERS:

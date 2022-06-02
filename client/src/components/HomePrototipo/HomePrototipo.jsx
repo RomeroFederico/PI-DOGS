@@ -4,14 +4,14 @@ import { getBreedsWithPaginate, getTemperaments, showHome, resetHome, changeThem
 
 import Cards from '../Cards/Cards';
 import SideBar from '../SideBar/SideBar';
-import ModalTemperaments from '../SideBar/ModalTemperaments/ModalTemperaments';
+import ModalTemperamentsForTheHome from '../SideBar/ModalTemperamentsForTheHome/ModalTemperamentsForTheHome';
 import Pages from '../Pages/Pages';
 
 import s from './HomePrototipo.module.css';
 
 export default function HomePrototipo() {
   const home = useSelector(state => state.home);
-  const showModal = useSelector(state => state.home.modalAddTemperaments.show);
+  const showModal = useSelector(state => state.modalAddTemperaments.show);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ export default function HomePrototipo() {
         <Pages />
         <Cards cards = {home.breeds} style = {s.cards}/>
         {
-          showModal && <ModalTemperaments />
+          showModal && <ModalTemperamentsForTheHome />
         }
         <Pages />
       </div>
