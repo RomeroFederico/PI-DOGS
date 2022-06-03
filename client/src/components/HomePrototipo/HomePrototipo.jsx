@@ -10,6 +10,7 @@ import Pages from '../Pages/Pages';
 import s from './HomePrototipo.module.css';
 
 export default function HomePrototipo() {
+  const allTemperaments = useSelector(state => state.allTemperaments);
   const home = useSelector(state => state.home);
   const showModal = useSelector(state => state.modalAddTemperaments.show);
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function HomePrototipo() {
   }, [])
 
   React.useEffect(() => {
-    if (!home.show && home.allTemperaments.length > 0 && home.breeds.length > 0) dispatch(showHome())
+    if (!home.show && allTemperaments.length > 0 && home.breeds.length > 0) dispatch(showHome())
   }, [home])
 
   if (!home.show) return <span>Loading</span>

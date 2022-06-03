@@ -20,7 +20,7 @@ export default function AddName(){
   const rules = Dog.getValidationRules().name;
 
   React.useEffect(() => {
-    if (!validating && newDog) {
+    if (!validating && newDog && name !== '') {
       if (newDog.validName && newDog.name === name) handleNextPageWithDelay();
       else handleFailure(); // Si la validacion falla, no cambia de pagina.
     }

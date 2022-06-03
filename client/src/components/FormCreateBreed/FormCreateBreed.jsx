@@ -1,23 +1,26 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropertiesTab from '../PropertiesTab/PropertiesTab';
 import FormCreateSections from '../FormCreateSections/FormCreateSections';
+import ModalTemperamentsForTheForm from '../ModalTemperamentsForTheForm/ModalTemperamentsForTheForm';
 import Loading from '../Loading/Loading';
-import { initializeNewDog, validatePropertyDog } from '../../redux/actions';
+import { initializeNewDog, getTemperaments } from '../../redux/actions';
 
 import s from './FormCreateBreed.module.css';
 
 export default function FormCreateBreed() {
 
   const dispatch = useDispatch();
+  const { newDog } = useSelector(state => state.create);
+  const { allTemperaments } = useSelector(state => state);
+  const showModal = useSelector(state => state.modalAddTemperaments.show);
 
   React.useEffect(() => {
     dispatch(initializeNewDog());
-  }, [])
+    dispatch(getTemperaments());
+  }, []);
 
-  let handleClick = function(){
-    dispatch(validatePropertyDog('validName'));
-  }
+  if (!newDog || !allTemperaments || allTemperaments.length === 0) return <span>Loading</span>;
 
   return (
     <div className = {`${s.globalContainer} center`}>
@@ -29,6 +32,9 @@ export default function FormCreateBreed() {
         <div className = {s.mainZone}>
           <Loading style = {s.loading}/>
           <FormCreateSections />
+          {
+            showModal && <ModalTemperamentsForTheForm />
+          }
         </div>
       </div>
     </div>

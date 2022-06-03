@@ -44,14 +44,6 @@ export function validateTemperament(value) {
   return Temperament.validate(value);
 }
 
-export function filterTemperaments(temperaments, search, alreadyOnFilter) {
-  alreadyOnFilter = alreadyOnFilter.split(',');
-  return temperaments.filter(t => 
-    alreadyOnFilter.every(a => a !== t.nombre) &&
-     (search === '' || t.nombre.toUpperCase().includes(search))
-  );
-}
-
 export function validateBreed(value) {
   return Breed.validate(value);
 }
@@ -78,4 +70,21 @@ export function checkIfExistBreedByName(breeds, name) {
 
 export function getDelayForPaginateAnimation() {
   return DELAY_PAGINATE_SECTION;
+}
+
+export function filterTemperaments(temperaments, search, alreadyOnFilter) {
+  return temperaments.filter(t => 
+    alreadyOnFilter.every(a => a !== t.nombre) &&
+     (search === '' || t.nombre.toUpperCase().includes(search))
+  );
+}
+
+export function filterTemperamentsHome(temperaments, search, alreadyOnFilter) {
+  alreadyOnFilter = alreadyOnFilter.split(',');
+  return filterTemperaments(temperaments, search, alreadyOnFilter);
+}
+
+export function filterTemperamentsForm(temperaments, search, alreadyOnFilter) {
+  alreadyOnFilter = alreadyOnFilter.map(t => t.nombre);
+  return filterTemperaments(temperaments, search, alreadyOnFilter);
 }

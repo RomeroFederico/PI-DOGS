@@ -15,7 +15,10 @@ export default function Card({ id, nombre, temperamento, imagen, peso, delay }) 
   let type = getType(id);
 
   React.useEffect(() => {
-    setTimeout(() => setShowCard(true),  100 * (delay + 1));
+    let idTimeOut = setTimeout(() => setShowCard(true),  100 * (delay + 1));
+    return (() => {
+      clearTimeout(idTimeOut);
+    })
   }, []);
 
   return (

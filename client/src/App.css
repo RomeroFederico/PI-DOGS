@@ -29,6 +29,12 @@
   --durationPaginateSection: 500ms;
 }
 
+.imageParam,
+.tab {
+  fill: var(--fontColor);
+  z-index: 5;
+}
+
 .FILLExtra-Small {
   fill: var(--colorExtraSmallRace);
 }

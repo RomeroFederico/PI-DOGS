@@ -6,6 +6,7 @@ import {
   CHANGE_FORM_CREATE_SECTION,
   SET_BACK_PAGE_ANIMATION,
   SET_NEXT_PAGE_ANIMATION,
+  CHANGE_TEMPERAMENTS_OF_NEW_DOG
 } from './actions';
 
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
@@ -80,5 +81,15 @@ export const setBackPageAnimation = function() {
 export const setNextPageAnimation = function() {
   return {
     type: SET_NEXT_PAGE_ANIMATION
+  }
+}
+
+export const changeTemperamentsOfNewDog = function(temperaments, temperamentsName) {
+  return {
+    type: CHANGE_TEMPERAMENTS_OF_NEW_DOG,
+    payload: {
+      temperaments: temperaments,
+      temperamentsName: temperamentsName,
+    }
   }
 }

@@ -10,8 +10,13 @@ export default function SmartImage({ image, alt, style }) {
   let [ showImage, setShowImage ] = React.useState(false);
   let [ delayLoading, setDelayLoading ] = React.useState(true);
 
+  let idTimeOut;
+
   React.useEffect(() => {
-    setTimeout(() => setDelayLoading(false), Math.random() * 400 + 1500);
+    let idTimeOut = setTimeout(() => setDelayLoading(false), Math.random() * 400 + 1500);
+    return (() => {
+      clearTimeout(idTimeOut);
+    })
   }, []);
 
   let handleErrorImageNotFound = function() {

@@ -22,6 +22,7 @@ import {
   CHANGE_FORM_CREATE_SECTION,
   SET_BACK_PAGE_ANIMATION,
   SET_NEXT_PAGE_ANIMATION,
+  CHANGE_TEMPERAMENTS_OF_NEW_DOG,
 
   SHOW_HOME,
   RESET_HOME,
@@ -35,11 +36,11 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'ligthTheme',
+  theme: 'darkTheme',
+  allTemperaments: [],
 
   home: {
     show: false,
-    allTemperaments: [],
     breeds: [],
     localBreeds: null,
     pages: 0,
@@ -59,7 +60,7 @@ const initialState = {
 
   create: {
     validating: false,
-    section: 1,
+    section: 2,
     animateBackPage: false,
     animateNextPage: false,
     newTemperaments: [],
@@ -103,10 +104,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
     case GET_TEMPERAMENTS:
       return {
         ...state,
-        home: {
-          ...state.home,
-          allTemperaments: payload
-        }
+        allTemperaments: payload
       }
     case GET_BREEDS_WITH_PAGINATE_LOCAL: 
 
@@ -207,8 +205,6 @@ const rootReducer = (state = initialState, {type, payload}) => {
     case RESET_BREEDS:
       return {
         ...state,
-        currentPage: 1,
-        pages: 0,
         loading: true,
         home: {
           ...state.home,
@@ -295,6 +291,18 @@ const rootReducer = (state = initialState, {type, payload}) => {
         create: {
           ...state.create,
           animateNextPage: true,
+        }
+      }
+    case CHANGE_TEMPERAMENTS_OF_NEW_DOG:
+      return {
+        ...state,
+        modalAddTemperaments: {
+          show: false,
+          search: ''
+        },
+        create: {
+          ...state.create,
+          [payload.temperamentsName]: payload.temperaments,
         }
       }
     case CHANGE_THEME:
