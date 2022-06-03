@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PaginateSections from '../PaginateSections/PaginateSections';
 import ConfusedDog from '../SVG/ConfusedDog/ConfusedDog';
 import TemperamentsAdded from '../TemperamentsAdded/TemperamentsAdded';
-import { showModalTemperaments } from '../../redux/actions';
+import { showModalTemperaments, showModalCreateTemperament } from '../../redux/actions';
 import { Dog } from '../../util/validaciones';
 
 import s from './AddTemperaments.module.css';
@@ -17,6 +17,10 @@ export default function AddTemperaments(){
     dispatch(showModalTemperaments());
   }
 
+  let handleClickCreate = function() {
+    dispatch(showModalCreateTemperament());
+  }
+
   return (
     <>
       <div className = {s.imgContainer}>
@@ -26,19 +30,20 @@ export default function AddTemperaments(){
 
       <div className = {s.btnContainer}>
 
-        <button 
-          className = {`${s.btnAddNewTemperament}`}
+        <button
           onClick = {handleClickAdd}
+          className = {`${s.btnAddNewTemperament}`}
           disabled = {newTemperaments.length + oldTemperaments.length >= 9 ? true : false}
         >
-          Agregar Temperamentos
+          Agregar
         </button>
 
-        <button 
+        <button
+          onClick = {handleClickCreate}
           className = {`${s.btnAddNewTemperament}`}
           disabled = {newTemperaments.length + oldTemperaments.length >= 9 ? true : false}
         >
-          Crear Nuevo Temperamento
+          Crear Nuevo
         </button>
 
         <TemperamentsAdded />

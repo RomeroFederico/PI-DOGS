@@ -6,7 +6,9 @@ import {
   CHANGE_FORM_CREATE_SECTION,
   SET_BACK_PAGE_ANIMATION,
   SET_NEXT_PAGE_ANIMATION,
-  CHANGE_TEMPERAMENTS_OF_NEW_DOG
+  CHANGE_TEMPERAMENTS_OF_NEW_DOG,
+  SHOW_MODAL_CREATE_TEMPERAMENT,
+  CLOSE_MODAL_CREATE_TEMPERAMENT
 } from './actions';
 
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
@@ -91,5 +93,17 @@ export const changeTemperamentsOfNewDog = function(temperaments, temperamentsNam
       temperaments: temperaments,
       temperamentsName: temperamentsName,
     }
+  }
+}
+
+export const showModalCreateTemperament = function() {
+  return {
+    type: SHOW_MODAL_CREATE_TEMPERAMENT
+  }
+}
+
+export const closeModalCreateTemperament = function() {
+  return {
+    type: CLOSE_MODAL_CREATE_TEMPERAMENT
   }
 }

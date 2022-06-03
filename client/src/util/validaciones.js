@@ -24,11 +24,23 @@ export class Temperament {
   }
 
   static checkMinLength(value) {
-    return value.length >= MIN_TEMPERAMENT_LENGTH;
+    return value.trim().length >= MIN_TEMPERAMENT_LENGTH;
   }
 
   static checkMaxLength(value) {
     return value.length <= MAX_TEMPERAMENT_LENGTH;
+  }
+
+  static checkWordsLength(value) {
+    return value.split(REGEXP_SEPARATORS).every(word => word.length >= 2 || word.length === 0);
+  }
+
+  static checkFirstCharacterIsALetter(value) {
+    return !REGEXP_SEPARATORS.test(value[0]);
+  }
+
+  static checkNoMoreThanOneSeparator(value) {
+    return !NO_MORE_THAN_ONE_SEPARATOR.test(value);
   }
 
   static checkeEmptyOrSingleCharacter(value) {
@@ -159,9 +171,30 @@ export class Dog {
 
   static validateTemperament(newTemperament) {
     if (newTemperament.length === 0) return '-';
+    if (!Temperament.checkFirstCharacterIsALetter(newTemperament)) return 'El primer caracter de cada palabra debe ser una letra.';
+    if (!Temperament.checkNoMoreThanOneSeparator(newTemperament)) return 'Se han colocado mas de un espacio seguido.'
     if (!Temperament.checkMinLength(newTemperament)) return 'El temperamento es demasiado corto.';
     if (!Temperament.checkMaxLength(newTemperament)) return 'El temperamento es demasiado largo.';
     if (!Temperament.checkCharacters(newTemperament)) return 'El temperamento posee caracteres invalidos.';
+    if (!Temperament.checkWordsLength(newTemperament)) return 'Las palabras son demaciado cortas.'
     return true;
+  }
+
+  static checkIfTemperamentIsAvailable(temperaments, newTemperament) {
+    newTemperament = newTemperament.toUpperCase().replace(REGEXP_SEPARATORS, ' ');
+    return !temperaments.some(t => t.nombre.toUpperCase().replace(REGEXP_SEPARATORS, ' ') === newTemperament);
+  }
+
+  static formatString(value) {
+    value = value.toLowerCase(); 
+    let length = value.length;
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      let characterToAdd = value[i];
+      if (i === 0) result += characterToAdd.toUpperCase();
+      else if (REGEXP_SEPARATORS.test(value[i - 1])) result += characterToAdd.toUpperCase(); 
+      else result += characterToAdd;
+    }
+    return result;
   }
 }

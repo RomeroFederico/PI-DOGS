@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropertiesTab from '../PropertiesTab/PropertiesTab';
 import FormCreateSections from '../FormCreateSections/FormCreateSections';
 import ModalTemperamentsForTheForm from '../ModalTemperamentsForTheForm/ModalTemperamentsForTheForm';
+import ModalCreateTemperament from '../ModalCreateTemperament/ModalCreateTemperament';
 import Loading from '../Loading/Loading';
 import { initializeNewDog, getTemperaments } from '../../redux/actions';
 
@@ -13,7 +14,8 @@ export default function FormCreateBreed() {
   const dispatch = useDispatch();
   const { newDog } = useSelector(state => state.create);
   const { allTemperaments } = useSelector(state => state);
-  const showModal = useSelector(state => state.modalAddTemperaments.show);
+  const showModalAddTemperament = useSelector(state => state.modalAddTemperaments.show);
+  const showModalCreateTemperament = useSelector(state => state.modalCreateTemperament.show);
 
   React.useEffect(() => {
     dispatch(initializeNewDog());
@@ -33,7 +35,10 @@ export default function FormCreateBreed() {
           <Loading style = {s.loading}/>
           <FormCreateSections />
           {
-            showModal && <ModalTemperamentsForTheForm />
+            showModalAddTemperament && <ModalTemperamentsForTheForm />
+          }
+          {
+            showModalCreateTemperament && <ModalCreateTemperament />
           }
         </div>
       </div>

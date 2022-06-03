@@ -23,6 +23,8 @@ import {
   SET_BACK_PAGE_ANIMATION,
   SET_NEXT_PAGE_ANIMATION,
   CHANGE_TEMPERAMENTS_OF_NEW_DOG,
+  SHOW_MODAL_CREATE_TEMPERAMENT,
+  CLOSE_MODAL_CREATE_TEMPERAMENT,
 
   SHOW_HOME,
   RESET_HOME,
@@ -66,6 +68,10 @@ const initialState = {
     newTemperaments: [],
     oldTemperaments: [], 
     newDog: null,
+  },
+
+  modalCreateTemperament: {
+    show: false
   }
 }
 
@@ -253,7 +259,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
       }
     case CHECK_IF_NAME_IS_AVALAIBLE:
 
-      let resultValidateName = payload.valid ? true : checkIfExistBreedByName(payload.breeds, payload.name)
+      let resultValidateName = payload.valid ? true : checkIfExistBreedByName(payload.breeds, payload.name);
 
       return {
         ...state,
@@ -303,6 +309,20 @@ const rootReducer = (state = initialState, {type, payload}) => {
         create: {
           ...state.create,
           [payload.temperamentsName]: payload.temperaments,
+        }
+      }
+    case SHOW_MODAL_CREATE_TEMPERAMENT:
+      return {
+        ...state,
+        modalCreateTemperament: {
+          show: true,
+        }
+      }
+    case CLOSE_MODAL_CREATE_TEMPERAMENT:
+      return {
+        ...state,
+        modalCreateTemperament: {
+          show: false,
         }
       }
     case CHANGE_THEME:
