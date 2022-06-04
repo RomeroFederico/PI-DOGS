@@ -157,8 +157,8 @@ export class Dog {
       ],
       size: [
         "Los valores minimos de tanto el peso como la altura son opcionales.",
-        "Tanto la altura como el peso deben ser proporcionales.",
-        "El peso maximo es de 120Kg. La altura maxima es de 100cm.",
+        "Se debe cumplir con el IMC (kg/0,45)/(cm/2,54) con respecto al peso.",
+        "El peso maximo es de 100Kg. La altura maxima es de 100cm.",
         "El peso minimo es de 1Kg. La altura minima es de 10cm"
       ]
     }
@@ -168,11 +168,11 @@ export class Dog {
     return {
       minWeight: {
         min: 1,
-        max: 120,
+        max: 100,
       },
       maxWeight: {
         min: 1,
-        max: 120,
+        max: 100,
       },
       minHeight: {
         min: 10,
@@ -223,5 +223,63 @@ export class Dog {
       else result += characterToAdd;
     }
     return result;
+  }
+
+  static getDefaultSize() {
+    return {
+      minWeight: {
+        hundred: "0",
+        ten: "0",
+        unity: "1",
+        number: 1,
+        nombre: 'Peso Min.',
+        unidad: 'Kg',
+        enabled: false,
+      },
+      maxWeight: {
+        hundred: "0",
+        ten: "0",
+        unity: "1",
+        number: 1,
+        nombre: 'Peso Max.',
+        unidad: 'Kg',
+        required: true
+      },
+      minHeight: {
+        hundred: "0",
+        ten: "1",
+        unity: "0",
+        number: 10,
+        nombre: 'Altura Min.',
+        unidad: 'cm',
+        enabled: false,
+      },
+      maxHeight: {
+        hundred: "0",
+        ten: "1",
+        unity: "0",
+        number: 10,
+        nombre: 'Altura Max.',
+        unidad: 'cm',
+        required: true
+      }  
+    };
+  }
+
+  static getIMC(weight, height) {
+    return (weight / 0.45) / (height / 2.54);
+  }
+
+  static getIMCValues(weight, height) {
+
+    let imc = Dog.getIMC(weight, height);
+    let max = 0.051 * weight + 1;
+    let min = 0.051 * weight + 0;
+    return {
+      imc: imc.toFixed(2),
+      max: max.toFixed(2),
+      min: min.toFixed(2),
+      isValid: imc <= max && imc >= min
+    }
   }
 }

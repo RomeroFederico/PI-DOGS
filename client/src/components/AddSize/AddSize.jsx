@@ -13,63 +13,27 @@ export default function AddSize(){
 
   const dispatch = useDispatch();
   const { newDog } = useSelector(state => state.create);
-  const [ size, setSize ] = React.useState({
-    minWeight: {
-      hundred: "0",
-      ten: "0",
-      unity: "1",
-      number: 1,
-      nombre: 'Peso Min.',
-      unidad: 'Kg',
-      enabled: false,
-    },
-    maxWeight: {
-      hundred: "0",
-      ten: "0",
-      unity: "1",
-      number: 1,
-      nombre: 'Peso Max.',
-      unidad: 'Kg',
-      required: true
-    },
-    minHeight: {
-      hundred: "0",
-      ten: "1",
-      unity: "0",
-      number: 10,
-      nombre: 'Altura Min.',
-      unidad: 'cm',
-      enabled: false,
-    },
-    maxHeight: {
-      hundred: "0",
-      ten: "1",
-      unity: "0",
-      number: 10,
-      nombre: 'Altura Max.',
-      unidad: 'cm',
-      required: true
-    }  
-  });
+  const [ size, setSize ] = React.useState(Dog.getDefaultSize());
+  const [ imc, setImc ] = React.useState(Dog.getIMCValues(1, 10));
 
   const rules = Dog.getValidationRules().size;
   const minMaxValues = Dog.getminMaxValues();
 
   let handleInput = function(value, property) {
-    let result = size[property].number + value;
-    if (result > minMaxValues[property].max) result = minMaxValues[property].max;
-    if (result < minMaxValues[property].min) result = minMaxValues[property].min;
+    let newSize = { ...size };
+    let result = newSize[property].number + value;
+    if (result >= minMaxValues[property].max) result = minMaxValues[property].max;
+    if (result <= minMaxValues[property].min) result = minMaxValues[property].min;
+
     let sizeNumberString = ("00" + result).split("");
-    setSize({
-      ...size,
-      [property]: {
-        ...size[property],
-        unity: sizeNumberString.pop(),
-        ten: sizeNumberString.pop(),
-        hundred: sizeNumberString.pop(),
-        number: result
-      }
-    });
+    newSize[property].unity = sizeNumberString.pop();
+    newSize[property].ten = sizeNumberString.pop();
+    newSize[property].hundred = sizeNumberString.pop();
+    newSize[property].number = result;
+
+    console.log(newSize);
+    setSize({ ...newSize });
+    setImc(Dog.getIMCValues(newSize.maxWeight.number, newSize.maxHeight.number));
   }
 
   let handleCheck = function(property) {
@@ -90,11 +54,17 @@ export default function AddSize(){
       <label className = {s.title}>- Agregar Medidas -</label>
       <div className = {s.inputZone}>
       {
-        size && Object.keys(size).map((property, index)=> { return (
+        size && imc && Object.keys(size).map((property, index)=> { return (
 
             <>
             {
-              index === 2 &&  <div className = {s.containerIsValid}></div>
+              index === 2 && imc && (
+                <div className = {s.containerIsValid}>
+                  <label className = {s.imcTitle}>{imc.imc}</label>
+                  <hr />
+                  <label className = {s.imcSubTitle}>{imc.min} : {imc.max}</label>
+                </div>
+              )
             }
             <InputSize 
               key = {`InputSize-${property}-${index}`}
@@ -119,7 +89,7 @@ export default function AddSize(){
       </div>
       <PaginateSections
         buttons = {["Volver", "Continuar"]}
-        disableNext = {false}
+        disableNext = {!imc || !imc.isValid}
         disableBack = {true}
       />
     </>
