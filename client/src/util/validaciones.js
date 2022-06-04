@@ -154,8 +154,35 @@ export class Dog {
         "El temperamento solo puede poseer letras (incluye acentos y otras dieresis).",
         "A su vez, solo se puede incluir 2 (dos) palabras, separadas por espacio y/o guion del medio (-–)",
         "Cada palabra debe tener 2 (dos) o mas caracteres.",
+      ],
+      size: [
+        "Los valores minimos de tanto el peso como la altura son opcionales.",
+        "Tanto la altura como el peso deben ser proporcionales.",
+        "El peso maximo es de 120Kg. La altura maxima es de 100cm.",
+        "El peso minimo es de 1Kg. La altura minima es de 10cm"
       ]
     }
+  }
+
+  static getminMaxValues() {
+    return {
+      minWeight: {
+        min: 1,
+        max: 120,
+      },
+      maxWeight: {
+        min: 1,
+        max: 120,
+      },
+      minHeight: {
+        min: 10,
+        max: 100,
+      },
+      maxHeight: {
+        min: 10,
+        max: 100,
+      }
+    };
   }
 
   static validateName(name) {

@@ -1,0 +1,63 @@
+.up {
+  width: 0; 
+  height: 0; 
+  border-left: 0.4rem solid transparent;
+  border-right: 0.4rem solid transparent;
+  
+  border-bottom: 0.4rem solid var(--fontColor);
+  opacity: 0.7;
+}
+
+.down {
+  width: 0; 
+  height: 0; 
+  border-left: 0.4rem solid transparent;
+  border-right: 0.4rem solid transparent;
+  
+  border-top: 0.4rem solid var(--fontColor);
+  opacity: 0.7;
+}
+
+.up:hover {
+  border-bottom: 0.4rem solid var(--secondaryColor);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.down:Hover {
+  border-top: 0.4rem solid var(--secondaryColor);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.num {
+  height: 1.5rem;
+  width: 1.5rem;
+
+  color: var(--fontColor);
+  background-color: var(--primaryColorSub);
+
+  font-size: var(--fontSubTitle);
+  font-weight: 700;
+  font-style: italic;
+
+  border-radius: 5px;
+}
+
+.containerNumber {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.4rem 1.5rem 0.4rem;
+  grid-gap: 5px;
+  align-items: center;
+  justify-items: center;
+}
+
+.containerInput {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 3px;
+  width: fit-content;
+  z-index: 5;
+}
