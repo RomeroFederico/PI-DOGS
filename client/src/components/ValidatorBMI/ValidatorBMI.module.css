@@ -1,0 +1,69 @@
+.containerIsValid {
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+  grid-template-rows: 5rem 1rem;
+  grid-gap: 5px;
+  grid-template-columns: 1fr;
+}
+
+.containerImc {
+  width: 5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 2px solid var(--dangerColor);
+  box-sizing: border-box;
+
+  padding: 0.5rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.imcTitle,
+.imcSubTitle {
+  color: var(--dangerColor);
+  font-weight: 900;
+}
+
+.imcTitle {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+
+  font-size: var(--fontTitle);
+  align-self: flex-end;
+}
+
+.imcSubTitle {
+  font-size: var(--fontSmallest);
+}
+
+.separator {
+  height: 50%;
+  border-left: 2px solid var(--dangerColor);
+  border-right: 2px var(--dangerColor);
+}
+
+.lblIsValid {
+  align-self: center;
+  justify-self: center;
+
+  color: var(--dangerColor);
+  font-size: var(--fontSmall);
+  font-weight: 700;
+}
+
+.isValid > .containerImc > .imcTitle,
+.isValid > .containerImc > .imcSubTitle,
+.isValid > .containerImc > .imcSubTitle,
+.isValid > .lblIsValid {
+  color: var(--successColor);
+}
+
+.isValid > .containerImc,
+.isValid > .containerImc > .separator {
+  border-color: var(--successColor);
+}

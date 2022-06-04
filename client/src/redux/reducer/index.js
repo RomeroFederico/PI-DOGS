@@ -25,6 +25,7 @@ import {
   CHANGE_TEMPERAMENTS_OF_NEW_DOG,
   SHOW_MODAL_CREATE_TEMPERAMENT,
   CLOSE_MODAL_CREATE_TEMPERAMENT,
+  CHANGE_SIZE_OF_NEW_DOG,
 
   SHOW_HOME,
   RESET_HOME,
@@ -323,6 +324,25 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         modalCreateTemperament: {
           show: false,
+        }
+      }
+    case CHANGE_SIZE_OF_NEW_DOG:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          newDog: {
+            ...state.create.newDog,
+            weight: {
+              min: payload.weight.min,
+              max: payload.weight.max,
+            },
+            height: {
+              min: payload.height.min,
+              max: payload.height.max,
+            },
+            validWeighAndHeight: true,
+          }
         }
       }
     case CHANGE_THEME:

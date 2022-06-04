@@ -158,8 +158,8 @@ export class Dog {
       size: [
         "Los valores minimos de tanto el peso como la altura son opcionales.",
         "Se debe cumplir con el IMC (kg/0,45)/(cm/2,54) con respecto al peso.",
-        "El peso maximo es de 100Kg. La altura maxima es de 100cm.",
-        "El peso minimo es de 1Kg. La altura minima es de 10cm"
+        "El rango valido de peso es: 1 a 100 kg. Para el peso es: 10 a 100 cm.",
+        "Los valores minimos se aceptan hasta la mitad del valor maximo puesto."
       ]
     }
   }
@@ -281,5 +281,115 @@ export class Dog {
       min: min.toFixed(2),
       isValid: imc <= max && imc >= min
     }
+  }
+
+  static checkIfMinSizeIsValid(size) {
+    if (!size.minHeight.enabled && !size.minWeight.enabled) return true;
+    if (size.minHeight.enabled && 
+       (size.minHeight.number > size.maxHeight.number || size.minHeight.number < size.maxHeight.number / 2))
+       return false;
+    if (size.minWeight.enabled && 
+       (size.minWeight.number > size.maxWeight.number || size.minWeight.number < size.maxWeight.number / 2))
+       return false;
+    return true;
+  }
+
+  static formatSize(size) {
+    return {
+      weight: {
+        min: size.minWeight.enabled ? size.minWeight.number : null,
+        max: size.maxWeight.number
+      },
+      height: {
+        min: size.minHeight.enabled ? size.minHeight.number : null,
+        max: size.maxHeight.number
+      }
+    }
+  }
+
+  static reformatSize({ weight, height }) {
+
+    let size = {};
+
+    let minWeight = weight.min;
+    let maxWeight = weight.max;
+    let minHeight = height.min;
+    let maxHeight = height.max;
+
+    if (minWeight) {
+      let minWeightString = ("00" + minWeight).split('');
+      
+      size.minWeight = {
+        unity: minWeightString.pop(),
+        ten: minWeightString.pop(),
+        hundred: minWeightString.pop(),
+        number: minWeight,
+        nombre: 'Peso Min.',
+        unidad: 'Kg',
+        enabled: true
+      }
+    }
+    else {
+      size.minWeight = {
+        hundred: "0",
+        ten: "0",
+        unity: "1",
+        number: 1,
+        nombre: 'Peso Min.',
+        unidad: 'Kg',
+        enabled: false,
+      }
+    }
+
+    let maxWeightString = ("00" + maxWeight).split('');
+
+    size.maxWeight = {
+      unity: maxWeightString.pop(),
+      ten: maxWeightString.pop(),
+      hundred: maxWeightString.pop(),
+      number: maxWeight,
+      nombre: 'Peso Max.',
+      unidad: 'Kg',
+      required: true
+    };
+
+    if (minHeight) {
+      let minHeightString = ("00" + minHeight).split('');
+      
+      size.minHeight = {
+        unity: minHeightString.pop(),
+        ten: minHeightString.pop(),
+        hundred: minHeightString.pop(),
+        number: minHeight,
+        nombre: 'Altura Min.',
+        unidad: 'cm',
+        enabled: true
+      }
+    }
+    else {
+      size.minHeight = {
+        hundred: "0",
+        ten: "1",
+        unity: "0",
+        number: 10,
+        nombre: 'Altura Min.',
+        unidad: 'cm',
+        enabled: false,
+      }
+    }
+
+    let maxHeightString = ("00" + maxHeight).split('');
+
+    size.maxHeight = {
+      unity: maxHeightString.pop(),
+      ten: maxHeightString.pop(),
+      hundred: maxHeightString.pop(),
+      number: maxHeight,
+      nombre: 'Altura Max.',
+      unidad: 'cm',
+      required: true
+    };
+
+    return size;
   }
 }

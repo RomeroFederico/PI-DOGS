@@ -8,7 +8,8 @@ import {
   SET_NEXT_PAGE_ANIMATION,
   CHANGE_TEMPERAMENTS_OF_NEW_DOG,
   SHOW_MODAL_CREATE_TEMPERAMENT,
-  CLOSE_MODAL_CREATE_TEMPERAMENT
+  CLOSE_MODAL_CREATE_TEMPERAMENT,
+  CHANGE_SIZE_OF_NEW_DOG
 } from './actions';
 
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
@@ -105,5 +106,15 @@ export const showModalCreateTemperament = function() {
 export const closeModalCreateTemperament = function() {
   return {
     type: CLOSE_MODAL_CREATE_TEMPERAMENT
+  }
+}
+
+export const changeSizeOfNewDog = function(height, weight) {
+  return {
+    type: CHANGE_SIZE_OF_NEW_DOG,
+    payload: {
+      height,
+      weight
+    }
   }
 }

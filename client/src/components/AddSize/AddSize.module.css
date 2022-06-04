@@ -18,20 +18,6 @@
   font-weight: 700;
 }
 
-.inputZone {
-  height: 25%;
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.containerIsValid {
-  width: 5.5rem;
-  height: 100%;
-}
-
 .rules {
   color: var(--fontColor);
   font-size: var(--fontSmallest);

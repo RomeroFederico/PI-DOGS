@@ -5,13 +5,13 @@ import { getDelayForPaginateAnimation } from '../../util/';
 
 import s from './PaginateSections.module.css';
 
-export default function PaginateSections({ buttons, disableNext, disableBack, cbHandleNext = null}) {
+export default function PaginateSections({ buttons, disableNext, disableBack, cbHandleNext = null, cbHandleBack = null}) {
 
   const dispatch = useDispatch();
   const { section } = useSelector(state => state.create);
 
   let handleNextPage = function() {
-    dispatch(setBackPageAnimation());
+    dispatch(setNextPageAnimation());
     dispatch(changeFormCreateSection(section + 1, getDelayForPaginateAnimation()));
   }
 
@@ -24,14 +24,14 @@ export default function PaginateSections({ buttons, disableNext, disableBack, cb
     <div className = {`center ${s.btnZone}`}>
       <button 
         className = {`${s.btn} ${disableBack ? '' : s.enabled}`}
-        onClick = {handleBackPage}
+        onClick = { cbHandleBack ? cbHandleBack : handleBackPage }
         disabled = {disableBack}
        >
         {`< ${buttons[0]}`}
       </button>
       <button 
         className = {`${s.btn} ${disableNext ? '' : s.enabled}`}
-        onClick = { cbHandleNext ? cbHandleNext : handleNextPage}
+        onClick = { cbHandleNext ? cbHandleNext : handleNextPage }
         disabled = {disableNext}
        >
         {`${buttons[1]} >`}
