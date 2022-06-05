@@ -115,6 +115,7 @@ export class Dog {
     this.lifespan = lifespan;
 
     this.validName = false;
+    this.validTemperaments = false;
     this.validWeighAndHeight = false;
     this.validLifespan = false;
   }
@@ -132,6 +133,7 @@ export class Dog {
     },
     {
       clientName: 'Temperamentos',
+      isPropertyValid: 'validTemperaments',
       imageComponentName: 'Temperament'
     },
     {
@@ -162,9 +164,9 @@ export class Dog {
         "Los valores minimos se aceptan hasta la mitad del valor maximo puesto."
       ],
       lifespan: [
-        "Los años de vida de la raza son opcionales.",
-        "El valor minimo aceptado es 5 (cinco) años.",
-        "El valor maximo aceptado es 20 (veinte) años."
+        "Es valido incluir los dos, uno o ninguno de los rangos.",
+        "En cualquier rango, los valores validos son de 5 a 20 años.",
+        "El rango minimo no puede ser superior al rango maximo.",
       ]
     }
   }
@@ -228,6 +230,25 @@ export class Dog {
       else result += characterToAdd;
     }
     return result;
+  }
+
+  static getDefaultLifespan() {
+    return {
+      min: {
+        ten: "0",
+        unity: "5",
+        number: 5,
+        enabled: false,
+        clientName: 'Rango Min(Años)'
+      },
+      max: {
+        ten: "0",
+        unity: "5",
+        number: 5,
+        enabled: false,
+        clientName: 'Rango Max(Años)'
+      },
+    }
   }
 
   static getDefaultSize() {
@@ -312,89 +333,58 @@ export class Dog {
     }
   }
 
+  static reformatPropertyOfSize(size, property, value) {
+    let addEnabled = false;
+
+    if (property.includes('min')) {
+      if (value) addEnabled = true;
+      else return;
+    }
+
+    let propertyString = ("00" + value).split('');
+    size[property] = {
+      ...size[property],
+      unity: propertyString.pop(),
+      ten: propertyString.pop(),
+      hundred: propertyString.pop(),
+      number: value
+    };
+
+    if (addEnabled) size[property].enabled = true;
+  }
+
   static reformatSize({ weight, height }) {
 
-    let size = {};
+    let size = { ...Dog.getDefaultSize() };
 
-    let minWeight = weight.min;
-    let maxWeight = weight.max;
-    let minHeight = height.min;
-    let maxHeight = height.max;
+    let valuesToReformat = [ weight.min, weight.max, height.min, height.max ];
 
-    if (minWeight) {
-      let minWeightString = ("00" + minWeight).split('');
-      
-      size.minWeight = {
-        unity: minWeightString.pop(),
-        ten: minWeightString.pop(),
-        hundred: minWeightString.pop(),
-        number: minWeight,
-        nombre: 'Peso Min.',
-        unidad: 'Kg',
-        enabled: true
-      }
-    }
-    else {
-      size.minWeight = {
-        hundred: "0",
-        ten: "0",
-        unity: "1",
-        number: 1,
-        nombre: 'Peso Min.',
-        unidad: 'Kg',
-        enabled: false,
-      }
-    }
-
-    let maxWeightString = ("00" + maxWeight).split('');
-
-    size.maxWeight = {
-      unity: maxWeightString.pop(),
-      ten: maxWeightString.pop(),
-      hundred: maxWeightString.pop(),
-      number: maxWeight,
-      nombre: 'Peso Max.',
-      unidad: 'Kg',
-      required: true
-    };
-
-    if (minHeight) {
-      let minHeightString = ("00" + minHeight).split('');
-      
-      size.minHeight = {
-        unity: minHeightString.pop(),
-        ten: minHeightString.pop(),
-        hundred: minHeightString.pop(),
-        number: minHeight,
-        nombre: 'Altura Min.',
-        unidad: 'cm',
-        enabled: true
-      }
-    }
-    else {
-      size.minHeight = {
-        hundred: "0",
-        ten: "1",
-        unity: "0",
-        number: 10,
-        nombre: 'Altura Min.',
-        unidad: 'cm',
-        enabled: false,
-      }
-    }
-
-    let maxHeightString = ("00" + maxHeight).split('');
-
-    size.maxHeight = {
-      unity: maxHeightString.pop(),
-      ten: maxHeightString.pop(),
-      hundred: maxHeightString.pop(),
-      number: maxHeight,
-      nombre: 'Altura Max.',
-      unidad: 'cm',
-      required: true
-    };
+    Object.keys(size).forEach((property, index) => 
+      Dog.reformatPropertyOfSize(size, property, valuesToReformat[index])
+    );
 
     return size;
+  }
+
+  static reformatPropertyOfLifespan(lifespan, property, value) {
+    if (!value) return;
+
+    let propertyString = ("0" + value).split('');
+    lifespan[property] = {
+      ...lifespan[property],
+      unity: propertyString.pop(),
+      ten: propertyString.pop(),
+      number: value,
+      enabled: true,
+    };
+  }
+
+  static reformatLifespan(lifespanToReformat) {
+    let lifespan = { ...Dog.getDefaultLifespan() };
+    let valuesToReformat = [ lifespanToReformat.min, lifespanToReformat.max ];
+    Object.keys(lifespan).forEach((property, index) => 
+      Dog.reformatPropertyOfLifespan(lifespan, property, valuesToReformat[index])
+    );
+    return lifespan;  
   }
 }

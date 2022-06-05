@@ -28,7 +28,6 @@ export default function AddSize(){
   React.useEffect(() => {
     if (newDog && newDog.validWeighAndHeight) {
       let sizeFormated = Dog.reformatSize(newDog);
-      console.log(sizeFormated);
       setSize({ ...sizeFormated });
       setImc({ ...Dog.getIMCValues(sizeFormated.maxWeight.number, sizeFormated.maxHeight.number) });
       setValid({ isValid: true, msg: 'IMC Valido'});

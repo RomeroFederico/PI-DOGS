@@ -26,6 +26,7 @@ import {
   SHOW_MODAL_CREATE_TEMPERAMENT,
   CLOSE_MODAL_CREATE_TEMPERAMENT,
   CHANGE_SIZE_OF_NEW_DOG,
+  CHANGE_LIFESPAN_OF_NEW_DOG,
 
   SHOW_HOME,
   RESET_HOME,
@@ -39,7 +40,7 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'ligthTheme',
+  theme: 'darkTheme',
   allTemperaments: [],
 
   home: {
@@ -342,6 +343,18 @@ const rootReducer = (state = initialState, {type, payload}) => {
               max: payload.height.max,
             },
             validWeighAndHeight: true,
+          }
+        }
+      }
+    case CHANGE_LIFESPAN_OF_NEW_DOG:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          newDog: {
+            ...state.create.newDog,
+            lifespan: payload,
+            validLifespan: true
           }
         }
       }

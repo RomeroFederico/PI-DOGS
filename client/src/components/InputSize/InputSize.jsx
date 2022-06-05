@@ -31,7 +31,12 @@ export default function InputSize({ size, propertyName, handleInput, handleCheck
         !size.required && (
           <>
           <label className = {s.labelCheck}>Agregar</label>
-          <input className = {s.check} type = 'checkbox' onChange = {() => handleCheck(propertyName)}/>
+          <input 
+            className = {s.check}
+            type = 'checkbox'
+            onChange = {() => handleCheck(propertyName)}
+            checked = {size.enabled}
+          />
           </>
         )
       }

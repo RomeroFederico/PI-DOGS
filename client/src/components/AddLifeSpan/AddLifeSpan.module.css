@@ -18,6 +18,38 @@
   font-weight: 700;
 }
 
+.containerInputLifespan {
+  width: 70%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.isValidContainer {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+
+  height: 4rem;
+  aspect-ratio: 1 / 1;
+
+  border-radius: 50px;
+  border: 2px solid var(--dangerColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--dangerColor);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.isValid {
+  border-color: var(--successColor);
+  color: var(--successColor);
+}
+
 .rules {
   color: var(--fontColor);
   font-size: var(--fontSmallest);
