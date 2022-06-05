@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import AddName from '../AddName/AddName';
 import AddTemperaments from '../AddTemperaments/AddTemperaments';
 import AddSize from '../AddSize/AddSize';
+import AddLifeSpan from '../AddLifeSpan/AddLifeSpan';
 import { setBackPageAnimation } from '../../redux/actions';
 
 import s from './FormCreateSections.module.css';
@@ -18,8 +19,11 @@ export default function FormCreateSections() {
     case 2:
       sectionToShow = <AddTemperaments />;
       break;
-    default:
+    case 3:
       sectionToShow = <AddSize />;
+      break;
+    default:
+      sectionToShow = <AddLifeSpan />;
   }
 
   return (

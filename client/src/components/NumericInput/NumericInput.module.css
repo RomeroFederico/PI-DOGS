@@ -61,3 +61,7 @@
   width: fit-content;
   z-index: 5;
 }
+
+.containterInputOnlyTwo {
+  grid-template-columns: 1fr 1fr;
+}

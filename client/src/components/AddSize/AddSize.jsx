@@ -91,7 +91,7 @@ export default function AddSize(){
     let { height, weight } = Dog.formatSize(size);
     dispatch(changeSizeOfNewDog(height, weight));
     dispatch(setNextPageAnimation());
-    dispatch(changeFormCreateSection(3, getDelayForPaginateAnimation()));
+    dispatch(changeFormCreateSection(4, getDelayForPaginateAnimation()));
   }
 
   let handleBack = function(value) {

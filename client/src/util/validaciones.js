@@ -160,6 +160,11 @@ export class Dog {
         "Se debe cumplir con el IMC (kg/0,45)/(cm/2,54) con respecto al peso.",
         "El rango valido de peso es: 1 a 100 kg. Para el peso es: 10 a 100 cm.",
         "Los valores minimos se aceptan hasta la mitad del valor maximo puesto."
+      ],
+      lifespan: [
+        "Los años de vida de la raza son opcionales.",
+        "El valor minimo aceptado es 5 (cinco) años.",
+        "El valor maximo aceptado es 20 (veinte) años."
       ]
     }
   }
