@@ -1,5 +1,5 @@
 import {  
-  INITIALIZE_NEW_DOG,
+  SHOW_FORM_CREATE_NEW_DOG,
   VALIDATE_PROPERTY_DOG,
   VALIDATING,
   CHECK_IF_NAME_IS_AVALAIBLE,
@@ -14,7 +14,8 @@ import {
   SHOW_MODAL_ADD_IMAGE,
   CLOSE_MODAL_ADD_IMAGE,
   CHANGE_IMAGE_OF_NEW_DOG,
-  UPLOAD_NEW_DOG
+  UPLOAD_NEW_DOG,
+  CLOSE_MODAL_ON_UPLOAD
 } from './actions';
 
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
@@ -36,7 +37,13 @@ export const checkIfNameIsAvalaible = function(name) {
                   }
                 });
               else
-                throw new Error("SERVER ERROR");
+                dispatch({
+                  type: UPLOAD_NEW_DOG,
+                  payload: {
+                    status: false,
+                    error: true,
+                  }
+              });
             }
             else
               dispatch({
@@ -46,13 +53,22 @@ export const checkIfNameIsAvalaible = function(name) {
                   name: name
                 }
               })
-           });
+           })
+           .catch(error => 
+              dispatch({
+                type: UPLOAD_NEW_DOG,
+                payload: {
+                  status: false,
+                  error: true
+                }
+            })
+          );
   }
 }
 
-export const initializeNewDog = function() {
+export const showFormCreateNewDog = function() {
   return {
-    type: INITIALIZE_NEW_DOG,
+    type: SHOW_FORM_CREATE_NEW_DOG,
   }
 }
 
@@ -152,7 +168,6 @@ export const changeImageOfNewDog = function(img) {
 }
 
 export const uploadNewDog = function(data) {
-  console.log(data);
   return function(dispatch) {
     return fetch(PATH_CREATE_NEW_DOG, {
               method: 'POST',
@@ -167,14 +182,33 @@ export const uploadNewDog = function(data) {
             if (data.error) {
               dispatch({
                 type: UPLOAD_NEW_DOG,
-                payload: false,
+                payload: {
+                  status: false
+                }
               })
             }
             else
               dispatch({
                 type: UPLOAD_NEW_DOG,
-                payload: true,
+                payload: {
+                  status: true
+                }
               })
-           });
+           })
+          .catch(error => 
+              dispatch({
+                type: UPLOAD_NEW_DOG,
+                payload: {
+                  status: false,
+                  error: true
+                }
+            })
+          );
+  }
+}
+
+export const closeModalOnUpload = function() {
+  return {
+    type: CLOSE_MODAL_ON_UPLOAD
   }
 }

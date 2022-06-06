@@ -15,7 +15,7 @@ import {
   ADD_TEMPERAMENT_TO_FILTERS,
   REMOVE_TEMPERAMENT_FROM_FILTERS,
 
-  INITIALIZE_NEW_DOG,
+  SHOW_FORM_CREATE_NEW_DOG,
   VALIDATE_PROPERTY_DOG,
   VALIDATING,
   CHECK_IF_NAME_IS_AVALAIBLE,
@@ -31,6 +31,7 @@ import {
   CLOSE_MODAL_ADD_IMAGE,
   CHANGE_IMAGE_OF_NEW_DOG,
   UPLOAD_NEW_DOG,
+  CLOSE_MODAL_ON_UPLOAD,
 
   SHOW_HOME,
   RESET_HOME,
@@ -67,8 +68,8 @@ const initialState = {
   },
 
   create: {
+    show: false,
     validating: false,
-    successOnUpload: false,
     section: 1,
     animateBackPage: false,
     animateNextPage: false,
@@ -83,6 +84,11 @@ const initialState = {
 
   modalAddImage: {
     show: false
+  },
+
+  modalOnUpload: {
+    show: false,
+    status: false
   }
 }
 
@@ -241,11 +247,17 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         home: { ...initialState.home }
       }
-    case INITIALIZE_NEW_DOG:
+    case SHOW_FORM_CREATE_NEW_DOG:
       return {
         ...state,
         create: {
-          ...state.create,
+          show: true,
+          validating: false,
+          section: 1,
+          animateBackPage: false,
+          animateNextPage: false,
+          newTemperaments: [],
+          oldTemperaments: [],
           newDog: new Dog('', [], [])
         }
       }
@@ -398,7 +410,20 @@ const rootReducer = (state = initialState, {type, payload}) => {
         create: {
           ...state.create,
           validating: false,
-          successOnUpload: payload
+        },
+        modalOnUpload: {
+          show: true,
+          status: payload.status,
+          error: payload.error,
+        }
+      }
+    case CLOSE_MODAL_ON_UPLOAD:
+      return {
+        ...state,
+        modalOnUpload: {
+          show: false,
+          status: false,
+          error: null
         }
       }
     case CHANGE_THEME:

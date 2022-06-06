@@ -13,7 +13,7 @@ import s from './FinalStep.module.css';
 export default function FinalStep() {
 
   const dispatch = useDispatch();
-  const { newDog, oldTemperaments, newTemperaments } = useSelector(state => state.create);
+  const { newDog, oldTemperaments, newTemperaments, validating } = useSelector(state => state.create);
 
   const formatedDogValues = Dog.formatDogProperties(newDog, oldTemperaments, newTemperaments);
   const formatedTemperaments = Dog.formatTemperaments(formatedDogValues.oldTemperaments, formatedDogValues.newTemperaments);
@@ -106,8 +106,8 @@ export default function FinalStep() {
 
       <PaginateSections
         buttons = {["Volver", "Subir"]}
-        disableNext = {false}
-        disableBack = {false}
+        disableNext = {validating}
+        disableBack = {validating}
         cbHandleBack = {handleBack}
         cbHandleNext = {handleNext}
       />

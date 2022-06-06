@@ -40,13 +40,14 @@ export default function AddName(){
   }
 
   let handleFailure = function() {
-    setValidation('El nombre esta en uso. Inserte un nuevo nombre.');
+    if (name !== newDog.name) setValidation(true);
+    else setValidation('El nombre esta en uso. Inserte un nuevo nombre.');
   }
 
   let handleNext = function(value) {
     if (newDog && newDog.validName && newDog.name === name) {
       dispatch(setNextPageAnimation());
-      dispatch(changeFormCreateSection(2, getDelayForPaginateAnimation())); // Habilito el cambio de pagina si ya se ha checkeado.
+      dispatch(changeFormCreateSection(2, getDelayForPaginateAnimation()));// Habilito el cambio de pagina si ya se ha checkeado.
       return;
     }
     dispatch(startValidating());
