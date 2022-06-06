@@ -1,0 +1,114 @@
+.container { 
+  width: 100%;
+  height: 100%;
+
+  flex-direction: column;
+  justify-content: space-between !important;
+}
+
+.title {
+  color: var(--fontColor);
+  font-size: var(--fontTitle);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.imgContainer {
+  fill: var(--secondaryColor);
+}
+
+.containerBreedData {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 6rem 22rem;
+  grid-template-rows: 3rem 3rem 3rem 3rem 6rem;
+  align-items: center;
+  justify-items: center;
+  grid-gap: 0.5rem;
+}
+
+.containerImageSelected {
+  border-radius: 10px;
+  border: 8px double var(--secondaryColor);
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  width: 5rem;
+  height: 5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageStyle {
+  width: 5rem !important;
+  height: 5rem !important;
+}
+
+.nameZone {
+  width: 100%;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.temperamentsZone {
+  width: 100%;
+  grid-column: 1 / 3;
+  grid-row: 5 / 6;
+}
+
+.weightZone {
+  width: 100%;
+  grid-column: 1 / 3;
+  grid-row: 3 / 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heightZone {
+  width: 100%;
+  grid-column: 1 / 3;
+  grid-row: 4 / 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divDoubleData {
+  width: 14rem;
+}
+
+.lifespanZone {
+  width: 100%;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.ldlData {
+  width: 5rem;
+  color: var(--fontColor);
+  font-size: var(--fontSmallest);
+  font-weight: 700;
+}
+
+.inputTemperaments {
+  height: 4rem;
+  width: 100%;
+  margin: 0;
+  padding: 0 1rem 0 1rem;
+  border: none;
+  background-color: var(--primaryColorSub);
+  font-size: var(--fontMedium);
+  color: var(--fontColor);
+  font-weight: 700;
+  font-style: italic;
+  box-sizing: border-box;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5) inset;
+  font-family: 
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  resize: none;
+}

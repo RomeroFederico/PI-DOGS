@@ -15,7 +15,7 @@ export default function PropertyTab({ name, isPropertyValid, imageComponent, cor
       { 
         isPropertyValid ? 
         (newDog[isPropertyValid] ? <i>✔</i> : <i>X</i> )
-        : '⚪'
+        : ' '
       }
       </span>
     </div>

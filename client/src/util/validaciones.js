@@ -152,6 +152,11 @@ export class Dog {
       isPropertyValid: 'validImage',
       imageComponentName: 'Camera',
       section: 5
+    },
+    {
+      clientName: 'Finalizar',
+      imageComponentName: 'Flag',
+      section: 6
     }];
   }
 
@@ -178,7 +183,7 @@ export class Dog {
       lifespan: [
         "Es valido incluir los dos, uno o ninguno de los rangos.",
         "En cualquier rango, los valores validos son de 5 a 20 años.",
-        "El rango minimo no puede ser superior al rango maximo.",
+        "El rango minimo no puede ser superior o igual al rango maximo.",
       ]
     }
   }
@@ -324,10 +329,10 @@ export class Dog {
   static checkIfMinSizeIsValid(size) {
     if (!size.minHeight.enabled && !size.minWeight.enabled) return true;
     if (size.minHeight.enabled && 
-       (size.minHeight.number > size.maxHeight.number || size.minHeight.number < size.maxHeight.number / 2))
+       (size.minHeight.number >= size.maxHeight.number || size.minHeight.number < size.maxHeight.number / 2))
        return false;
     if (size.minWeight.enabled && 
-       (size.minWeight.number > size.maxWeight.number || size.minWeight.number < size.maxWeight.number / 2))
+       (size.minWeight.number >= size.maxWeight.number || size.minWeight.number < size.maxWeight.number / 2))
        return false;
     return true;
   }
@@ -398,5 +403,42 @@ export class Dog {
       Dog.reformatPropertyOfLifespan(lifespan, property, valuesToReformat[index])
     );
     return lifespan;  
+  }
+
+  static formatDogProperties(dog, oldTemperaments, newTemperaments) {
+    let peso = [];
+    let altura = [];
+    let añosDeVida;
+
+    if (dog.weight.min) peso.push(dog.weight.min);
+    peso.push(dog.weight.max);
+
+    if (dog.height.min) altura.push(dog.height.min);
+    altura.push(dog.height.max);
+
+    if (dog.lifespan.min && dog.lifespan.min === dog.lifespan.max) añosDeVida = dog.lifespan.max.toString();
+    else if (dog.lifespan.min && dog.lifespan.max) añosDeVida = `${dog.lifespan.min}-${dog.lifespan.max}`;
+    else if (dog.lifespan.min) añosDeVida = dog.lifespan.min.toString();
+    else if (dog.lifespan.max) añosDeVida = dog.lifespan.max.toString();
+    else añosDeVida = null;
+
+    return {
+      oldTemperaments: oldTemperaments.map(t => { return { nombre: t.nombre } }),
+      newTemperaments: [ ...newTemperaments ],
+      breedData: {
+        nombre: dog.name,
+        peso,
+        altura,
+        añosDeVida,
+        imagen: dog.image
+      }
+    }
+  }
+
+  static formatTemperaments(oldTemperaments, newTemperaments) {
+    if (oldTemperaments.length === 0 && newTemperaments.length === 0) return "-- Vacio --";
+    return oldTemperaments.map(oldT => oldT.nombre)
+           .concat(newTemperaments.map(newT => newT.nombre))
+           .join(', ');
   }
 }

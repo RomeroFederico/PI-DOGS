@@ -2,7 +2,7 @@ import React from 'react';
 
 import s from './Input.module.css';
 
-export default function Input({ value, placeholder, handleInput, style, disable = false }) {
+export default function Input({ value, placeholder, handleInput, style, disable = false, readOnly = false }) {
 
   let handlePaste = function(e) {
     e.preventDefault();
@@ -18,6 +18,7 @@ export default function Input({ value, placeholder, handleInput, style, disable 
         onPaste = {handlePaste}
         value = {value}
         disabled = {disable}
+        readOnly = {readOnly}
       />
     </div>
   );

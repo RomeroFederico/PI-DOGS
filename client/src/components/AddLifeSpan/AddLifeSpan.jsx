@@ -53,7 +53,7 @@ export default function AddLifeSpan() {
   }
 
   let handleValidation = function(lifespan) {
-    if (lifespan.min.enabled && lifespan.max.enabled) return lifespan.min.number <= lifespan.max.number;
+    if (lifespan.min.enabled && lifespan.max.enabled) return lifespan.min.number < lifespan.max.number;
     return true;
   }
 

@@ -43,7 +43,7 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'ligthTheme',
+  theme: 'darkTheme',
   allTemperaments: [],
 
   home: {
