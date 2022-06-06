@@ -89,8 +89,8 @@ let addBreed = async function(data) {
 
 		let newBreedRef = await Raza.create(breedData);
 
-		let newTempPromise = newTemperaments ? Temperamento.bulkCreate(newTemperaments) : [];
-		let oldTempPromise = oldTemperaments ? Temperamento.findAll({ where: { [Op.or]: oldTemperaments }}) : [];
+		let newTempPromise = newTemperaments && newTemperaments.length > 0 ? Temperamento.bulkCreate(newTemperaments) : [];
+		let oldTempPromise = oldTemperaments && oldTemperaments.length > 0 ? Temperamento.findAll({ where: { [Op.or]: oldTemperaments }}) : [];
 		let [ newTempReference, oldTempReference ] = await Promise.all([newTempPromise, oldTempPromise]);
 
 		await newBreedRef.addTemperamentos(newTempReference.concat(oldTempReference));

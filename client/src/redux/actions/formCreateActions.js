@@ -13,10 +13,12 @@ import {
   CHANGE_LIFESPAN_OF_NEW_DOG,
   SHOW_MODAL_ADD_IMAGE,
   CLOSE_MODAL_ADD_IMAGE,
-  CHANGE_IMAGE_OF_NEW_DOG
+  CHANGE_IMAGE_OF_NEW_DOG,
+  UPLOAD_NEW_DOG
 } from './actions';
 
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
+const PATH_CREATE_NEW_DOG = 'http://localhost:3001/dogs/create';
 const ERROR_BREED_NOT_FOUND = "Breed not found";
 
 export const checkIfNameIsAvalaible = function(name) {
@@ -146,5 +148,33 @@ export const changeImageOfNewDog = function(img) {
   return {
     type: CHANGE_IMAGE_OF_NEW_DOG,
     payload: img
+  }
+}
+
+export const uploadNewDog = function(data) {
+  console.log(data);
+  return function(dispatch) {
+    return fetch(PATH_CREATE_NEW_DOG, {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ data: data })
+            })
+           .then(result => result.json())
+           .then(data => {
+            if (data.error) {
+              dispatch({
+                type: UPLOAD_NEW_DOG,
+                payload: false,
+              })
+            }
+            else
+              dispatch({
+                type: UPLOAD_NEW_DOG,
+                payload: true,
+              })
+           });
   }
 }

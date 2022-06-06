@@ -5,8 +5,7 @@ const router = Router();
 
 router.get('/', getBreeds);
 router.get('/page/:page', getBreedsByPage);
-router.get('/create', createBreed);
+router.post('/create', createBreed);
 router.get('/:idRaza', getBreedDetails);
-//router.post('/create', createBreed);
 
 module.exports = router;

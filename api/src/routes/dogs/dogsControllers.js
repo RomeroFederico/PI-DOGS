@@ -39,24 +39,25 @@ let getBreedDetails = async function (req, res, next) {
 }
 
 let createBreed = async function (req, res, next) {
-	//let { data } = req.body;
+	let { data } = req.body;
 
-	let data = {
-		oldTemperaments: [
-			{ nombre: "Friendly"},
-			{ nombre: "Loyal"}
-		],
-		newTemperaments: [
-			{ nombre: "Temperamento-de-prueba" },
-			{ nombre: "Otro-Temperamento-de-prueba" }
-		],
-		breedData: {
-			nombre: "prueba",
-			altura: [1, 10],
-			peso: [5, 15],
-			añosDeVida: "10-15"
-		}
-	}
+	// let data = {
+	// 	oldTemperaments: [
+	// 		{ nombre: "Friendly"},
+	// 		{ nombre: "Loyal"}
+	// 	],
+	// 	newTemperaments: [
+	// 		{ nombre: "Temperamento-de-prueba" },
+	// 		{ nombre: "Otro-Temperamento-de-prueba" }
+	// 	],
+	// 	breedData: {
+	// 		nombre: "prueba",
+	// 		altura: [1, 10],
+	// 		peso: [5, 15],
+	// 		añosDeVida: "10-15",
+	// 		imagen: 'url'
+	// 	}
+	// }
 
 	try {
 		let result = await addBreed(data);

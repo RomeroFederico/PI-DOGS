@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Input from '../Input/Input';
 import SmartImage from '../SmartImage/SmartImage';
 import PaginateSections from '../PaginateSections/PaginateSections';
-import { setBackPageAnimation, changeFormCreateSection } from '../../redux/actions';
+import { startValidating, uploadNewDog, setBackPageAnimation, changeFormCreateSection } from '../../redux/actions';
 
 import { getDelayForPaginateAnimation } from '../../util';
 import { Dog } from '../../util/validaciones';
@@ -18,10 +18,9 @@ export default function FinalStep() {
   const formatedDogValues = Dog.formatDogProperties(newDog, oldTemperaments, newTemperaments);
   const formatedTemperaments = Dog.formatTemperaments(formatedDogValues.oldTemperaments, formatedDogValues.newTemperaments);
 
-  console.log(formatedDogValues);
-  console.log(formatedTemperaments);
-
   let handleNext = function() {
+    dispatch(startValidating());
+    dispatch(uploadNewDog(formatedDogValues));
   }
 
   let handleBack = function() {
@@ -53,8 +52,7 @@ export default function FinalStep() {
 
           <div className = {s.temperamentsZone}>
             <label className = {s.ldlData}>Temperamentos</label>
-            <textarea className = {s.inputTemperaments} readOnly = {true}> 
-              {formatedTemperaments}
+            <textarea className = {s.inputTemperaments} readOnly = {true} value = {formatedTemperaments}> 
             </textarea>
           </div>
 

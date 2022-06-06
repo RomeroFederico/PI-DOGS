@@ -30,6 +30,7 @@ import {
   SHOW_MODAL_ADD_IMAGE,
   CLOSE_MODAL_ADD_IMAGE,
   CHANGE_IMAGE_OF_NEW_DOG,
+  UPLOAD_NEW_DOG,
 
   SHOW_HOME,
   RESET_HOME,
@@ -67,6 +68,7 @@ const initialState = {
 
   create: {
     validating: false,
+    successOnUpload: false,
     section: 1,
     animateBackPage: false,
     animateNextPage: false,
@@ -388,6 +390,15 @@ const rootReducer = (state = initialState, {type, payload}) => {
             ...state.create.newDog,
             image: payload,
           }
+        }
+      }
+    case UPLOAD_NEW_DOG:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          validating: false,
+          successOnUpload: payload
         }
       }
     case CHANGE_THEME:
