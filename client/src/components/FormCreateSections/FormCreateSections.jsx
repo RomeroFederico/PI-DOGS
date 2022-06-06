@@ -4,6 +4,7 @@ import AddName from '../AddName/AddName';
 import AddTemperaments from '../AddTemperaments/AddTemperaments';
 import AddSize from '../AddSize/AddSize';
 import AddLifeSpan from '../AddLifeSpan/AddLifeSpan';
+import AddImage from '../AddImage/AddImage';
 import { setBackPageAnimation } from '../../redux/actions';
 
 import s from './FormCreateSections.module.css';
@@ -22,8 +23,11 @@ export default function FormCreateSections() {
     case 3:
       sectionToShow = <AddSize />;
       break;
-    default:
+    case 4: 
       sectionToShow = <AddLifeSpan />;
+      break;
+    default:
+      sectionToShow = <AddImage />;
   }
 
   return (

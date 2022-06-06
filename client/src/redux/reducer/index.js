@@ -27,6 +27,9 @@ import {
   CLOSE_MODAL_CREATE_TEMPERAMENT,
   CHANGE_SIZE_OF_NEW_DOG,
   CHANGE_LIFESPAN_OF_NEW_DOG,
+  SHOW_MODAL_ADD_IMAGE,
+  CLOSE_MODAL_ADD_IMAGE,
+  CHANGE_IMAGE_OF_NEW_DOG,
 
   SHOW_HOME,
   RESET_HOME,
@@ -40,7 +43,7 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'darkTheme',
+  theme: 'ligthTheme',
   allTemperaments: [],
 
   home: {
@@ -64,7 +67,7 @@ const initialState = {
 
   create: {
     validating: false,
-    section: 2,
+    section: 1,
     animateBackPage: false,
     animateNextPage: false,
     newTemperaments: [],
@@ -73,6 +76,10 @@ const initialState = {
   },
 
   modalCreateTemperament: {
+    show: false
+  },
+
+  modalAddImage: {
     show: false
   }
 }
@@ -355,6 +362,31 @@ const rootReducer = (state = initialState, {type, payload}) => {
             ...state.create.newDog,
             lifespan: payload,
             validLifespan: true
+          }
+        }
+      }
+    case SHOW_MODAL_ADD_IMAGE:
+      return {
+        ...state,
+        modalAddImage: {
+          show: true
+        }
+      }
+    case CLOSE_MODAL_ADD_IMAGE:
+      return {
+        ...state,
+        modalAddImage: {
+          show: false
+        }
+      }
+    case CHANGE_IMAGE_OF_NEW_DOG:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          newDog: {
+            ...state.create.newDog,
+            image: payload,
           }
         }
       }

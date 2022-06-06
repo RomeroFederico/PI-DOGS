@@ -3,15 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import PaginateSections from '../PaginateSections/PaginateSections';
 import ConfusedDog from '../SVG/ConfusedDog/ConfusedDog';
 import TemperamentsAdded from '../TemperamentsAdded/TemperamentsAdded';
-import { showModalTemperaments, showModalCreateTemperament } from '../../redux/actions';
+import { showModalTemperaments, showModalCreateTemperament, validatePropertyDog, 
+         setNextPageAnimation, changeFormCreateSection } from '../../redux/actions';
+
 import { Dog } from '../../util/validaciones';
+import { getDelayForPaginateAnimation } from '../../util';
 
 import s from './AddTemperaments.module.css';
 
 export default function AddTemperaments(){
 
   const dispatch = useDispatch();
-  const { newTemperaments, oldTemperaments } = useSelector(state => state.create);
+  const { newTemperaments, oldTemperaments, newDog } = useSelector(state => state.create);
 
   let handleClickAdd = function() {
     dispatch(showModalTemperaments());
@@ -19,6 +22,12 @@ export default function AddTemperaments(){
 
   let handleClickCreate = function() {
     dispatch(showModalCreateTemperament());
+  }
+
+  let handleNext = function() {
+    if (newDog && !newDog.validTemperaments) dispatch(validatePropertyDog('validTemperaments'));
+    dispatch(setNextPageAnimation());
+    dispatch(changeFormCreateSection(3, getDelayForPaginateAnimation()));
   }
 
   return (
@@ -53,6 +62,7 @@ export default function AddTemperaments(){
         buttons = {["Volver", "Continuar"]}
         disableNext = {false}
         disableBack = {false}
+        cbHandleNext = {handleNext}
       />
     </>
   );

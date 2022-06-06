@@ -1,4 +1,4 @@
-import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS, DELAY_PAGINATE_SECTION } from './constants';
+import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS, DELAY_PAGINATE_SECTION, DEFAULT_IMAGES } from './constants';
 import { Temperament, Breed } from './validaciones';
 
 export function getBreedSize (weight) {
@@ -87,4 +87,19 @@ export function filterTemperamentsHome(temperaments, search, alreadyOnFilter) {
 export function filterTemperamentsForm(temperaments, search, alreadyOnFilter) {
   alreadyOnFilter = alreadyOnFilter.map(t => t.nombre);
   return filterTemperaments(temperaments, search, alreadyOnFilter);
+}
+
+export function getDefaultImages() {
+
+  const { DEFAULT_IMAGES_COUNT, DEFAULT_IMAGES_PATH, DEFAULT_IMAGES_NAME } = DEFAULT_IMAGES; 
+  const images = [];
+
+  for(let imageIndex = 1; imageIndex <= DEFAULT_IMAGES_COUNT; imageIndex++) {
+    images.push({
+      name: `default-image-${imageIndex}`,
+      url: `${DEFAULT_IMAGES_PATH}/${DEFAULT_IMAGES_NAME}${imageIndex}.svg`,
+    });
+  }
+
+  return images; 
 }

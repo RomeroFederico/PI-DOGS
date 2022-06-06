@@ -26,6 +26,7 @@ export default function PropertiesTab() {
             name = {p.clientName}
             isPropertyValid = {p.isPropertyValid}
             imageComponent = {getIcon(p)}
+            correspondingSection = {p.section}
           />
 
         )})

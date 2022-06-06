@@ -4,6 +4,7 @@ import PropertiesTab from '../PropertiesTab/PropertiesTab';
 import FormCreateSections from '../FormCreateSections/FormCreateSections';
 import ModalTemperamentsForTheForm from '../ModalTemperamentsForTheForm/ModalTemperamentsForTheForm';
 import ModalCreateTemperament from '../ModalCreateTemperament/ModalCreateTemperament';
+import ModalAddImage from '../ModalAddImage/ModalAddImage';
 import Loading from '../Loading/Loading';
 import { initializeNewDog, getTemperaments } from '../../redux/actions';
 
@@ -16,6 +17,7 @@ export default function FormCreateBreed() {
   const { allTemperaments } = useSelector(state => state);
   const showModalAddTemperament = useSelector(state => state.modalAddTemperaments.show);
   const showModalCreateTemperament = useSelector(state => state.modalCreateTemperament.show);
+  const showModalAddImage = useSelector(state => state.modalAddImage.show);
 
   React.useEffect(() => {
     dispatch(initializeNewDog());
@@ -39,6 +41,9 @@ export default function FormCreateBreed() {
           }
           {
             showModalCreateTemperament && <ModalCreateTemperament />
+          }
+          {
+            showModalAddImage && <ModalAddImage />
           }
         </div>
       </div>

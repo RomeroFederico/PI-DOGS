@@ -2,6 +2,7 @@ import Name from './Name';
 import Rule from './Rule';
 import Temperament from './Temperament';
 import Heart from './Heart';
+import Camera from './Camera';
 
 export const tabsComponents = [
   {
@@ -19,5 +20,9 @@ export const tabsComponents = [
   {
     component: <Heart />,
     name: 'Heart'
+  },
+  {
+    component: <Camera />,
+    name: 'Camera'
   }
 ]

@@ -107,39 +107,51 @@ export class Breed {
 }
 
 export class Dog {
-  constructor(name, weight, height, temperaments = [], lifespan = null) {
+  constructor(name, weight, height, temperaments = [], lifespan = null, image = null) {
     this.name = name;
     this.weight = weight;
     this.height = height;
     this.temperaments = temperaments;
     this.lifespan = lifespan;
+    this.image = image;
 
     this.validName = false;
     this.validTemperaments = false;
     this.validWeighAndHeight = false;
     this.validLifespan = false;
+    this.validImage = false;
   }
 
   static getPropertiesNameForTabs() { // Para los 'tabs' del form de alta.
     return [{
       clientName: 'Nombre de la Raza',
       isPropertyValid: 'validName',
-      imageComponentName: 'Name'
-    },
-    {
-      clientName: 'Peso y Altura',
-      isPropertyValid: 'validWeighAndHeight',
-      imageComponentName: 'Rule'
+      imageComponentName: 'Name',
+      section: 1
     },
     {
       clientName: 'Temperamentos',
       isPropertyValid: 'validTemperaments',
-      imageComponentName: 'Temperament'
+      imageComponentName: 'Temperament',
+      section: 2
+    },
+    {
+      clientName: 'Peso y Altura',
+      isPropertyValid: 'validWeighAndHeight',
+      imageComponentName: 'Rule',
+      section: 3
     },
     {
       clientName: 'Años de Vida',
       isPropertyValid: 'validLifespan',
-      imageComponentName: 'Heart'
+      imageComponentName: 'Heart',
+      section: 4
+    },
+    {
+      clientName: 'Imagen',
+      isPropertyValid: 'validImage',
+      imageComponentName: 'Camera',
+      section: 5
     }];
   }
 

@@ -22,6 +22,8 @@ server.use((req, res, next) => {
   next();
 });
 
+server.use('/public', express.static(__dirname + '/public'));
+
 server.use('/', routes);
 
 // Error catching endware.

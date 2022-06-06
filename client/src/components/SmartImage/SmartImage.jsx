@@ -4,7 +4,7 @@ import s from './SmartImage.module.css';
 import ImageNotFound from '../SVG/ImageNotFound/ImageNotFound';
 import DogPaw from '../SVG/DogPaw/DogPaw';
 
-export default function SmartImage({ image, alt, style }) {
+export default function SmartImage({ image, alt, style, imageStyle }) {
 
   let [ errorLoadingImage, setErrorLoadingImage ] = React.useState(false);
   let [ showImage, setShowImage ] = React.useState(false);
@@ -31,7 +31,7 @@ export default function SmartImage({ image, alt, style }) {
     <>
     {
       ((!showImage && !errorLoadingImage) || delayLoading) && 
-      <div className = {`${s.loadingImageContainer} center`}>
+      <div className = {`${s.loadingImageContainer} ${imageStyle ? imageStyle : ''} center`}>
         <DogPaw style = {s.loadingImage} fill = {style} />
       </div>
     }
@@ -42,12 +42,12 @@ export default function SmartImage({ image, alt, style }) {
         alt = {alt}
         onError = {handleErrorImageNotFound}
         onLoad = {handleLoadImage} 
-        className = {`${s.image} ${ !showImage || delayLoading ? s.dontShowImage : '' }`}
+        className = {`${s.image} ${ !showImage || delayLoading ? s.dontShowImage : '' } ${imageStyle ? imageStyle : ''}`}
       />
     }
     { 
       errorLoadingImage && !delayLoading &&
-      <div className = {`center ${s.imageContainer}`}>
+      <div className = {`center ${s.imageContainer} ${imageStyle ? imageStyle : ''}`}>
         <ImageNotFound style = {`${s.imageNotFound} ${style}`}/>
       </div>
     }
