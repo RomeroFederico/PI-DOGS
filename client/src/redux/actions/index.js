@@ -31,3 +31,4 @@ export const changeTheme = function() {
 
 export * from './homeActions';
 export * from './formCreateActions';
+export * from './breedDetailsActions';

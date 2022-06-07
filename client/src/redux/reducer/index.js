@@ -1,6 +1,5 @@
 import { 
   GET_ALL_BREEDS,
-  GET_BREED_DETAILS,
   GET_BREEDS_WITH_PAGINATE,
   GET_BREEDS_BY_NAME,
   GET_TEMPERAMENTS,
@@ -33,6 +32,9 @@ import {
   UPLOAD_NEW_DOG,
   CLOSE_MODAL_ON_UPLOAD,
 
+  GET_BREED_DETAILS,
+  CLOSE_BREED_DETAILS,
+
   SHOW_HOME,
   RESET_HOME,
   CHANGE_THEME
@@ -45,7 +47,7 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'darkTheme',
+  theme: 'ligthTheme',
   allTemperaments: [],
 
   home: {
@@ -89,6 +91,11 @@ const initialState = {
   modalOnUpload: {
     show: false,
     status: false
+  },
+
+  details: {
+    show: false,
+    dog: null
   }
 }
 
@@ -250,6 +257,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
     case SHOW_FORM_CREATE_NEW_DOG:
       return {
         ...state,
+        allTemperaments: [],
         create: {
           show: true,
           validating: false,
@@ -424,6 +432,23 @@ const rootReducer = (state = initialState, {type, payload}) => {
           show: false,
           status: false,
           error: null
+        }
+      }
+    case GET_BREED_DETAILS: {
+      return {
+        ...state,
+        details: {
+          show: true,
+          dog: payload
+        }
+      }
+    }
+    case CLOSE_BREED_DETAILS:
+      return {
+        ...state,
+        details: {
+          show: false,
+          dog: null
         }
       }
     case CHANGE_THEME:

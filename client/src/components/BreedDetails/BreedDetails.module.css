@@ -1,0 +1,60 @@
+.globalContainer {
+  width: 100%;
+}
+
+.containerForm {
+  width: var(--formCreateBreedWidth);
+  height: var(--formCreateBreedHeight);
+  background-color: var(--primaryColor);
+  border-radius: 10px;
+  border: 1px solid var(--primaryColor);
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 8fr;
+  grid-gap: 2px;
+  overflow: hidden;
+
+  background-color: var(--primaryColorSub);
+}
+
+.banner {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
+  background-color: var(--secondaryColor);
+  border-bottom: 2px solid var(--primary);
+
+  color: white;
+  font-size: var(--fontTitle);
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 2rem 0 2rem;
+}
+
+.dogIco {
+  height: 2.5rem;
+  aspect-ratio: 1 / 1;
+}
+
+.mainZone {
+  width: 100%;
+  height: 100%;
+  background-color: var(--primaryColor);
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  grid-template-rows: 1fr;
+
+  grid-gap: 1rem;
+}

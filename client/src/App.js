@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Card from './components/Card/Card';
 import HomePrototipo from './components/HomePrototipo/HomePrototipo';
 import FormCreateBreed from './components/FormCreateBreed/FormCreateBreed';
+import BreedDetails from './components/BreedDetails/BreedDetails';
 
 import './App.css';
 
@@ -15,8 +16,11 @@ function App() {
 
   return (
     <div className = {`global-variables ${theme} body`}>
-      {/*<HomePrototipo />*/}
-      <FormCreateBreed />
+      <Routes>
+        <Route path = '/' element = { <HomePrototipo /> } />
+        <Route path = '/alta' element = { <FormCreateBreed /> } />
+        <Route exact path = '/raza/:id' element = { <BreedDetails /> } />
+      </Routes>
     </div>
   );
 }

@@ -152,6 +152,8 @@
 .body {
   background-color: var(--primaryColorSub);
   transition: background-color 0.5s;
+
+  min-height: 50rem;
 }
 
 /* Animaciones de paginado. */

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { closeModalOnUpload, showFormCreateNewDog, changeImageOfNewDog, closeModalAddImage } from '../../redux/actions';
+import { closeModalOnUpload, showFormCreateNewDog, getTemperaments } from '../../redux/actions';
 
 import s from './ModalOnUpload.module.css';
 
@@ -17,6 +17,7 @@ export default function ModalOnUpload() {
   let handleCreateAnother = function(){
     dispatch(closeModalOnUpload());
     dispatch(showFormCreateNewDog());
+    dispatch(getTemperaments());
   }
 
   let handleBackToTheForm = function(){
