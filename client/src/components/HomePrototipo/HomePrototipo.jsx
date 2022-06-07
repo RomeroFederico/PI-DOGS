@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBreedsWithPaginate, getTemperaments, showHome, resetHome, changeTheme} from '../../redux/actions/index.js';
+import { getBreedsWithPaginate, getTemperaments, showHome, resetHome } from '../../redux/actions/index.js';
 
+import LoadingComponent from '../LoadingComponent/LoadingComponent';
 import Cards from '../Cards/Cards';
 import SideBar from '../SideBar/SideBar';
 import ModalTemperamentsForTheHome from '../SideBar/ModalTemperamentsForTheHome/ModalTemperamentsForTheHome';
@@ -28,11 +29,7 @@ export default function HomePrototipo() {
     if (!home.show && allTemperaments.length > 0 && home.breeds.length > 0) dispatch(showHome())
   }, [home])
 
-  if (!home.show) return <span>Loading</span>
-
-  let handleChangeTheme = function() {
-    dispatch(changeTheme());
-  }
+  if (!home.show) return <LoadingComponent />;
 
   return (
     <>
@@ -47,7 +44,6 @@ export default function HomePrototipo() {
         <Pages />
       </div>
     </div>
-    <button onClick = {handleChangeTheme}>Cambiar Tema</button>
     </>
   )
 };

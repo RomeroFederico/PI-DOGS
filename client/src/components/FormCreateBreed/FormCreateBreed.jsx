@@ -1,5 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import LoadingComponent from '../LoadingComponent/LoadingComponent';
 import PropertiesTab from '../PropertiesTab/PropertiesTab';
 import FormCreateSections from '../FormCreateSections/FormCreateSections';
 import ModalTemperamentsForTheForm from '../ModalTemperamentsForTheForm/ModalTemperamentsForTheForm';
@@ -7,7 +9,8 @@ import ModalCreateTemperament from '../ModalCreateTemperament/ModalCreateTempera
 import ModalAddImage from '../ModalAddImage/ModalAddImage';
 import ModalOnUpload from '../ModalOnUpload/ModalOnUpload';
 import Loading from '../Loading/Loading';
-import { showFormCreateNewDog, getTemperaments } from '../../redux/actions';
+
+import { showFormCreateNewDog, getTemperaments, closeFormCreateNewDog } from '../../redux/actions';
 
 import s from './FormCreateBreed.module.css';
 
@@ -21,12 +24,21 @@ export default function FormCreateBreed() {
   const showModalAddImage = useSelector(state => state.modalAddImage.show);
   const showModalOnUpload = useSelector(state => state.modalOnUpload.show);
 
+  const [ delay, setDelay ] = React.useState(true);
+
   React.useEffect(() => {
     dispatch(showFormCreateNewDog());
     dispatch(getTemperaments());
+
+    let idTimeOut = setTimeout(() => setDelay(false), 1000);
+
+    return () => {
+      dispatch(closeFormCreateNewDog());
+      clearTimeout(idTimeOut);
+    }
   }, []);
 
-  if (!newDog || !show || !allTemperaments || allTemperaments.length === 0) return <span>Loading</span>;
+  if (!newDog || !show || !allTemperaments || allTemperaments.length === 0 || delay ) return <LoadingComponent />;
 
   return (
     <div className = {`${s.globalContainer} center`}>

@@ -1,5 +1,6 @@
 .globalContainer {
   width: 100%;
+  height: var(--defaultHeight);
 }
 
 .containerForm {
@@ -17,6 +18,9 @@
   overflow: hidden;
 
   background-color: var(--primaryColorSub);
+
+  animation: showForm 0.5s;
+  animation-fill-mode: both;
 }
 
 .banner {
@@ -57,4 +61,15 @@
   width: 5rem;
   top: 5px;
   right: 10px;
+}
+
+@keyframes showForm {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

@@ -152,7 +152,9 @@
 .body {
   background-color: var(--primaryColorSub);
   transition: background-color 0.5s;
-  /*min-height: 50rem;*/
+  
+  --defaultHeight: 100vh;
+  min-height: var(--defaultHeight);
 }
 
 /* Animaciones de paginado. */

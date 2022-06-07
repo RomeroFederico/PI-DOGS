@@ -1,0 +1,53 @@
+.menuContainer {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.btn,
+.btnWithTag {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--primaryColor);
+  background-color: var(--primaryColor);
+  padding: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+
+  margin-top: 0.5rem;
+
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+}
+
+.btnWithTag {
+  position: relative;
+}
+
+.showIconWithTag {
+  height: 80%;
+  width: 80%;
+}
+
+.showIcon {
+  animation: showWhenClicked 0.5s;
+  animation-fill-mode: both;
+}
+
+.tag {
+  color: var(--fontColor);
+  font-weight: 500;
+  font-size: var(--fontSmall);
+
+  position: absolute;
+  bottom: 0.3rem;
+}
+
+@keyframes showWhenClicked {
+  from {
+    transform: translateY(3rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

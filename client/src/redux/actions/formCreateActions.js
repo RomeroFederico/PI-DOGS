@@ -15,7 +15,8 @@ import {
   CLOSE_MODAL_ADD_IMAGE,
   CHANGE_IMAGE_OF_NEW_DOG,
   UPLOAD_NEW_DOG,
-  CLOSE_MODAL_ON_UPLOAD
+  CLOSE_MODAL_ON_UPLOAD,
+  CLOSE_FORM_CREATE_NEW_DOG,
 } from './actions';
 
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
@@ -210,5 +211,11 @@ export const uploadNewDog = function(data) {
 export const closeModalOnUpload = function() {
   return {
     type: CLOSE_MODAL_ON_UPLOAD
+  }
+}
+
+export const closeFormCreateNewDog = function() {
+  return {
+    type: CLOSE_FORM_CREATE_NEW_DOG
   }
 }

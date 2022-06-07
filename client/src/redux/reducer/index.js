@@ -31,6 +31,7 @@ import {
   CHANGE_IMAGE_OF_NEW_DOG,
   UPLOAD_NEW_DOG,
   CLOSE_MODAL_ON_UPLOAD,
+  CLOSE_FORM_CREATE_NEW_DOG,
 
   GET_BREED_DETAILS,
   CLOSE_BREED_DETAILS,
@@ -47,7 +48,7 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'ligthTheme',
+  theme: 'darkTheme',
   allTemperaments: [],
 
   home: {
@@ -252,6 +253,7 @@ const rootReducer = (state = initialState, {type, payload}) => {
     case RESET_HOME:
       return {
         ...state,
+        allTemperaments: [],
         home: { ...initialState.home }
       }
     case SHOW_FORM_CREATE_NEW_DOG:
@@ -432,6 +434,14 @@ const rootReducer = (state = initialState, {type, payload}) => {
           show: false,
           status: false,
           error: null
+        }
+      }
+    case CLOSE_FORM_CREATE_NEW_DOG:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          show: false,
         }
       }
     case GET_BREED_DETAILS: {

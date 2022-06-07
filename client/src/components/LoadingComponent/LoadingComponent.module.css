@@ -1,0 +1,13 @@
+.globalContainer {
+  height: var(--defaultHeight);
+  width: 100%;
+}
+
+.containerLoading {
+  width: 15rem;
+  height: 15rem;
+}
+
+.fill {
+  fill:  var(--fontColor);
+}
