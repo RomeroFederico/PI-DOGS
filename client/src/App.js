@@ -1,14 +1,13 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Card from './components/Card/Card';
+import LandingPage from './components/LandingPage/LandingPage';
 import HomePrototipo from './components/HomePrototipo/HomePrototipo';
 import FormCreateBreed from './components/FormCreateBreed/FormCreateBreed';
 import BreedDetails from './components/BreedDetails/BreedDetails';
 
 import './App.css';
 
-import * as example from './components/Card/example.json';
 
 function App() {
 
@@ -17,9 +16,11 @@ function App() {
   return (
     <div className = {`global-variables ${theme} body`}>
       <Routes>
-        <Route path = '/' element = { <HomePrototipo /> } />
+        <Route exact path = '/' element = { <LandingPage /> } />
+        <Route path = '/home' element = { <HomePrototipo /> } />
         <Route path = '/alta' element = { <FormCreateBreed /> } />
         <Route exact path = '/raza/:id' element = { <BreedDetails /> } />
+        <Route path = "*" element = { <Navigate to = "/home" replace /> } />
       </Routes>
     </div>
   );

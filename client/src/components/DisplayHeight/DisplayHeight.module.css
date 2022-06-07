@@ -12,8 +12,6 @@
 .dog {
   align-self: flex-end;
   justify-self: flex-start;
-  position: relative;
-  top: 5px;
 }
 
 .man {
