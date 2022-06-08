@@ -13,6 +13,8 @@ import {
   SEARCH_TEMPERAMENTS_MODAL,
   ADD_TEMPERAMENT_TO_FILTERS,
   REMOVE_TEMPERAMENT_FROM_FILTERS,
+
+  DISPLAY_ERROR_MESSAGE,
 } from './actions';
 
 const PATH_GET_DOGS = 'http://localhost:3001/dogs';
@@ -39,10 +41,28 @@ export const getTemperaments = function() {
     return fetch(PATH_GET_TEMPERAMENTS)
            .then(result => result.json())
            .then(temperaments => {
-             dispatch({
-              type: GET_TEMPERAMENTS,
-              payload: temperaments 
-             })
+            if (temperaments.error)
+              dispatch({
+                  type: DISPLAY_ERROR_MESSAGE,
+                  payload: {
+                    msg: 'Error en el servidor. Vuelva a intentarlo mas tarde.',
+                    type: 'SERVER'
+                  }
+                })
+            else
+              dispatch({
+                type: GET_TEMPERAMENTS,
+                payload: temperaments 
+              })
+           })
+           .catch(error => {
+              dispatch({
+                type: DISPLAY_ERROR_MESSAGE,
+                payload: {
+                  msg: 'Error en el servidor. Vuelva a intentarlo mas tarde.',
+                  type: 'SERVER'
+                }
+              })
            })
   }
 }
@@ -71,7 +91,13 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
                     }
                   });
                 else
-                  throw new Error("SERVER ERROR");
+                  dispatch({
+                    type: DISPLAY_ERROR_MESSAGE,
+                    payload: {
+                      msg: 'Error en el servidor. Vuelva a intentarlo mas tarde.',
+                      type: 'SERVER'
+                    }
+                  })
               }
               else 
                 dispatch({
@@ -82,6 +108,15 @@ export const getBreedsWithPaginate = function(page = 1, filterOptions = {
                     currentPage: page,
                     localBreeds: [],
                     filterData: { ...filterOptions }
+                }
+              })
+           })
+           .catch(error => {
+              dispatch({
+                type: DISPLAY_ERROR_MESSAGE,
+                payload: {
+                  msg: 'Error en el servidor. Vuelva a intentarlo mas tarde.',
+                  type: 'SERVER'
                 }
               })
            })
@@ -103,7 +138,13 @@ export const getBreedsByName = function(name, filterOptions) {
                     }
                   });
                 else
-                  throw new Error("SERVER ERROR");
+                  dispatch({
+                    type: DISPLAY_ERROR_MESSAGE,
+                    payload: {
+                      msg: 'Error en el servidor. Vuelva a intentarlo mas tarde.',
+                      type: 'SERVER'
+                    }
+                  })
               }
               else
               dispatch({
@@ -112,6 +153,15 @@ export const getBreedsByName = function(name, filterOptions) {
                   localBreeds: data,
                   currentPage: 1,
                   filterData: { ...filterOptions }
+                }
+              })
+           })
+           .catch(error => {
+              dispatch({
+                type: DISPLAY_ERROR_MESSAGE,
+                payload: {
+                  msg: 'Error en el servidor. Vuelva a intentarlo mas tarde.',
+                  type: 'SERVER'
                 }
               })
            })

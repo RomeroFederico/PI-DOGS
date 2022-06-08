@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBreedsWithPaginate, getTemperaments, showHome, resetHome } from '../../redux/actions/index.js';
 
+import ModalError from '../ModalError/ModalError';
 import LoadingComponent from '../LoadingComponent/LoadingComponent';
 import Cards from '../Cards/Cards';
 import SideBar from '../SideBar/SideBar';
@@ -14,6 +15,7 @@ export default function HomePrototipo() {
   const allTemperaments = useSelector(state => state.allTemperaments);
   const home = useSelector(state => state.home);
   const showModal = useSelector(state => state.modalAddTemperaments.show);
+  const showModalError = useSelector(state => state.modalError.show);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -28,6 +30,8 @@ export default function HomePrototipo() {
   React.useEffect(() => {
     if (!home.show && allTemperaments.length > 0 && home.breeds.length > 0) dispatch(showHome())
   }, [home])
+
+  if (showModalError) return <ModalError />;
 
   if (!home.show) return <LoadingComponent />;
 

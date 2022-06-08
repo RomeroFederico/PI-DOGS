@@ -38,7 +38,9 @@ import {
 
   SHOW_HOME,
   RESET_HOME,
-  CHANGE_THEME
+  CHANGE_THEME,
+  DISPLAY_ERROR_MESSAGE,
+  CLOSE_ERROR_MESSAGE
 } from '../actions/actions';
 
 import { filterLocalBreeds } from '../../util/filtrados';
@@ -97,6 +99,12 @@ const initialState = {
   details: {
     show: false,
     dog: null
+  },
+
+  modalError: {
+    show: false,
+    type: '',
+    msg: '',
   }
 }
 
@@ -465,6 +473,24 @@ const rootReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         theme: state.theme === 'ligthTheme' ? 'darkTheme' : 'ligthTheme'
+      }
+    case DISPLAY_ERROR_MESSAGE:
+      return {
+        ...state,
+        modalError: {
+          show: true,
+          msg: payload.msg,
+          type: payload.type,
+        }
+      }
+    case CLOSE_ERROR_MESSAGE:
+      return {
+        ...state,
+        modalError: {
+          show: false,
+          msg: '',
+          type: '',
+        }
       }
     default:
       return state;

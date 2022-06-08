@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeModalOnUpload, showFormCreateNewDog, getTemperaments } from '../../redux/actions';
 
@@ -7,11 +8,13 @@ import s from './ModalOnUpload.module.css';
 export default function ModalOnUpload() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { modalOnUpload } = useSelector(state => state);
   const { newDog } = useSelector(state => state.create);
 
   let handleBackHome = function(){
-
+    dispatch(closeModalOnUpload());
+    navigate('./home', { replace: true });
   }
 
   let handleCreateAnother = function(){

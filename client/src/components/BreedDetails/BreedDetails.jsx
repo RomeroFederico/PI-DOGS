@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getBreedDetails, closeBreedDetails } from '../../redux/actions';
 import LoadingComponent from '../LoadingComponent/LoadingComponent';
 import MainZoneBreedDetails from '../MainZoneBreedDetails/MainZoneBreedDetails';
+import ModalError from '../ModalError/ModalError';
 import DogFace from '../SVG/DogFace/DogFace';
 import { getBreedSize } from '../../util';
 
@@ -14,6 +15,7 @@ export default function BreedDetails() {
   const dispatch = useDispatch();
   const breedId = useParams();
   const { show , dog } = useSelector(state => state.details);
+  const showModalError = useSelector(state => state.modalError.show);
   const [ delay, setDelay ] = React.useState(true);
 
   React.useEffect(() => {
@@ -25,7 +27,9 @@ export default function BreedDetails() {
     }
   }, []);
 
-  if (!dog || !show || delay) return <LoadingComponent />;
+  if (showModalError) return <ModalError />;
+
+  else if (!dog || !show || delay) return <LoadingComponent />;
 
   let size = getBreedSize(dog.peso[dog.peso.length - 1]);
 

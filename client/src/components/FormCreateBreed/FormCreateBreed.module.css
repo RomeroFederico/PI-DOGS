@@ -20,7 +20,7 @@
   background-color: var(--primaryColorSub);
 
   animation: showForm 0.5s;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
 }
 
 .banner {
@@ -65,11 +65,9 @@
 
 @keyframes showForm {
   from {
-    transform: translateY(-20%);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
     opacity: 1;
   }
 }

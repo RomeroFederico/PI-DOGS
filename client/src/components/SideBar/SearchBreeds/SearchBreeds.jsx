@@ -19,11 +19,13 @@ export default function SearchBreeds() {
   }
 
   let handleClick = function() {
+    if (breed.length < 3) return;
     dispatch(resetBreeds());
     dispatch(getBreedsByName(breed, filterData));
   }
 
   let handleReset = function() {
+    if (!localBreeds) return;
     setBreed('');
     dispatch(resetBreeds());
     dispatch(getBreedsWithPaginate(1, filterData));
