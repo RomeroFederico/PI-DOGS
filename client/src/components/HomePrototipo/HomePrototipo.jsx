@@ -14,6 +14,7 @@ import s from './HomePrototipo.module.css';
 export default function HomePrototipo() {
   const allTemperaments = useSelector(state => state.allTemperaments);
   const home = useSelector(state => state.home);
+  const { breeds } = useSelector(state => state.home);
   const showModal = useSelector(state => state.modalAddTemperaments.show);
   const showModalError = useSelector(state => state.modalError.show);
   const dispatch = useDispatch();
@@ -30,6 +31,10 @@ export default function HomePrototipo() {
   React.useEffect(() => {
     if (!home.show && allTemperaments.length > 0 && home.breeds.length > 0) dispatch(showHome())
   }, [home])
+
+  React.useEffect(() => {
+    if (allTemperaments.length > 0 && home.breeds.length > 0) dispatch(showHome());
+  }, [allTemperaments, breeds]);
 
   if (showModalError) return <ModalError />;
 

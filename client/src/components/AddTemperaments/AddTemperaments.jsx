@@ -6,7 +6,6 @@ import TemperamentsAdded from '../TemperamentsAdded/TemperamentsAdded';
 import { showModalTemperaments, showModalCreateTemperament, validatePropertyDog, 
          setNextPageAnimation, changeFormCreateSection } from '../../redux/actions';
 
-import { Dog } from '../../util/validaciones';
 import { getDelayForPaginateAnimation } from '../../util';
 
 import s from './AddTemperaments.module.css';

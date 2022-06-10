@@ -50,7 +50,7 @@ import { checkIfExistBreedByName } from '../../util';
 const initialState = {
 
   loading: false,
-  theme: 'darkTheme',
+  theme: 'ligthTheme',
   allTemperaments: [],
 
   home: {
@@ -147,15 +147,15 @@ const rootReducer = (state = initialState, {type, payload}) => {
       }
     case GET_BREEDS_WITH_PAGINATE_LOCAL: 
 
-      var { breeds, pages } = filterLocalBreeds([ ...state.home.localBreeds ], { ...payload.filterData }, payload.currentPage);
+      var filterResponse = filterLocalBreeds([ ...state.home.localBreeds ], { ...payload.filterData }, payload.currentPage);
 
       return {
         ...state,
         loading: false,
         home: {
           ...state.home,
-          breeds: breeds,
-          pages: pages,
+          breeds: filterResponse.breeds,
+          pages: filterResponse.pages,
           currentPage: payload.currentPage,
           filterData: {
             ...payload.filterData

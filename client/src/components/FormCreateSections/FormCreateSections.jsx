@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AddName from '../AddName/AddName';
 import AddTemperaments from '../AddTemperaments/AddTemperaments';
 import AddSize from '../AddSize/AddSize';
 import AddLifeSpan from '../AddLifeSpan/AddLifeSpan';
 import AddImage from '../AddImage/AddImage';
 import FinalStep from '../FinalStep/FinalStep';
-import { setBackPageAnimation } from '../../redux/actions';
 
 import s from './FormCreateSections.module.css';
 

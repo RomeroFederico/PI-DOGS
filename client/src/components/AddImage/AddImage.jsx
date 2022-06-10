@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SmartImage from '../SmartImage/SmartImage';
 import PaginateSections from '../PaginateSections/PaginateSections';
 import { showModalAddImage, changeImageOfNewDog, validatePropertyDog,
-         setNextPageAnimation, setBackPageAnimation, changeFormCreateSection } from '../../redux/actions';
+         setNextPageAnimation, changeFormCreateSection } from '../../redux/actions';
 
 import { getDelayForPaginateAnimation } from '../../util';
 
@@ -26,11 +26,6 @@ export default function AddImage() {
     if (!validImage) dispatch(validatePropertyDog('validImage'));
     dispatch(setNextPageAnimation());
     dispatch(changeFormCreateSection(6, getDelayForPaginateAnimation()));
-  }
-
-  let handleBack = function() {
-    dispatch(setBackPageAnimation());
-    dispatch(changeFormCreateSection(4, getDelayForPaginateAnimation()));
   }
 
   return (

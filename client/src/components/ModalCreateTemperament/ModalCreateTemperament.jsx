@@ -51,7 +51,6 @@ export default function ModalCreateTemperament() {
             value = {newTemperament}
             placeholder = "Ingrese un Temperamento Valido."
             handleInput = {handleInput}
-            style = {''}
           /> 
           <div className = {`${s.validationMsg} ${ validation === true ? s.valid : ''}`}>
             {validation !== true ? validation : 'El nombre de temperamento es valido.'}

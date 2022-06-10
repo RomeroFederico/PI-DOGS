@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PaginateSections from '../PaginateSections/PaginateSections';
 import InputsSize from '../InputsSize/InputsSize';
-import ValidatorBMI from '../ValidatorBMI/ValidatorBMI';
 import DogSize from '../SVG/DogSize/DogSize';
 import { changeSizeOfNewDog, changeFormCreateSection, setBackPageAnimation, setNextPageAnimation } from '../../redux/actions';
 

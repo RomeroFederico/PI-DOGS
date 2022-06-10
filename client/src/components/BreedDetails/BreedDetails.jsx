@@ -6,7 +6,7 @@ import LoadingComponent from '../LoadingComponent/LoadingComponent';
 import MainZoneBreedDetails from '../MainZoneBreedDetails/MainZoneBreedDetails';
 import ModalError from '../ModalError/ModalError';
 import DogFace from '../SVG/DogFace/DogFace';
-import { getBreedSize } from '../../util';
+import { getBreedSize, getType } from '../../util';
 
 import s from './BreedDetails.module.css';
 
@@ -32,12 +32,14 @@ export default function BreedDetails() {
   else if (!dog || !show || delay) return <LoadingComponent />;
 
   let size = getBreedSize(dog.peso[dog.peso.length - 1]);
+  let type = getType(dog.id);
 
   return (
     <div className = {`${s.globalContainer} center`}>
       <div className = {s.containerForm}>
         <div className = {`${s.banner} BG${size}`}>
           <DogFace style = {s.dogIco}/>
+          <label>{type} ::: Nro: {dog.id}</label>
           ::: Detalles de la Raza :::
         </div>
         <div className = {s.mainZone}>

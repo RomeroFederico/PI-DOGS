@@ -10,8 +10,6 @@ export default function SmartImage({ image, alt, style, imageStyle }) {
   let [ showImage, setShowImage ] = React.useState(false);
   let [ delayLoading, setDelayLoading ] = React.useState(true);
 
-  let idTimeOut;
-
   React.useEffect(() => {
     let idTimeOut = setTimeout(() => setDelayLoading(false), Math.random() * 400 + 1500);
     return (() => {

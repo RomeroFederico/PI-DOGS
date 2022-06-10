@@ -2,16 +2,13 @@ import React from 'react';
 import SmartImage from '../SmartImage/SmartImage';
 import DisplayWeight from '../DisplayWeight/DisplayWeight';
 import DisplayHeight from '../DisplayHeight/DisplayHeight';
-import Weight from '../SVG/Weight/Weight';
-import DogFace from '../SVG/DogFace/DogFace';
-import { getBreedSize, getType } from '../../util';
+import { getBreedSize } from '../../util';
 
 import s from './MainZoneBreedDetails.module.css';
 
 export default function MainZoneBreedDetails({ id, nombre, peso, altura, temperamento, añosDeVida, imagen }) {
 
   let size = getBreedSize(peso[peso.length - 1]);
-  let type = getType(id);
 
   return (
     <>

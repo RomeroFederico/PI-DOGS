@@ -11,8 +11,6 @@ export default function ModalTemperamentsForTheForm() {
   const { oldTemperaments } = useSelector(state => state.create);
   let { search } = useSelector(state => state.modalAddTemperaments);
 
-  let [ temperament, setTemperament ] = React.useState('');
-
   let filteredTemperaments = filterTemperamentsForm(allTemperaments, search, oldTemperaments);
 
   let handleClose = function() {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { paramsComponents } from '../SVG/Params';
 import { getFilters } from '../../util';
 import Options from './Options/Options';
 import OptionTemperaments from './OptionTemperaments/OptionTemperaments';

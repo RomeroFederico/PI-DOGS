@@ -10,6 +10,17 @@
   grid-template-rows: 1fr;
 }
 
+.mainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+
+  animation: showBackground 1s;
+  animation-play-state: paused;
+}
+
 .containerLoading {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
@@ -37,15 +48,15 @@
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 
-  height: 100%;
-  width: 100%;
+  height: var(--fullHeight);
+  width: var(--fullWidth);
 
-  background-repeat: no-repeat;
+  /*background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-color: #cccccc;
 
-  animation: showBackground 1s;
+  animation: showBackground 1s;*/
 
   z-index: 5;
 }
@@ -63,6 +74,7 @@
   animation: showTitle 2s;
   animation-delay: 1.5s;
   animation-fill-mode: both;
+  animation-play-state: paused;
 }
 
 .iconContainer {
@@ -85,6 +97,7 @@
     rgba(125,185,232,0) 100%);
 
   animation: slide 2s infinite; /* For the card shine animation*/
+  animation-play-state: paused;
 }
 
 @keyframes slide {
@@ -183,6 +196,7 @@
   animation: showTitle 2s;
   animation-delay: 0.5s;
   animation-fill-mode: both;
+  animation-play-state: paused;
 }
 
 .glassEffect {
@@ -252,4 +266,8 @@
   to {
     opacity: 1;
   }
+}
+
+.addAnimation {
+  animation-play-state: running;
 }

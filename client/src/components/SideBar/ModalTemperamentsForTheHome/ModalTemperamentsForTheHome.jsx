@@ -13,8 +13,6 @@ export default function ModalTemperamentsForTheHome() {
   let temperamentsFiltered = useSelector(state => state.home.filterData.temperaments);
   let { search } = useSelector(state => state.modalAddTemperaments);
 
-  let [ temperament, setTemperament ] = React.useState('');
-
   let filteredTemperaments = filterTemperamentsHome(allTemperaments, search, temperamentsFiltered);
 
   let handleClose = function() {
