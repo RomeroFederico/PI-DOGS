@@ -8,6 +8,7 @@ import ModalError from '../ModalError/ModalError';
 import ModalTemperamentsForTheForm from '../ModalTemperamentsForTheForm/ModalTemperamentsForTheForm';
 import ModalCreateTemperament from '../ModalCreateTemperament/ModalCreateTemperament';
 import ModalAddImage from '../ModalAddImage/ModalAddImage';
+import ModalUploadImage from '../ModalUploadImage/ModalUploadImage';
 import ModalOnUpload from '../ModalOnUpload/ModalOnUpload';
 import Loading from '../Loading/Loading';
 
@@ -24,6 +25,7 @@ export default function FormCreateBreed() {
   const showModalAddTemperament = useSelector(state => state.modalAddTemperaments.show);
   const showModalCreateTemperament = useSelector(state => state.modalCreateTemperament.show);
   const showModalAddImage = useSelector(state => state.modalAddImage.show);
+  const showModalUploadImage = useSelector(state => state.modalUploadImage.show);
   const showModalOnUpload = useSelector(state => state.modalOnUpload.show);
 
   const [ delay, setDelay ] = React.useState(true);
@@ -62,6 +64,9 @@ export default function FormCreateBreed() {
           }
           {
             showModalAddImage && <ModalAddImage />
+          }
+          {
+            showModalUploadImage && < ModalUploadImage />
           }
           {
             showModalOnUpload && <ModalOnUpload />

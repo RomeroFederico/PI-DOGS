@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SmartImage from '../SmartImage/SmartImage';
 import PaginateSections from '../PaginateSections/PaginateSections';
-import { showModalAddImage, changeImageOfNewDog, validatePropertyDog,
+import { showModalAddImage, showModalUploadImage, changeImageOfNewDog, validatePropertyDog,
          setNextPageAnimation, changeFormCreateSection } from '../../redux/actions';
 
 import { getDelayForPaginateAnimation } from '../../util';
@@ -16,6 +16,10 @@ export default function AddImage() {
 
   let handleOpenModal = function() {
     dispatch(showModalAddImage());
+  }
+
+  let handleOpenUpload = function() {
+    dispatch(showModalUploadImage());
   }
 
   let handleRemoveImage = function() {
@@ -54,6 +58,7 @@ export default function AddImage() {
 
       <div className = {s.btnContainer}>
         <button className = {s.btn} onClick = {handleOpenModal} >Seleccionar</button>
+        <button className = {s.btn} onClick = {handleOpenUpload} >Subir Imagen</button>
         <button className = {s.btn} disabled = {!image} onClick = {handleRemoveImage}>Quitar</button>
       </div>
 

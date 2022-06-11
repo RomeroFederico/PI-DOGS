@@ -94,3 +94,21 @@ export const DEFAULT_IMAGES = {
   DEFAULT_IMAGES_COUNT: 30,
   DEFAULT_IMAGES_NAME: 'dogbreed'
 }
+
+// PARA EL CONTROL DE LA SUBIDA DE IMAGENES:
+
+export const UPLOAD_IMAGE_PARAMS = {
+
+  VALID_TYPES: [
+    'image/png',
+    'image/jpeg',
+    'image/jpg'
+  ],
+
+  VALID_SIZE: 3 * 1024 * 1024,
+
+  SHOW_ERROR: {
+    INVALID_SIZE: 'El archivo ingresado es demasiado grande.',
+    INVALID_TYPE: 'El tipo de archivo ingresado no es valido.'
+  }
+}

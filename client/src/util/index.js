@@ -1,4 +1,5 @@
-import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS, DELAY_PAGINATE_SECTION, DEFAULT_IMAGES } from './constants';
+import { METRICS_FOR_BREEDS, FONT_SIZE, TYPES, FILTER_PARAMS, DELAY_PAGINATE_SECTION, DEFAULT_IMAGES, 
+         UPLOAD_IMAGE_PARAMS } from './constants';
 import { Temperament, Breed } from './validaciones';
 
 export function getBreedSize (weight) {
@@ -102,4 +103,14 @@ export function getDefaultImages() {
   }
 
   return images; 
+}
+
+export function validateImageToUpload(file) {
+  let result = ''
+  if (!UPLOAD_IMAGE_PARAMS.VALID_TYPES.includes(file.type)) result = UPLOAD_IMAGE_PARAMS.SHOW_ERROR.INVALID_TYPE;
+  else if (UPLOAD_IMAGE_PARAMS.VALID_SIZE < file.size) result = UPLOAD_IMAGE_PARAMS.SHOW_ERROR.INVALID_SIZE;
+  return {
+    valid: result === '' ? true : false,
+    msg: result
+  }
 }

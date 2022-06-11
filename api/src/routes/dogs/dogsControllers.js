@@ -1,4 +1,5 @@
-const { listBreeds, addBreed, getBreedById, paginateBreeds } = require('../../util/util');
+const { listBreeds, addBreed, getBreedById, paginateBreeds, handleUploadTemporaryImage } = require('../../util/util');
+const { PATH_TEMPORARY_IMAGES } = require('../../util/global-constants');
 
 let getBreeds = async function (req, res, next) {
 	let { name } = req.query;
@@ -68,9 +69,20 @@ let createBreed = async function (req, res, next) {
 	}
 }
 
+let uploadTemporaryImage = function(req, res) {
+	try {
+		result = handleUploadTemporaryImage(req.file);
+		res.status(201).json({ filename: result });
+	}
+	catch(err) {
+		next(err);
+	}
+}
+
 module.exports = {
 	getBreeds,
 	getBreedsByPage,
 	getBreedDetails,
-	createBreed
+	createBreed,
+	uploadTemporaryImage
 }

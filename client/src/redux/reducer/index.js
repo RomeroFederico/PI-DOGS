@@ -28,6 +28,11 @@ import {
   CHANGE_LIFESPAN_OF_NEW_DOG,
   SHOW_MODAL_ADD_IMAGE,
   CLOSE_MODAL_ADD_IMAGE,
+  SHOW_MODAL_UPLOAD_IMAGE,
+  CLOSE_MODAL_UPLOAD_IMAGE,
+  START_UPLOADING_IMAGE,
+  ERROR_UPLOADING_IMAGE,
+  SUCCESS_UPLOADING_IMAGE,
   CHANGE_IMAGE_OF_NEW_DOG,
   UPLOAD_NEW_DOG,
   CLOSE_MODAL_ON_UPLOAD,
@@ -89,6 +94,12 @@ const initialState = {
 
   modalAddImage: {
     show: false
+  },
+
+  modalUploadImage: {
+    show: false,
+    error: false,
+    errorMsg: '',
   },
 
   modalOnUpload: {
@@ -409,6 +420,54 @@ const rootReducer = (state = initialState, {type, payload}) => {
         ...state,
         modalAddImage: {
           show: false
+        }
+      }
+    case SHOW_MODAL_UPLOAD_IMAGE: 
+      return {
+        ...state,
+        modalUploadImage: {
+          show: true
+        }
+      }
+    case CLOSE_MODAL_UPLOAD_IMAGE: 
+      return {
+        ...state,
+        modalUploadImage: {
+          show: false
+        }
+      }
+    case START_UPLOADING_IMAGE:
+      return {
+        ...state,
+        modalUploadImage: {
+          ...state.modalUploadImage,
+          error: false,
+          errorMsg: '',
+        }
+      }
+    case ERROR_UPLOADING_IMAGE:
+      return {
+        ...state,
+        modalUploadImage: {
+          ...state.modalUploadImage,
+          error: true,
+          errorMsg: payload
+        }
+      }
+    case SUCCESS_UPLOADING_IMAGE:
+      return {
+        ...state,
+        create: {
+          ...state.create,
+          newDog: {
+            ...state.create.newDog,
+            image: payload,
+          }
+        },
+        modalUploadImage: {
+          show: false,
+          error: false,
+          errorMsg: ''
         }
       }
     case CHANGE_IMAGE_OF_NEW_DOG:

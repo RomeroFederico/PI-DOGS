@@ -6,9 +6,11 @@ const { ENDPOINT_ALL_BREEDS, ENDPOINT_SEARCH_BREEDS, IMAGE_URL_API,
 			CONVERT_WEIGHT, CONVERT_HEIGHT, CONVERT_LB_TO_KG, CONVERT_IN_TO_CM,
 			FILTER_ONLY_API, FILTER_ONLY_DB, NO_FILTER,
 			FILTER_ONLY_DB_TEMP, FILTER_ONLY_API_TEMP, FILTER_ONLY_TEMP,
-			TEMPERAMENTS_SEPARATOR } = require('./global-constants');
+			TEMPERAMENTS_SEPARATOR, 
+			PATH_TEMPORARY_IMAGES, PATH_IMAGES, PATH_GET_TMP_IMAGE, PATH_GET_IMAGE } = require('./global-constants');
 
 const axios = require('axios');
+const fs = require('fs');
 
 let listBreeds = async function(name) {
 	// Comprueba que el nombre sea valido.
@@ -94,6 +96,9 @@ let addBreed = async function(data) {
 		let [ newTempReference, oldTempReference ] = await Promise.all([newTempPromise, oldTempPromise]);
 
 		await newBreedRef.addTemperamentos(newTempReference.concat(oldTempReference));
+
+		if (breedData.imagen && !breedData.imagen.includes('dogbreed')) 
+			await newBreedRef.update({ imagen: moveImage(breedData.imagen) });
 
 		return newBreedRef;
 	}
@@ -252,10 +257,37 @@ let filterByTemperaments = function(breed, temperaments) {
 	return true;
 }
 
+let handleUploadTemporaryImage = function(file) {
+	if (!file) throw new Error('Error en la subida del archivo.');
+	setTimeout(() => removeTemporaryImage(file.filename), 10 * 60 * 1000);
+	return `${PATH_GET_TMP_IMAGE}${file.filename}`
+}
+
+let removeTemporaryImage = function(filename) {
+	fs.unlink(`${PATH_TEMPORARY_IMAGES}${filename}`, error => {
+		if (error) console.log('No se pudo eliminar el archivo, ya se ha movido el mismo.');
+		else console.log(`Se ha removido el archivo: ${PATH_TEMPORARY_IMAGES}${filename}`);
+	})
+}
+
+let moveImage = function(filepath) {
+	let filename = filepath.replace(PATH_GET_TMP_IMAGE, '');
+	let oldPath = `${PATH_TEMPORARY_IMAGES}${filename}`;
+	let newPath = `${PATH_IMAGES}${filename}`
+	let newPathGET = filepath.replace(PATH_GET_TMP_IMAGE, PATH_GET_IMAGE);
+	
+	fs.rename(oldPath, newPath, function (err) {
+	  if (err) console.log('No se pudo mover el archivo.');
+	  else console.log(`Se movio el archivo con exito: ${oldPath} => ${newPath}`);
+	});
+	return newPathGET;
+}
+
 module.exports = {
 	listBreeds,
 	getBreedById,
 	listTemperaments,
 	addBreed,
-	paginateBreeds
+	paginateBreeds,
+	handleUploadTemporaryImage
 }

@@ -13,6 +13,11 @@ import {
   CHANGE_LIFESPAN_OF_NEW_DOG,
   SHOW_MODAL_ADD_IMAGE,
   CLOSE_MODAL_ADD_IMAGE,
+  SHOW_MODAL_UPLOAD_IMAGE,
+  CLOSE_MODAL_UPLOAD_IMAGE,
+  START_UPLOADING_IMAGE,
+  ERROR_UPLOADING_IMAGE,
+  SUCCESS_UPLOADING_IMAGE,
   CHANGE_IMAGE_OF_NEW_DOG,
   UPLOAD_NEW_DOG,
   CLOSE_MODAL_ON_UPLOAD,
@@ -21,6 +26,7 @@ import {
 
 const PATH_GET_DOGS_BY_NAME = 'http://localhost:3001/dogs?name=';
 const PATH_CREATE_NEW_DOG = 'http://localhost:3001/dogs/create';
+const PATH_UPLOAD_TEMPORAY_IMAGE = 'http://localhost:3001/dogs/image/upload';
 const ERROR_BREED_NOT_FOUND = "Breed not found";
 
 export const checkIfNameIsAvalaible = function(name) {
@@ -158,6 +164,41 @@ export const showModalAddImage = function() {
 export const closeModalAddImage = function() {
   return {
     type: CLOSE_MODAL_ADD_IMAGE
+  }
+}
+
+export const showModalUploadImage = function() {
+  return {
+    type: SHOW_MODAL_UPLOAD_IMAGE
+  }
+}
+
+export const closeModalUploadImage = function() {
+  return {
+    type: CLOSE_MODAL_UPLOAD_IMAGE
+  }
+}
+
+export const startUploadingImage = function() {
+  return {
+    type: START_UPLOADING_IMAGE
+  }
+}
+
+export const uploadImage = function(formData) {
+  return function(dispatch) {
+    return fetch(PATH_UPLOAD_TEMPORAY_IMAGE, {
+                  method: 'POST',
+                  body: formData
+                })
+          .then(result => result.json())
+          .then(data => {
+            if (data.error) dispatch({ type: ERROR_UPLOADING_IMAGE, payload: data.msg });
+            else dispatch({ type: SUCCESS_UPLOADING_IMAGE, payload: data.filename });
+          })
+          .catch(error => {
+             dispatch({ type: ERROR_UPLOADING_IMAGE, payload: 'Error en el Servidor' });
+          });
   }
 }
 

@@ -30,6 +30,11 @@ const FILTER_ONLY_TEMP = "TEMP";
 
 const TEMPERAMENTS_SEPARATOR = ",";
 
+const PATH_TEMPORARY_IMAGES = 'src/public/tmp/';
+const PATH_IMAGES = 'src/public/images/';
+const PATH_GET_TMP_IMAGE = 'http://localhost:3001/public/tmp/';
+const PATH_GET_IMAGE = 'http://localhost:3001/public/images/';
+
 /* 
 	1 lb === 0.4536 kg
 	1 in === 2.54 cm
@@ -57,5 +62,9 @@ module.exports = {
 	FILTER_ONLY_DB_TEMP,
 	FILTER_ONLY_API_TEMP,
 	FILTER_ONLY_TEMP,
-	TEMPERAMENTS_SEPARATOR
+	TEMPERAMENTS_SEPARATOR,
+	PATH_TEMPORARY_IMAGES,
+	PATH_IMAGES,
+	PATH_GET_TMP_IMAGE,
+	PATH_GET_IMAGE
 }
